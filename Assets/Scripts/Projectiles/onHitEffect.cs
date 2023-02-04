@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class onHitEffect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   public virtual void OnHitBehavior(GameObject enemy)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(enemy == null)
+        {
+            return;
+        }
+       
+        print("hit enemy");
     }
 }
