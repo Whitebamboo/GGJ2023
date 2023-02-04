@@ -11,7 +11,8 @@ public class projectile : MonoBehaviour
     public float attack_multiply = 1;
     public List<ElementsType> elements_list = new List<ElementsType>();
     public float size = 1f;
-    public bool canDestroy = true;
+    public bool isPenetrate = false;
+    public int penetrate_times = 0; 
     public float speed = 10;
 
     public Vector3 move_direction = Vector3.zero;
@@ -24,11 +25,6 @@ public class projectile : MonoBehaviour
         {ElementsType.Wood, ElementsType.Fire } 
     };
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -39,6 +35,27 @@ public class projectile : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// create projectile and 
+    /// </summary>
+    /// <param name="p_info"></param>
+    public void SetProjectileParameters(ProjectileCreateInfo p_info)
+    {
+        attack_add = p_info.attack_add;
+        attack_multiply = p_info.attack_multiply;
+        isPenetrate = p_info.isPenetrate;
+        penetrate_times = p_info.penetrate;
+        elements_list = p_info.elements_list;
+        size = p_info.size;
+        //change size fuct TODO
+
+    }
+
+    /// <summary>
+    /// start move
+    /// </summary>
+    /// <param name="dir"></param>
     public void StartMove(Vector3 dir)
     {
         //rotate to move dir
@@ -71,8 +88,10 @@ public class projectile : MonoBehaviour
     {
         Enemy e = enemy.GetComponent<Enemy>();
         float damage = (attack_base + attack_add) * attack_multiply;
+ 
         if ((elements_list.Count > 0) && (elements_list.Contains(element_restraint[e.GetElement()])))// have a restraint elements
         {
+            print("find retraint");
             damage *= 2;
         }
         e.TakeDamage(damage);
@@ -101,10 +120,12 @@ public class projectile : MonoBehaviour
     /// </summary>
     private void CallDeadOnHit()
     {
-        if (canDestroy)
+        if(isPenetrate && penetrate_times > 0)
         {
-            Dead();
+            penetrate_times -= 1;
+            return;
         }
+        Dead();
     }
 
 

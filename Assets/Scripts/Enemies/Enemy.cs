@@ -33,6 +33,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// add a debuff to that enemy
+    /// </summary>
+    /// <param name="debuff"></param>
+    public void AddDebuff(Debuff debuff)
+    {
+        debuffs.Add(debuff);
+    }
+
     /// <summary>
     /// function to get enemy element type
     /// </summary>

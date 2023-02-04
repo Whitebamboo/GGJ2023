@@ -15,6 +15,16 @@ public enum SkillType
     Attibutes,//number,attack,hp,size
 }
 
+
+/// <summary>
+/// base node
+/// </summary>
+public enum BaseType
+{
+    Attack,
+    Shiled,
+}
+
 /// <summary>
 /// what type of elements
 /// </summary>
