@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: WoodNode
   m_EditorClassIdentifier: 
   skillImage: {fileID: 0}
+  Description: 
   skilltype: 1
   baseType: 0
-  elementType: 0
+  elementType: 2
   elements_parameters:
-  - parameters_name: flame_damage
-    value: 1
+  - parameters_name: Wood_damageIncrease
+    value: 5
   battleCryBehaviorType: 0
   onHitBehaviorType: 1
   onhit_parameters: []

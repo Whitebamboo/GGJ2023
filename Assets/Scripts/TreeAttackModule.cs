@@ -44,6 +44,7 @@ public class TreeAttackModule : MonoBehaviour
     {
         //init some variable
         attacknode_number = 0;
+        node_number_multiply = 1;
         //first get how manys base nodes in it
         createInfo = new ProjectileCreateInfo();
         elementCreateInfo = new ElementTotalInfo();
@@ -69,6 +70,11 @@ public class TreeAttackModule : MonoBehaviour
                     break;
             }
         }
+
+
+        //final multiply for the attack node
+        attacknode_number *= node_number_multiply;//when have a multply node for base node
+        //
         //print("deal with attack node" + attacknode_number);
         //find position
         List<Vector3> dir =  FindClosestEnemyPosition(attacknode_number);
@@ -77,7 +83,8 @@ public class TreeAttackModule : MonoBehaviour
             print("find attack direction wrong");
             return;
         }
-        //create projectiles
+        //create attack projectiles
+        
         for(int i = 0; i < attacknode_number; i++)
         {
             GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
@@ -245,8 +252,20 @@ public class TreeAttackModule : MonoBehaviour
         {
             case Attributetype.NodeNumber:
                 //only for multiply
+                node_number_multiply *= (int)s.attribute_information[0].value;//how many attack node
                 break;
-
+            case Attributetype.AttackOrDefend:
+                //for add or multiply
+                if (s.attribute_information[0].parameters_name == "AttackOrDefend_Add")
+                {
+                    createInfo.attack_add += s.attribute_information[0].value;
+                }
+                else if(s.attribute_information[0].parameters_name == "AttackOrDefend_Mul")
+                {
+                    createInfo.attack_multiply *= s.attribute_information[0].value;
+                }
+                break;
+            
         }
     }
     #endregion

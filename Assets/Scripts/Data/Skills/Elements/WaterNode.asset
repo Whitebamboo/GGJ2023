@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: WaterNode
   m_EditorClassIdentifier: 
   skillImage: {fileID: 0}
+  Description: 
   skilltype: 1
   baseType: 0
   elementType: 1
   elements_parameters:
-  - parameters_name: flame_damage
-    value: 1
-  - parameters_name: flame_duration
-    value: 4
+  - parameters_name: Water_decelerate
+    value: 10
   battleCryBehaviorType: 0
   onHitBehaviorType: 1
   onhit_parameters: []
