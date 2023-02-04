@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Tree : MonoBehaviour
 {
@@ -10,6 +11,22 @@ public class Tree : MonoBehaviour
     private float processTimer;
 
     public bool ProcessingStart { get; set; }
+
+    public TreeNetworkModule NetworkModule { get; private set; }
+
+    public TreeAttackModule AttackModule { get; private set; }  
+
+    private void Start()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        ProcessingStart = true;
+
+        
+    }
 
     private void Update()
     {
@@ -27,8 +44,8 @@ public class Tree : MonoBehaviour
     
     void ProcessNetwork()
     {
-        Debug.Log("Process");
+        
     }
 
-    
+
 }

@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class GameManager : CSingletonMono<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float initialWeight;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
