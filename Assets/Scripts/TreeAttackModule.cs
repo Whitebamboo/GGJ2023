@@ -58,17 +58,17 @@ public class TreeAttackModule : MonoBehaviour
                     CompileElementsNode(s);
                     break;
                 case SkillType.BattleCryBehavior:
-                    CompileBattleCryBehavior(s);
+                    CompileBattleCryBehavior(s);//TODO
                     break;
                 case SkillType.OnHitBehavior:
-                    CompileOnHitBehavior(s);
+                    CompileOnHitBehavior(s);//TODO
                     break;
                 case SkillType.Attibutes:
                     CompileAttributes(s);
                     break;
             }
         }
-        print("deal with attack node" + attacknode_number);
+        //print("deal with attack node" + attacknode_number);
         //find position
         List<Vector3> dir =  FindClosestEnemyPosition(attacknode_number);
         if(dir == null)
