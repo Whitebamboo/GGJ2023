@@ -12,6 +12,9 @@ public class projectile : MonoBehaviour
     public List<ElementsType> elements_list = new List<ElementsType>();
     public float size = 1f;
     public bool canDestroy = true;
+    public float speed = 10;
+
+    public Vector3 move_direction = Vector3.zero;
 
     //a dictionary to restore elements restraint relationship, first item is the element, second will be the elemnts make double damage
     private static Dictionary<ElementsType, ElementsType> element_restraint = new Dictionary<ElementsType, ElementsType>() {
@@ -29,7 +32,7 @@ public class projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
 
