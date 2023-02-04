@@ -19,4 +19,34 @@ MonoBehaviour:
   - time: 2
     enemyIndex: 0
     spawnPositionIndex: 1
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 2
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 3
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 4
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 5
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 6
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 7
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 8
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 9
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 10
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 11
   time: 500
