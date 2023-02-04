@@ -14,10 +14,9 @@ public class projectile : MonoBehaviour
     public bool isPenetrate = false;
     public int penetrate_times = 0; 
     public float speed = 10;
-
     public Vector3 move_direction = Vector3.zero;
-    private bool canMove = false; 
-
+    private bool canMove = false;
+    public GameObject explode_Object;
     //a dictionary to restore elements restraint relationship, first item is the element, second will be the elemnts make double damage
     private static Dictionary<ElementsType, ElementsType> element_restraint = new Dictionary<ElementsType, ElementsType>() {
         {ElementsType.Fire,  ElementsType.Water },
@@ -81,12 +80,26 @@ public class projectile : MonoBehaviour
     }
 
     /// <summary>
+    /// explosion will call this
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void MakeExplodeDamage(GameObject enemy)
+    {
+        if (enemy)
+        {
+            MakeDamage(enemy);
+            CallAllOnHit(enemy);
+        }
+        
+    }
+
+    /// <summary>
     /// calculate and make damage
     /// </summary>
     /// <param name="enemy"></param>
     private void MakeDamage(GameObject enemy)
     {
-        Enemy e = enemy.GetComponent<Enemy>();
+        Enemy e = enemy.GetComponentInParent<Enemy>();
         float damage = (attack_base + attack_add) * attack_multiply;
  
         if ((elements_list.Count > 0) && (elements_list.Contains(element_restraint[e.GetElement()])))// have a restraint elements

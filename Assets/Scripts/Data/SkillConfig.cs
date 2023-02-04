@@ -21,6 +21,7 @@ public class SkillConfig : ScriptableObject
     //Attribute behavior
     public Attributetype attributetype = Attributetype.AttackOrDefend;
     public List<FloatParameters> attribute_information = new List<FloatParameters>();
-    
-    
+   
+
+
 }

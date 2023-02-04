@@ -63,7 +63,7 @@ public class TreeAttackModule : MonoBehaviour
                     CompileBattleCryBehavior(s);//TODO
                     break;
                 case SkillType.OnHitBehavior:
-                    CompileOnHitBehavior(s);//TODO
+                    CompileOnHitBehavior(s);
                     break;
                 case SkillType.Attibutes:
                     CompileAttributes(s);
@@ -109,6 +109,7 @@ public class TreeAttackModule : MonoBehaviour
         {
             Explode e =  projectile.AddComponent<Explode>();
             e.explode_radius = createInfo.explode_radius;
+         
         }
         if (elementCreateInfo.isFire)
         {
