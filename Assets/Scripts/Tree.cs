@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float Health;
+    public float NetworkProcessInterval;
+
+    private float processTimer;
+
+    public bool ProcessingStart { get; set; }
+
+    private void Update()
     {
-        
+        if (ProcessingStart)
+        {
+            processTimer -= Time.deltaTime; 
+            
+            if(processTimer <= 0)
+            {
+                ProcessNetwork();
+                processTimer = NetworkProcessInterval;
+            }
+        }
+    }
+    
+    void ProcessNetwork()
+    {
+        Debug.Log("Process");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
