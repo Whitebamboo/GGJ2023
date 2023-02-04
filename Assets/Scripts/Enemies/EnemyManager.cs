@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<Transform> spawnPositions;
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<WaveInfo> waveInfos;
-    private List<Enemy> enemies;
+    public List<Enemy> enemies;
     private float timer;
     // Start is called before the first frame update
     void Start()
