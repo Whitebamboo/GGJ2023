@@ -51,13 +51,37 @@ public class EnemyManager : MonoBehaviour
                 i += 1;
             }
             
+            // handle debuffs
+            enemies.ForEach(enemy =>
+            {
+                enemy.debuffs.ForEach(debuff =>
+                {
+                    debuff.coolDown -= Time.deltaTime;
+                    if (debuff.coolDown <= 0)
+                    {
+                        debuff.OnRepeat(enemy);
+                        debuff.times -= 1;
+                        if (debuff.times == 0)
+                        {
+                            debuff.OnRemove(enemy);
+                        }
+                        debuff.coolDown += debuff.configInterval;
+                    }
+                });
+                enemy.debuffs.RemoveAll(debuff => debuff.times == 0);
+            });
+            
+            enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy => Destroy(enemy.gameObject)); 
+            enemies.RemoveAll(enemy => enemy.health <= 0);
+
+            
             // update non-attacking enemy movement
             enemies.Where(enemy => !enemy.isAttacking).ToList().ForEach(enemy =>
             {
                 var dir = transform.position - enemy.gameObject.transform.position;
                 dir.z = 0;
                 dir = dir.normalized;
-                enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed;
+                enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate);
             });
             
             // update cool down
@@ -77,23 +101,8 @@ public class EnemyManager : MonoBehaviour
                 GameManager.instance.tree.Health -= enemy.attack;
             });
             
-            // handle debuffs
-            enemies.ForEach(enemy =>
-            {
-                int fireDebuffIndex = enemy.debuffs.FindIndex(debuff => debuff.elementType == ElementsType.Fire);
-                if (fireDebuffIndex == -1) return;
-                var debuff = enemy.debuffs[fireDebuffIndex];
-                if (debuff.times == 0) return;
-                debuff.coolDown -= Time.deltaTime;
-                if (debuff.coolDown <= 0)
-                {
-                    enemy.health -= debuff.value;
-                    debuff.times -= 1;
-                    debuff.coolDown += debuff.interval;
-                }
-            });
             
-            
+
             yield return null;
             timer += Time.deltaTime;
         }

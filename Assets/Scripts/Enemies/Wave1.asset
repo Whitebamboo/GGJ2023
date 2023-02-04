@@ -19,4 +19,4 @@ MonoBehaviour:
   - time: 2
     enemyIndex: 0
     spawnPositionIndex: 1
-  time: 5
+  time: 500

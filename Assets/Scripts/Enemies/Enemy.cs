@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
     public List<Debuff> debuffs = new List<Debuff>();
+    public float damageIncreaseRate = 0;
+    public float speedDecreaseRate = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +40,24 @@ public class Enemy : MonoBehaviour
     /// add a debuff to that enemy
     /// </summary>
     /// <param name="debuff"></param>
-    public void AddDebuff(ElementsType elementsType, float value)
+    public void AddDebuff(ElementsType elementType, float value)
     {
-        
+        int i = debuffs.FindIndex(debuff => debuff.elementType == elementType);
+        if (i == -1)
+        {
+            var newDebuff = DebuffCreator.instance.Create(elementType);
+            newDebuff.value = value;
+            debuffs.Add(newDebuff);
+            newDebuff.OnApply(this);
+        }
+        else
+        {
+            // renew debuff
+            debuffs[i].OnRemove(this);
+            debuffs[i].value += value;
+            debuffs[i].OnApply(this);
+            debuffs[i].times = debuffs[i].configTimes;
+        }
     }
 
     /// <summary>
@@ -58,7 +75,7 @@ public class Enemy : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        health -= damage * (1 + damageIncreaseRate);
         print("on hit:" + health);//call UI utils function
     }
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7379852767426001542}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,11 +112,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ae85b991a19bb4c84b59e2c66495e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 150
   attack: 3
   attack_interval: 1
   element: 0
   speed: 0.5
+  attackCoolDown: 0
+  isAttacking: 0
+  debuffs: []
+  damageIncreaseRate: 0
+  speedDecreaseRate: 0
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,3 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2689e9c975cdbd34e8e0d9c9c679d9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 7609548829010015532}
