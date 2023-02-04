@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(WaveCoroutine(0));
     }
 
     // Update is called once per frame
@@ -24,7 +25,6 @@ public class EnemyManager : MonoBehaviour
 
     public void StartWave(int waveIndex)
     {
-        
         StartCoroutine(WaveCoroutine(waveIndex));
     }
 
@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
         
         while (timer < waveInfos[waveIndex].time)
         {
-            while (spawnInfos[i].time <= timer)
+            while (i < spawnInfos.Count && spawnInfos[i].time <= timer)
             {
                 // spawn for spawnInfos[i]
                 var go = Instantiate(enemyPrefabs[spawnInfos[i].enemyIndex],
@@ -50,6 +50,33 @@ public class EnemyManager : MonoBehaviour
                 enemies.Add(go.GetComponent<Enemy>());
                 i += 1;
             }
+            
+            // update non-attacking enemy movement
+            enemies.Where(enemy => !enemy.isAttacking).ToList().ForEach(enemy =>
+            {
+                var dir = transform.position - enemy.gameObject.transform.position;
+                dir.z = 0;
+                dir = dir.normalized;
+                enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed;
+            });
+            
+            // update cool down
+            enemies.Where(enemy => enemy.attackCoolDown > 0).ToList().ForEach(enemy =>
+            {
+                enemy.attackCoolDown -= Time.deltaTime;
+                if (enemy.attackCoolDown < 0)
+                {
+                    enemy.attackCoolDown = 0;
+                }
+            });
+            
+            // update attack
+            enemies.Where(enemy => enemy.isAttacking && enemy.attackCoolDown == 0).ToList().ForEach(enemy =>
+            {
+                enemy.attackCoolDown = enemy.attack_interval;
+                GameManager.instance.tree.Health -= enemy.attack;
+            });
+            
             
             yield return null;
             timer += Time.deltaTime;

@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a97f1db1cbd2b4d9c30702ee5c7aaf, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  spawnInfos: []
+  spawnInfos:
+  - time: 1
+    enemyIndex: 0
+    spawnPositionIndex: 0
+  - time: 2
+    enemyIndex: 0
+    spawnPositionIndex: 1
+  time: 5
