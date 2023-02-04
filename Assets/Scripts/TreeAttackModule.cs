@@ -15,7 +15,8 @@ public class TreeAttackModule : MonoBehaviour
     public float radius = 20;
     public ProjectileCreateInfo createInfo;
     public ElementTotalInfo elementCreateInfo;
-    
+    public int node_number_multiply = 1;//only for attack and shild base mode
+
    
 
     private void Start()
@@ -240,7 +241,13 @@ public class TreeAttackModule : MonoBehaviour
 
     private void CompileAttributes(SkillConfig s)
     {
+        switch (s.attributetype)
+        {
+            case Attributetype.NodeNumber:
+                //only for multiply
+                break;
 
+        }
     }
     #endregion
 }

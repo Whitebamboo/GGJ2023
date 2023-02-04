@@ -6,6 +6,7 @@ using UnityEngine;
 public class SkillConfig : ScriptableObject
 {
     public Sprite skillImage;
+    public string Description;
     public SkillType skilltype = SkillType.Base;
     //the infomation that we can input
     public BaseType baseType = BaseType.Attack;
