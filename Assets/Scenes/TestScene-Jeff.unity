@@ -336,28 +336,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &41648780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1248348678500178728, guid: 8a21a4636e31ad8469e388fbe3f494d9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1248348678531275172}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &41648786
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41648780}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &202451241
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +369,7 @@ MonoBehaviour:
   - {fileID: 940511492}
   - {fileID: 1196862825}
   enemyPrefabs:
-  - {fileID: 41648780}
+  - {fileID: 1248348678500178728, guid: 8a21a4636e31ad8469e388fbe3f494d9, type: 3}
   waveInfos:
   - {fileID: 11400000, guid: 95ad606aeac7838428bec7956f8c0550, type: 2}
   enemies: []
@@ -2418,11 +2396,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1248348678500178728, guid: 8a21a4636e31ad8469e388fbe3f494d9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1248348678500178740, guid: 8a21a4636e31ad8469e388fbe3f494d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -2477,11 +2450,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7609548829010015532, guid: 8a21a4636e31ad8469e388fbe3f494d9,
-        type: 3}
-      propertyPath: health
-      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a21a4636e31ad8469e388fbe3f494d9, type: 3}
