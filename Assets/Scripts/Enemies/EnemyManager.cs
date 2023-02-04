@@ -77,7 +77,23 @@ public class EnemyManager : MonoBehaviour
                 GameManager.instance.tree.Health -= enemy.attack;
             });
             
+            // handle debuffs
+            enemies.ForEach(enemy =>
+            {
+                int fireDebuffIndex = enemy.debuffs.FindIndex(debuff => debuff.elementType == ElementsType.Fire);
+                if (fireDebuffIndex == -1) return;
+                var debuff = enemy.debuffs[fireDebuffIndex];
+                if (debuff.times == 0) return;
+                debuff.coolDown -= Time.deltaTime;
+                if (debuff.coolDown <= 0)
+                {
+                    enemy.health -= debuff.value;
+                    debuff.times -= 1;
+                    debuff.coolDown += debuff.interval;
+                }
+            });
             
+            enemies.
             yield return null;
             timer += Time.deltaTime;
         }

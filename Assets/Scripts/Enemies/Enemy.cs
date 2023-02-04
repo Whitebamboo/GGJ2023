@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
+    public List<Debuff> debuffs = new List<Debuff>();
 
     // Start is called before the first frame update
     void Start()
