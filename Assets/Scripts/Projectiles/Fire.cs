@@ -5,7 +5,15 @@ using UnityEngine;
 public class Fire : onHitEffect
 {
     public float flame_damage = 1f;
-   
 
-    
+    public override void OnHitBehavior(GameObject enemy)
+    {
+        base.OnHitBehavior(enemy);
+
+        print("add flame buff to enemy");
+
+        Debuff d = new Debuff
+    }
+
+
 }

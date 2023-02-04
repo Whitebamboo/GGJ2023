@@ -11,6 +11,6 @@ public class onHitEffect : MonoBehaviour
             return;
         }
        
-        print("hit enemy");
+        //print("hit enemy");
     }
 }

@@ -38,9 +38,9 @@ public class Enemy : MonoBehaviour
     /// add a debuff to that enemy
     /// </summary>
     /// <param name="debuff"></param>
-    public void AddDebuff(Debuff debuff)
+    public void AddDebuff(ElementsType elementsType, float value)
     {
-        debuffs.Add(debuff);
+        
     }
 
     /// <summary>
