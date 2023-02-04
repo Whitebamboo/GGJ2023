@@ -12,6 +12,10 @@ public class projectile : MonoBehaviour
     public List<ElementsType> elements_list = new List<ElementsType>();
     public float size = 1f;
     public bool canDestroy = true;
+    public float speed = 10;
+
+    public Vector3 move_direction = Vector3.zero;
+    private bool canMove = false; 
 
     //a dictionary to restore elements restraint relationship, first item is the element, second will be the elemnts make double damage
     private static Dictionary<ElementsType, ElementsType> element_restraint = new Dictionary<ElementsType, ElementsType>() {
@@ -29,9 +33,21 @@ public class projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (canMove)
+        {
+            this.transform.position += move_direction.normalized * speed * Time.deltaTime;
+        }
     }
 
+    public void StartMove(Vector3 dir)
+    {
+        //rotate to move dir
+        move_direction = dir;
+        Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.red,2f);
+        transform.rotation = Quaternion.FromToRotation(transform.right, move_direction);
+        canMove = true;
+        EventBus.Broadcast(EventTypes.ProjectileBattleCry);
+    }
 
     #region hit enemy behavior
     private void OnTriggerEnter(Collider other)

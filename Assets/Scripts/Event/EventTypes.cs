@@ -4,5 +4,6 @@ using UnityEngine;
 
 public enum EventTypes
 {
-    
+    ProjectileBattleCry,//before move
+  
 }

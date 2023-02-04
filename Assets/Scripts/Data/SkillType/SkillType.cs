@@ -25,16 +25,40 @@ public enum ElementsType
     Wood,
 }
 
-
+/// <summary>
+/// battle cry
+/// </summary>
 public enum BattleCryBehaviorType
 {
     Buff,
     Summon,
 }
 
-
+/// <summary>
+/// on hit
+/// </summary>
 public enum OnHitBehaviorType
 {
    Penetrate,
    Explode,
+}
+
+/// <summary>
+/// attributes
+/// </summary>
+public enum Attributetype
+{
+    NodeNumber,
+    AttackOrDefend,
+    Size,
+}
+
+[System.Serializable]
+/// <summary>
+/// a structure for Float parameters,include parameter name and value 
+/// </summary>
+public struct FloatParameters
+{
+    public string parameters_name;
+    public float value;
 }
