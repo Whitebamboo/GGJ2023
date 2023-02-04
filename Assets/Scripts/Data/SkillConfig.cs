@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObjects/Skill")]
 public class SkillConfig : ScriptableObject
 {
-    
+    public Sprite skillImage;
 }
