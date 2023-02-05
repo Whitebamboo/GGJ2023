@@ -11804,6 +11804,8 @@ MonoBehaviour:
   - {fileID: 1248348678500178728, guid: 3402a6f9a2b8cbd438c9a1630a97543e, type: 3}
   - {fileID: 1248348678500178728, guid: 836ab2d2f6b21904fa1224e7a07c44e7, type: 3}
   - {fileID: 1248348678500178728, guid: e9e2b53922056ca428e21084c1d8f2fe, type: 3}
+  - {fileID: 1248348678500178728, guid: 2b97310d61fb80044bd77ef5c17b0034, type: 3}
+  - {fileID: 1248348678500178728, guid: 405a545502104cc4880e18cf5d2385bf, type: 3}
   waveInfos:
   - {fileID: 11400000, guid: 95ad606aeac7838428bec7956f8c0550, type: 2}
   - {fileID: 11400000, guid: ae01aecce9886fa4191f2dcd661ffbee, type: 2}
