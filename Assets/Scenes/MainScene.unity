@@ -43287,6 +43287,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3153915498920590185, guid: 69a96ca41040a0a448ef8db53fc33b0b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870564902652589032, guid: 69a96ca41040a0a448ef8db53fc33b0b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8785821417066133118, guid: 69a96ca41040a0a448ef8db53fc33b0b,
         type: 3}
       propertyPath: m_Name
@@ -43357,7 +43367,8 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5574320873395043724, guid: 69a96ca41040a0a448ef8db53fc33b0b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 69a96ca41040a0a448ef8db53fc33b0b, type: 3}
 --- !u!1 &1985264472 stripped
 GameObject:
