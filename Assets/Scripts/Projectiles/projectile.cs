@@ -81,7 +81,7 @@ public class projectile : MonoBehaviour
     {
         //rotate to move dir
         move_direction = dir;
-        Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.red,2f);
+        //Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.red,2f);
         transform.rotation = Quaternion.FromToRotation(transform.right, move_direction);
         canMove = true;
         EventBus.Broadcast(EventTypes.ProjectileBattleCry);

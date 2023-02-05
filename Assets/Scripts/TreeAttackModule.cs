@@ -10,8 +10,10 @@ public class TreeAttackModule : MonoBehaviour
     //
  
     public GameObject projectile_prefab;
+    public GameObject shield_prefab;
     public Transform projectile_spawn_point;
-    public int attacknode_number = 1;
+    public int attacknode_number = 0;
+    public int defendnode_number = 0;
     public float radius = 5;
     public ProjectileCreateInfo createInfo;
     public ElementTotalInfo elementCreateInfo;
@@ -44,6 +46,7 @@ public class TreeAttackModule : MonoBehaviour
     {
         //init some variable
         attacknode_number = 0;
+        defendnode_number = 0;
         node_number_multiply = 1;
         //first get how manys base nodes in it
         createInfo = new ProjectileCreateInfo();
@@ -76,31 +79,48 @@ public class TreeAttackModule : MonoBehaviour
 
 
         //final multiply for the attack node
-        attacknode_number *= node_number_multiply;//when have a multply node for base node
+        attacknode_number *= node_number_multiply;
+        defendnode_number *= node_number_multiply;
+        //when have a multply node for base node
         //
-        //print("deal with attack node" + attacknode_number);
+        //create attack projectile
         //find position
         List<Vector3> dir =  FindClosestEnemyPosition(attacknode_number);
-        if(dir == null)
-        {
-            print("find attack direction wrong");
-            return;
-        }
+        List<Vector3> defend_dir = FindClosestEnemyPosition(defendnode_number);
+       
         //create attack projectiles
-        
-        for(int i = 0; i < attacknode_number; i++)
+        if((dir != null) && (dir.Count > 0))
         {
-            GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
-            projectile p = go.GetComponent<projectile>();
-            //set go parameters
-            p.SetProjectileParameters(createInfo);
-            //add onhit effect to go
-            AddOnhitComponentToProjectile(go);
-            //set go move direction and start move
-            //print(projectile_spawn_point.position);
-            p.StartMove(dir[i] - projectile_spawn_point.position);
-            
+            for (int i = 0; i < attacknode_number; i++)
+            {
+                GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
+                projectile p = go.GetComponent<projectile>();
+                //set go parameters
+                p.SetProjectileParameters(createInfo);
+                //add onhit effect to go
+                AddOnhitComponentToProjectile(go);
+                //set go move direction and start move
+                //print(projectile_spawn_point.position);
+                p.StartMove(dir[i] - projectile_spawn_point.position);
+
+            }
         }
+        
+        if((defend_dir != null) && (defend_dir.Count > 0))
+        {
+            //create defend shield
+            for (int i = 0; i < defendnode_number; i++)
+            {
+                GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
+                shield s = go.GetComponent<shield>();
+                //set shild parameters
+                s.SetShieldParameters(createInfo);
+                //set on dead effect
+                //start move
+                s.StartMove(defend_dir[i] - projectile_spawn_point.position);
+            }
+        }
+       
     }
 
     /// <summary>
@@ -154,21 +174,22 @@ public class TreeAttackModule : MonoBehaviour
         {
             return null;
         }
-        GameManager.instance.enemyManager.enemies.Sort(SortByVector);
-        if(GameManager.instance.enemyManager.enemies.Count > 0)
+        List<Enemy> enemy_targets_list = GameManager.instance.enemyManager.enemies;
+        enemy_targets_list.Sort(SortByVector);
+        if(enemy_targets_list.Count > 0)
         {
-            if(GameManager.instance.enemyManager.enemies.Count >= num)
+            if(enemy_targets_list.Count >= num)
             {
                 for(int i = 0; i < num; i++)
                 {
-                    enemy_position.Add(GameManager.instance.enemyManager.enemies[i].transform.position);
+                    enemy_position.Add(enemy_targets_list[i].transform.position);
                 }
             }
             else
             {
-                for(int i = 0; i< GameManager.instance.enemyManager.enemies.Count; i++)
+                for(int i = 0; i< enemy_targets_list.Count; i++)
                 {
-                    enemy_position.Add(GameManager.instance.enemyManager.enemies[i].transform.position);
+                    enemy_position.Add(enemy_targets_list[i].transform.position);
                     num--;
                 }
                 for(int i = 0; i < num; i++)
@@ -195,6 +216,9 @@ public class TreeAttackModule : MonoBehaviour
         {
             case BaseType.Attack:
                 attacknode_number += 1;
+                break;
+            case BaseType.Shiled:
+                defendnode_number += 1;
                 break;
         }
 
