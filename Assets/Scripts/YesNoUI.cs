@@ -19,8 +19,8 @@ public class YesNoUI : MonoBehaviour
 
     public void OnNoClick()
     {
-        YesImage.SetActive(true);
-        NoImage.SetActive(false);
+        YesImage.SetActive(false);
+        NoImage.SetActive(true);
     }
 
     public void ResetUI()
