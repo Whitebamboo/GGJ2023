@@ -82,8 +82,8 @@ public class EnemyManager : MonoBehaviour
                 var dir = transform.position - enemy.gameObject.transform.position;
                 dir.z = 0;
                 dir = dir.normalized;
-                var localScale = enemy.gameObject.transform.localScale;
-                enemy.gameObject.transform.localScale = new Vector3(Mathf.Abs(localScale.x) * (dir.x < 0 ? -1 : 1), localScale.y, localScale.z);
+                var localScale = enemy.model.transform.localScale;
+                enemy.model.transform.localScale = new Vector3(localScale.x , localScale.y, Mathf.Abs(localScale.z) * (dir.x < 0 ? -1 : 1));
                 enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate / 100);
             });
             
@@ -116,7 +116,7 @@ public class EnemyManager : MonoBehaviour
                     {
                         enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy);
                     }
-                    
+                    GameManager.instance.dmgTextManager.AddDmgText(enemy.attack, DmgType.PlayerNormal, enemy.attack_target.transform.position);
                 }
                 else
                 {

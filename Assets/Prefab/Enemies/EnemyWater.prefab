@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1248348678500178728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.084, y: 2.259, z: -1.8453}
-  m_LocalScale: {x: -0.4811754, y: 0.57442623, z: 0.5293}
+  m_LocalScale: {x: 0.4811754, y: 0.57442623, z: 0.5293}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2337185922915423233}
@@ -110,6 +110,7 @@ MonoBehaviour:
   attackCoolDown: 0
   slashEffect: {fileID: 4571367348136271490}
   text: {fileID: 6338116893421868402}
+  model: {fileID: 2342839290254779261}
   isAttacking: 0
   debuffs: []
   damageIncreaseRate: 0

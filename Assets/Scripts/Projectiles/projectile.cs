@@ -134,7 +134,7 @@ public class projectile : MonoBehaviour
             print("find retraint");
             damage *= 2;
         }
-        e.TakeDamage(damage);
+        e.TakeDamage(damage, damage > attack_base);
     }
 
     /// <summary>

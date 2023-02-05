@@ -9,6 +9,7 @@ public class GameManager : CSingletonMono<GameManager>
     public float minWeight; 
     public Tree tree;
     public EnemyManager enemyManager;
+    public DmgTextManager dmgTextManager;
     public GameState state = GameState.StartMenu;
     public GameObject YesOrNoUI;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,7 +18,8 @@ public class Enemy : MonoBehaviour
     public GameObject slashEffect;
     [SerializeField]
     public GameObject text;
-
+    [SerializeField]
+    public GameObject model;
     private Coroutine hideTextCoroutine;
 
     private Rigidbody rigidbody;
@@ -78,19 +80,12 @@ public class Enemy : MonoBehaviour
     /// function to make damage to enemy
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isCritical)
     {
         var dmg = damage * (1 + damageIncreaseRate / 100);
 
         health -= dmg;
-        text.SetActive(true);
-        text.GetComponent<TextMeshPro>().text = dmg.ToString();
-        if (hideTextCoroutine != null)
-        {
-            StopCoroutine(hideTextCoroutine);
-        }
-        hideTextCoroutine = StartCoroutine(HideText());
-
+        GameManager.instance.dmgTextManager.AddDmgText(dmg, isCritical ? DmgType.EnemyCritical : DmgType.EnemyNormal, transform.position);
         print("on hit:" + health);//call UI utils function
     }
 
