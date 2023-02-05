@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class SpawnInfo
 {
-    public int time;
+    public float time;
     public int enemyIndex; // or enemy id
     public int spawnPositionIndex;
 }

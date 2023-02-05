@@ -82,7 +82,7 @@ public class EnemyManager : MonoBehaviour
                 dir.z = 0;
                 dir = dir.normalized;
                 var localScale = enemy.gameObject.transform.localScale;
-                enemy.gameObject.transform.localScale = new Vector3(localScale.x * (dir.x < 0 ? -1 : 1), localScale.y, localScale.z);
+                enemy.gameObject.transform.localScale = new Vector3(Mathf.Abs(localScale.x) * (dir.x < 0 ? -1 : 1), localScale.y, localScale.z);
                 enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate);
             });
             
@@ -116,6 +116,6 @@ public class EnemyManager : MonoBehaviour
 
     private int SortByTime(SpawnInfo a, SpawnInfo b)
     {
-        return a.time - b.time;
+        return (int) (a.time - b.time);
     }
 }
