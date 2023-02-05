@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        var dmg = damage * (1 + damageIncreaseRate);
+        var dmg = damage * (1 + damageIncreaseRate / 100);
 
         health -= dmg;
         text.SetActive(true);

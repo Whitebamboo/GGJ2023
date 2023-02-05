@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour
                 dir = dir.normalized;
                 var localScale = enemy.gameObject.transform.localScale;
                 enemy.gameObject.transform.localScale = new Vector3(Mathf.Abs(localScale.x) * (dir.x < 0 ? -1 : 1), localScale.y, localScale.z);
-                enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate);
+                enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate / 100);
             });
             
             // update cool down
