@@ -1808,12 +1808,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config_list:
   - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: d08b66a853c6de0429bd8dd4cacbf5e9, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
     type: 3}
   projectile_spawn_point: {fileID: 751214894}
   attacknode_number: 1
-  radius: 20
+  radius: 10
   node_number_multiply: 1
 --- !u!4 &1254828861
 Transform:

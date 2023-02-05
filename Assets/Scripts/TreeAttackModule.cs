@@ -151,37 +151,29 @@ public class TreeAttackModule : MonoBehaviour
         {
             return null;
         }
-        RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.1f);
-        List<RaycastHit> raycast_list = new List<RaycastHit>(raycastHits);
-        
-        while(raycast_list.Count > 0 && num > 0)
+        GameManager.instance.enemyManager.enemies.Sort(SortByVector);
+        if(GameManager.instance.enemyManager.enemies.Count > 0)
         {
-            if(raycast_list[0].transform.tag != "Enemy")
+            if(GameManager.instance.enemyManager.enemies.Count >= num)
             {
-                raycast_list.RemoveAt(0);
-                continue;
+                for(int i = 0; i < num; i++)
+                {
+                    enemy_position.Add(GameManager.instance.enemyManager.enemies[i].transform.position);
+                }
             }
-           
-            enemy_position.Add(raycast_list[0].transform.position);
-            raycast_list.RemoveAt(0);
-            num--;
-        }
-        if(enemy_position.Count == 0)
-        {
-            //try get position from enemy list
-            //if that doesn't work 
-            return null;
-        }
-        else if((enemy_position.Count>0) && (num > 0))
-        {
-            print("did not find enough enemies, just repeat on same path");
-            for(int i = 0; i < num; i++)
+            else
             {
-                enemy_position.Add(enemy_position[0]);
+                for(int i = 0; i< GameManager.instance.enemyManager.enemies.Count; i++)
+                {
+                    enemy_position.Add(GameManager.instance.enemyManager.enemies[i].transform.position);
+                    num--;
+                }
+                for(int i = 0; i < num; i++)
+                {
+                    enemy_position.Add(enemy_position[0]);
+                }
             }
-            return enemy_position;
         }
-
         return enemy_position;
         
 
@@ -281,6 +273,18 @@ public class TreeAttackModule : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     #endregion
+
+    /// <summary>
+    /// sort by vector distance
+    /// </summary>
+    /// <returns></returns>
+    private int SortByVector(Enemy a,Enemy b)
+    {
+        float a_dis = (a.transform.position - transform.position).magnitude;
+
+        float b_dis = (b.transform.position - transform.position).magnitude;
+        return (int)(a_dis - b_dis);
+    }
 }
 
 
