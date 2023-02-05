@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -1
+  m_Spacing: -2
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -119,4 +119,6 @@ MonoBehaviour:
   LayerNodePrefab: {fileID: 6840217654722298027, guid: c3655322b2dff734095fac88a37378a1,
     type: 3}
   containerImage: {fileID: 4500806898032548783}
-  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightColor: {r: 1, g: 0.67539173, b: 0.2028302, a: 1}
+  canAdd: 1
+  layerIndex: 0

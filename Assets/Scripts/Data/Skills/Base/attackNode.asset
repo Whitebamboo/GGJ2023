@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
   m_Name: attackNode
   m_EditorClassIdentifier: 
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 21300000, guid: 3f0191551445bb9468119140761dd22e, type: 3}
+  Description: 
   skilltype: 0
+  baseType: 0
   elementType: 0
   elements_parameters: []
   battleCryBehaviorType: 0
   onHitBehaviorType: 1
+  onhit_parameters: []
   attributetype: 1
-  attribute_infomation: []
+  attribute_information: []

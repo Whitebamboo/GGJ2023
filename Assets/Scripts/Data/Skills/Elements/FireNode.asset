@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
   m_Name: FireNode
   m_EditorClassIdentifier: 
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 21300000, guid: 2c84e036555703341b9f17c67a92988f, type: 3}
+  Description: 
   skilltype: 1
   baseType: 0
   elementType: 0

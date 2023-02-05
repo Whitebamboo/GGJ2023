@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class projectile : MonoBehaviour
 {
-
+    
     //base attributes
     public float attack_base = 5;
     public float attack_add = 0;
@@ -28,6 +28,11 @@ public class projectile : MonoBehaviour
     public Transform element_particle_parent;
     public List<GameObject> onhit_particle_list = new List<GameObject>();
 
+    //private ProjcetilePool projcetilePool;
+    private void Start()
+    {
+        //projcetilePool = FindObjectOfType<ProjcetilePool>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -81,7 +86,7 @@ public class projectile : MonoBehaviour
     {
         //rotate to move dir
         move_direction = dir;
-        Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.red,2f);
+        //Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.red,2f);
         transform.rotation = Quaternion.FromToRotation(transform.right, move_direction);
         canMove = true;
         EventBus.Broadcast(EventTypes.ProjectileBattleCry);
@@ -122,14 +127,42 @@ public class projectile : MonoBehaviour
     private void MakeDamage(GameObject enemy)
     {
         Enemy e = enemy.GetComponentInParent<Enemy>();
+        DmgType damge_type = DmgType.EnemyNormal;
         float damage = (attack_base + attack_add) * attack_multiply;
- 
         if ((elements_list.Count > 0) && (elements_list.Contains(element_restraint[e.GetElement()])))// have a restraint elements
         {
             print("find retraint");
             damage *= 2;
         }
-        e.TakeDamage(damage);
+        else if ((elements_list.Count > 0))
+        {
+            foreach(ElementsType element_type in elements_list)
+            {
+                if(e.element == element_restraint[element_type])
+                {
+                    damage /= 2;
+                    break;
+                }
+            }
+        }
+        if(damage > (attack_base + attack_add))
+        {
+            if(damage>((attack_base + attack_add) * attack_multiply))
+            {
+                damge_type = DmgType.EnemyRestraint;
+            }
+            else
+            {
+                damge_type = DmgType.EnemyCritical;
+
+            }
+            
+        }
+        else if(damage < (attack_base + attack_add))
+        {
+            damge_type = DmgType.EnemyWeak;
+        }
+        e.TakeDamage(damage, damge_type);
     }
 
     /// <summary>
@@ -170,6 +203,8 @@ public class projectile : MonoBehaviour
     private void Dead()
     {
         Destroy(this.gameObject);
+        //projcetilePool.PoolDead(this.gameObject);
+       
     }
     #endregion
 }

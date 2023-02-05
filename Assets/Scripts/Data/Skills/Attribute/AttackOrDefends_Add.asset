@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
   m_Name: AttackOrDefends_Add
   m_EditorClassIdentifier: 
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 21300000, guid: 5b952e61b03dcaf4d9c29a8d1a0f961b, type: 3}
   Description: "\u589E\u52A0,\u653B\u51FB\u6216\u751F\u547D\u503C+6"
   skilltype: 4
   baseType: 0

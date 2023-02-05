@@ -10,19 +10,25 @@ public class TreeAttackModule : MonoBehaviour
     //
  
     public GameObject projectile_prefab;
+    public GameObject shield_prefab;
     public Transform projectile_spawn_point;
-    public int attacknode_number = 1;
+    public int attacknode_number = 0;
+    public int defendnode_number = 0;
     public float radius = 5;
     public ProjectileCreateInfo createInfo;
     public ElementTotalInfo elementCreateInfo;
     public int node_number_multiply = 1;//only for attack and shild base mode
 
-   
+
+    //private ProjcetilePool projcetilePool;
+    //private ShiledPool shiledPool;
 
     private void Start()
     {
+        //projcetilePool = GetComponent<ProjcetilePool>();
+        //shiledPool = GetComponent<ShiledPool>();
         //only for test
-        foreach(var c in config_list)
+        foreach (var c in config_list)
         {
             TreeNode t = new TreeNode(c);
             treeNode_list.Add(t);
@@ -44,6 +50,7 @@ public class TreeAttackModule : MonoBehaviour
     {
         //init some variable
         attacknode_number = 0;
+        defendnode_number = 0;
         node_number_multiply = 1;
         //first get how manys base nodes in it
         createInfo = new ProjectileCreateInfo();
@@ -76,30 +83,64 @@ public class TreeAttackModule : MonoBehaviour
 
 
         //final multiply for the attack node
-        attacknode_number *= node_number_multiply;//when have a multply node for base node
+        attacknode_number *= node_number_multiply;
+        defendnode_number *= node_number_multiply;
+        //when have a multply node for base node
         //
-        //print("deal with attack node" + attacknode_number);
+        //create attack projectile
         //find position
         List<Vector3> dir =  FindClosestEnemyPosition(attacknode_number);
-        if(dir == null)
-        {
-            print("find attack direction wrong");
-            return;
-        }
+        List<Vector3> defend_dir = FindClosestEnemyPosition(defendnode_number);
+       
         //create attack projectiles
-        
-        for(int i = 0; i < attacknode_number; i++)
+        if((dir != null) && (dir.Count > 0))
         {
-            GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
-            projectile p = go.GetComponent<projectile>();
-            //set go parameters
-            p.SetProjectileParameters(createInfo);
-            //add onhit effect to go
-            AddOnhitComponentToProjectile(go);
-            //set go move direction and start move
-            //print(projectile_spawn_point.position);
-            p.StartMove(dir[i] - projectile_spawn_point.position);
-            
+            for (int i = 0; i < attacknode_number; i++)
+            {
+                GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
+                //GameObject go = projcetilePool.PoolCreate(projectile_prefab, projectile_spawn_point);
+                projectile p = go.GetComponent<projectile>();
+                //set go parameters
+                p.SetProjectileParameters(createInfo);
+                //add onhit effect to go
+                AddOnhitComponentToProjectile(go);
+                //set go move direction and start move
+                //print(projectile_spawn_point.position);
+                p.StartMove(dir[i] - projectile_spawn_point.position);
+
+            }
+        }
+        
+        if((defend_dir != null) && (defend_dir.Count > 0))
+        {
+            //create defend shield
+            for (int i = 0; i < defendnode_number; i++)
+            {
+                GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
+                //GameObject go = shiledPool.PoolCreate(shield_prefab, projectile_spawn_point);
+                shield s = go.GetComponent<shield>();
+                //set shild parameters
+                s.SetShieldParameters(createInfo);
+                //set on dead effect
+                AddOnDeadComponentToShield(go);
+                //start move
+                s.StartMove(defend_dir[i] - projectile_spawn_point.position);
+            }
+        }
+       
+    }
+
+    /// <summary>
+    /// add when on dead
+    /// </summary>
+    /// <param name="shield"></param>
+    private void AddOnDeadComponentToShield(GameObject shield)
+    {
+        if (createInfo.isExplode)
+        {
+            OnDeadExplode e = shield.AddComponent<OnDeadExplode>();
+            e.explode_radius = createInfo.explode_radius;
+
         }
     }
 
@@ -154,37 +195,30 @@ public class TreeAttackModule : MonoBehaviour
         {
             return null;
         }
-        RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.1f);
-        List<RaycastHit> raycast_list = new List<RaycastHit>(raycastHits);
-        
-        while(raycast_list.Count > 0 && num > 0)
+        List<Enemy> enemy_targets_list = GameManager.instance.enemyManager.enemies;
+        enemy_targets_list.Sort(SortByVector);
+        if(enemy_targets_list.Count > 0)
         {
-            if(raycast_list[0].transform.tag != "Enemy")
+            if(enemy_targets_list.Count >= num)
             {
-                raycast_list.RemoveAt(0);
-                continue;
+                for(int i = 0; i < num; i++)
+                {
+                    enemy_position.Add(enemy_targets_list[i].transform.position);
+                }
             }
-           
-            enemy_position.Add(raycast_list[0].transform.position);
-            raycast_list.RemoveAt(0);
-            num--;
-        }
-        if(enemy_position.Count == 0)
-        {
-            //try get position from enemy list
-            //if that doesn't work 
-            return null;
-        }
-        else if((enemy_position.Count>0) && (num > 0))
-        {
-            print("did not find enough enemies, just repeat on same path");
-            for(int i = 0; i < num; i++)
+            else
             {
-                enemy_position.Add(enemy_position[0]);
+                for(int i = 0; i< enemy_targets_list.Count; i++)
+                {
+                    enemy_position.Add(enemy_targets_list[i].transform.position);
+                    num--;
+                }
+                for(int i = 0; i < num; i++)
+                {
+                    enemy_position.Add(enemy_position[0]);
+                }
             }
-            return enemy_position;
         }
-
         return enemy_position;
         
 
@@ -203,6 +237,9 @@ public class TreeAttackModule : MonoBehaviour
         {
             case BaseType.Attack:
                 attacknode_number += 1;
+                break;
+            case BaseType.Shiled:
+                defendnode_number += 1;
                 break;
         }
 
@@ -284,6 +321,18 @@ public class TreeAttackModule : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     #endregion
+
+    /// <summary>
+    /// sort by vector distance
+    /// </summary>
+    /// <returns></returns>
+    private int SortByVector(Enemy a,Enemy b)
+    {
+        float a_dis = (a.transform.position - transform.position).magnitude;
+
+        float b_dis = (b.transform.position - transform.position).magnitude;
+        return (int)(a_dis - b_dis);
+    }
 }
 
 

@@ -1126,6 +1126,56 @@ Transform:
   m_Father: {fileID: 202451243}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &644197081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644197083}
+  - component: {fileID: 644197082}
+  m_Layer: 0
+  m_Name: DmgTextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &644197082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644197081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f36dfca14fac7240bb0662e23aa3018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanBeReset: 1
+  normalTextObject: {fileID: 3017140877355366108, guid: f58c39692c805424b8bf443e9f03114e,
+    type: 3}
+  criticalTextObject: {fileID: 3017140877355366108, guid: 68e35efc9fdd26642a14d7251a94a4f6,
+    type: 3}
+  textLifeTime: 0.3
+--- !u!4 &644197083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644197081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19376743, y: 1.6137438, z: -2.9938388}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &677750083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,8 +1507,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanBeReset: 1
   Health: 30
-  NetworkProcessInterval: 0
-  defaultSkill: {fileID: 0}
+  NetworkProcessInterval: 1
+  defaultSkill: {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
+  AttackModule: {fileID: 1254828860}
 --- !u!1 &926914841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,12 +1859,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config_list:
   - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: d08b66a853c6de0429bd8dd4cacbf5e9, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
+    type: 3}
+  shield_prefab: {fileID: 6438780514538200307, guid: eff9cd3a9f441df40b9cd556637d90b0,
     type: 3}
   projectile_spawn_point: {fileID: 751214894}
   attacknode_number: 1
-  radius: 20
+  defendnode_number: 0
+  radius: 10
   node_number_multiply: 1
 --- !u!4 &1254828861
 Transform:
@@ -1823,7 +1877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254828859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 5.71, z: -1.75}
+  m_LocalPosition: {x: -0.06, y: 7.15, z: -1.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2217,6 +2271,8 @@ MonoBehaviour:
   initialWeight: 0
   tree: {fileID: 880073043}
   enemyManager: {fileID: 202451242}
+  dmgTextManager: {fileID: 644197082}
+  state: 0
 --- !u!4 &1593083646
 Transform:
   m_ObjectHideFlags: 0

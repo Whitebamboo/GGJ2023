@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,9 +18,11 @@ public class Enemy : MonoBehaviour
     public GameObject slashEffect;
     [SerializeField]
     public GameObject text;
-
+    [SerializeField]
+    public GameObject model;
+    public List<SkillConfig> droppedSkills = new List<SkillConfig>();
     private Coroutine hideTextCoroutine;
-    
+
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
@@ -27,19 +30,18 @@ public class Enemy : MonoBehaviour
     public float damageIncreaseRate = 0;
     public float speedDecreaseRate = 0;
 
+    public GameObject attack_target = null;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        GetComponentInChildren<HPBar>().InitialHP(health);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isAttacking)
-        {
-            
-        }
+        
     }
 
 
@@ -80,20 +82,14 @@ public class Enemy : MonoBehaviour
     /// function to make damage to enemy
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, DmgType damage_type)
     {
         var dmg = damage * (1 + damageIncreaseRate / 100);
 
         health -= dmg;
-        text.SetActive(true);
-        text.GetComponent<TextMeshPro>().text = dmg.ToString();
-        if (hideTextCoroutine != null)
-        {
-            StopCoroutine(hideTextCoroutine);
-        }
-        hideTextCoroutine = StartCoroutine(HideText());
-        
-        print("on hit:" + health);//call UI utils function
+        GameManager.instance.dmgTextManager.AddDmgText(dmg, damage_type, transform.position);
+        GetComponentInChildren<HPBar>().UpdateHP(health);
+        //print("on hit:" + health);//call UI utils function
     }
 
     private IEnumerator HideText()
@@ -104,19 +100,25 @@ public class Enemy : MonoBehaviour
 
     public void OnAttackTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Tree"))
+        if (other.gameObject.CompareTag("Tree") || (other.gameObject.CompareTag("Shield")))
         {
             isAttacking = true;
             rigidbody.velocity = new Vector3();
+            attack_target = other.gameObject;
         }
+    
     }
 
     public void OnAttackTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Tree"))
+        if (other.gameObject.CompareTag("Tree") || (other.gameObject.CompareTag("Shield")))
         {
             isAttacking = false;
         }
     }
     
+    public void DropSkills()
+    {
+        GameManager.instance.ProcessDropItemList(droppedSkills);
+    }
 }

@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public SkillConfig skillConfig;
+    public Image displayImage;
+    private GameObject Icon; 
 
     private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
     private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform>();
+
+    public void Init(SkillConfig config)
+    {
+        skillConfig = config;
+        displayImage.sprite = config.skillImage;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -21,6 +29,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         // What we want to do is create an icon for this.
 
         GameObject displayIcon = new GameObject("icon");
+        Icon = displayIcon;
         m_DraggingIcons[eventData.pointerId] = displayIcon;
 
         m_DraggingIcons[eventData.pointerId].transform.SetParent(canvas.transform, false);
@@ -32,7 +41,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         var group = m_DraggingIcons[eventData.pointerId].AddComponent<CanvasGroup>();
         group.blocksRaycasts = false;
 
-        image.sprite = GetComponent<Image>().sprite;
+        image.sprite = displayImage.sprite;
         image.SetNativeSize();
         displayIcon.GetComponent<RectTransform>().sizeDelta = GetComponent<RectTransform>().sizeDelta;
 
@@ -58,6 +67,11 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             rt.position = globalMousePos;
             rt.rotation = m_DraggingPlanes[eventData.pointerId].rotation;
         }
+    }
+
+    public void OnEndDrag()
+    {
+        Destroy(Icon);
     }
 
     public void OnEndDrag(PointerEventData eventData)

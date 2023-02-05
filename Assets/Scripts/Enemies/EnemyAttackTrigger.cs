@@ -25,4 +25,6 @@ public class EnemyAttackTrigger : MonoBehaviour
     {
         parent.OnAttackTriggerExit(other);
     }
+
+    
 }

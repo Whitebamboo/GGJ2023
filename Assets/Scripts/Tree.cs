@@ -19,8 +19,16 @@ public class Tree : CSingletonMono<Tree>
 
     public TreeAttackModule AttackModule;
 
+    private TreeNodeChain currentChain;
+
+    //true is yes, false is no
+    public bool yesOrNo;
+
+    public bool yesOrNoClicked;
+
     private void Start()
     {
+        GetComponentInChildren<HPBar>().InitialHP(Health);
         processTimer = 1f;
         Init();
     }
@@ -32,8 +40,20 @@ public class Tree : CSingletonMono<Tree>
         NetworkModule = new TreeNetworkModule();
         TreeNode bulletNode = new TreeNode(defaultSkill);
         NetworkModule.AddNodeToLayer(1, bulletNode);
+
+        
     }
 
+    /// <summary>
+    /// on hit take damage
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="damageType"></param>
+    public void TakeDamage(float damage,DmgType damageType)
+    {
+        Health -= damage;
+        GetComponentInChildren<HPBar>().UpdateHP(Health);
+    }
     private void Update()
     {
         if (ProcessingStart)
@@ -47,10 +67,29 @@ public class Tree : CSingletonMono<Tree>
             }
         }
     }
-    
+
+    public void OnYesClicked()
+    {
+        yesOrNo = true;
+        yesOrNoClicked = true;
+    }
+
+    public void OnNoClicked()
+    {
+        yesOrNo = false;
+        yesOrNoClicked = true;
+    }
+
     void ProcessNetwork()
     {
+        if(yesOrNoClicked && currentChain != null)
+        {
+            currentChain.UpdateWeight(yesOrNo);
+        }
+        yesOrNoClicked = false;
+
         TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
+        currentChain = chain;
 
         string text = "";
 

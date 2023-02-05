@@ -12,8 +12,9 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     private Color normalColor;
     public Color highlightColor = Color.yellow;
+    public Color hintColor = Color.yellow;
 
-    public bool addable;
+    public bool canAdd = true;
 
     public int layerIndex;
 
@@ -21,13 +22,11 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
     {
         if (containerImage != null)
             normalColor = containerImage.color;
-
-        addable = true;
     }
 
     public void OnDrop(PointerEventData data)
     {
-        if (!addable)
+        if (!canAdd)
             return;
         
         containerImage.color = normalColor;
@@ -35,21 +34,30 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         Sprite dropSprite = GetDropSprite(data);
 
         GameObject obj = Instantiate(LayerNodePrefab, transform);
-        obj.GetComponent<Image>().sprite = dropSprite;
+        obj.GetComponent<LayerNodeUI>().image.sprite = dropSprite;
 
         if(transform.childCount == 5)
         {
-            addable = false;
+            canAdd = false;
+        }
+
+        if (transform.childCount == 3 && layerIndex >= 2)
+        {
+            GetComponentInParent<NetworkUI>().AddLayer();
         }
 
         SkillConfig config = GetConfig(data);
 
         Tree.instance.NetworkModule.AddNodeToLayer(layerIndex, new TreeNode(config));
+
+        var originalObj = data.pointerDrag;
+        originalObj.GetComponent<NodeDragUI>().OnEndDrag();
+        Destroy(originalObj);
     }
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (containerImage == null || !addable)
+        if (containerImage == null || !canAdd)
             return;
 
         Sprite dropSprite = GetDropSprite(data);
@@ -59,7 +67,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     public void OnPointerExit(PointerEventData data)
     {
-        if (containerImage == null || !addable)
+        if (containerImage == null || !canAdd)
             return;
 
         containerImage.color = normalColor;
@@ -79,7 +87,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         if (srcImage == null)
             return null;
 
-        return srcImage.sprite;
+        return dragMe.skillConfig.skillImage;
     }
 
     private SkillConfig GetConfig(PointerEventData data)
