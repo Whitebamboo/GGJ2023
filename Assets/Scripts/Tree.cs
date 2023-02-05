@@ -19,6 +19,13 @@ public class Tree : CSingletonMono<Tree>
 
     public TreeAttackModule AttackModule;
 
+    private TreeNodeChain currentChain;
+
+    //true is yes, false is no
+    public bool yesOrNo;
+
+    public bool yesOrNoClicked;
+
     private void Start()
     {
         processTimer = 1f;
@@ -32,6 +39,8 @@ public class Tree : CSingletonMono<Tree>
         NetworkModule = new TreeNetworkModule();
         TreeNode bulletNode = new TreeNode(defaultSkill);
         NetworkModule.AddNodeToLayer(1, bulletNode);
+
+        
     }
 
     private void Update()
@@ -47,10 +56,29 @@ public class Tree : CSingletonMono<Tree>
             }
         }
     }
-    
+
+    public void OnYesClicked()
+    {
+        yesOrNo = true;
+        yesOrNoClicked = true;
+    }
+
+    public void OnNoClicked()
+    {
+        yesOrNo = false;
+        yesOrNoClicked = true;
+    }
+
     void ProcessNetwork()
     {
+        if(yesOrNoClicked && currentChain != null)
+        {
+            currentChain.UpdateWeight(yesOrNo);
+        }
+        yesOrNoClicked = false;
+
         TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
+        currentChain = chain;
 
         string text = "";
 
@@ -65,7 +93,7 @@ public class Tree : CSingletonMono<Tree>
         }
         print(text);
 
-        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 

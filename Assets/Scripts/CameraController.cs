@@ -48,7 +48,7 @@ public class CameraController : CSingletonMono<CameraController>
         yield return myTween.WaitForCompletion();
         // This log will happen after the tween has completed
         Debug.Log("Game Started!");
-        GameManager.instance.state = GameState.InGame;
+        GameManager.instance.SetState(GameState.InGame);
     }
 
     /// <summary>

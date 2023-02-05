@@ -5,15 +5,22 @@ using UnityEngine;
 public class GameManager : CSingletonMono<GameManager>
 {
     public float initialWeight;
+    public float maxWeight;
+    public float minWeight; 
     public Tree tree;
     public EnemyManager enemyManager;
     public GameState state = GameState.StartMenu;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject YesOrNoUI;
 
+    public void SetState(GameState state)
+    {
+        this.state = state;
+
+        if(state == GameState.InGame)
+        {
+            YesOrNoUI.SetActive(true);
+        }
+    }
 }
 
 public enum GameState

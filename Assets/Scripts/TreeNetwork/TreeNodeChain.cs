@@ -39,5 +39,24 @@ public class TreeNodeChain
         }
     }
 
+    public void UpdateWeight(bool increase)
+    {
+        if(edges.Count == 0)
+        {
+            Debug.LogError("Update weight with no edges");
+            return;
+        }
 
+        foreach(Edge e in edges)
+        {
+            if(increase)
+            {
+                e.UpdateWeight(0.05f);
+            }
+            else
+            {
+                e.UpdateWeight(-0.05f);
+            }
+        }
+    }
 }
