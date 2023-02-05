@@ -5285,6 +5285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1372266157949503270, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2468253197398525803, guid: e05aedf6d03400049bfa22c340e8f181,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5303,6 +5308,16 @@ PrefabInstance:
     - target: {fileID: 2468253197398525803, guid: e05aedf6d03400049bfa22c340e8f181,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827472172497412270, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905174030855576877, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6092993983928728296, guid: e05aedf6d03400049bfa22c340e8f181,
