@@ -5351,6 +5351,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3248040291142502423, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248040291142502423, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248040291142502423, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248040291142502423, guid: e05aedf6d03400049bfa22c340e8f181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5905174030855576877, guid: e05aedf6d03400049bfa22c340e8f181,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -6111,6 +6131,7 @@ MonoBehaviour:
   Health: 200
   NetworkProcessInterval: 1
   defaultSkill: {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  defaultSkill2: {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   AttackModule: {fileID: 714429864}
   yesOrNo: 0
   yesOrNoClicked: 0

@@ -11,6 +11,7 @@ public class Tree : CSingletonMono<Tree>
     private float processTimer;
 
     public SkillConfig defaultSkill;
+    public SkillConfig defaultSkill2;
 
     public bool ProcessingStart { get; set; }
 
@@ -38,7 +39,9 @@ public class Tree : CSingletonMono<Tree>
 
         NetworkModule = new TreeNetworkModule();
         TreeNode bulletNode = new TreeNode(defaultSkill);
+        TreeNode sheidNode = new TreeNode(defaultSkill2);
         NetworkModule.AddNodeToLayer(1, bulletNode);
+        NetworkModule.AddNodeToLayer(1, sheidNode);
 
         
     }
