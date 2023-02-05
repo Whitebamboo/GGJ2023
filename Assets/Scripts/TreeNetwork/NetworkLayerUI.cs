@@ -9,28 +9,47 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
     public GameObject LayerNodePrefab;
 
     public Image containerImage;
+
     private Color normalColor;
     public Color highlightColor = Color.yellow;
+
+    public bool addable;
+
+    public int layerIndex;
 
     public void OnEnable()
     {
         if (containerImage != null)
             normalColor = containerImage.color;
+
+        addable = true;
     }
 
     public void OnDrop(PointerEventData data)
     {
+        if (!addable)
+            return;
+        
         containerImage.color = normalColor;
 
         Sprite dropSprite = GetDropSprite(data);
 
         GameObject obj = Instantiate(LayerNodePrefab, transform);
         obj.GetComponent<Image>().sprite = dropSprite;
+
+        if(transform.childCount == 5)
+        {
+            addable = false;
+        }
+
+        SkillConfig config = GetConfig(data);
+
+        Tree.instance.NetworkModule.AddNodeToLayer(layerIndex, new TreeNode(config));
     }
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (containerImage == null)
+        if (containerImage == null || !addable)
             return;
 
         Sprite dropSprite = GetDropSprite(data);
@@ -40,7 +59,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     public void OnPointerExit(PointerEventData data)
     {
-        if (containerImage == null)
+        if (containerImage == null || !addable)
             return;
 
         containerImage.color = normalColor;
@@ -61,5 +80,18 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
             return null;
 
         return srcImage.sprite;
+    }
+
+    private SkillConfig GetConfig(PointerEventData data)
+    {
+        var originalObj = data.pointerDrag;
+        if (originalObj == null)
+            return null;
+
+        var dragMe = originalObj.GetComponent<NodeDragUI>();
+        if (dragMe == null)
+            return null;
+
+        return dragMe.skillConfig; 
     }
 }

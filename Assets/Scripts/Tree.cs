@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Tree : MonoBehaviour
+public class Tree : CSingletonMono<Tree>
 {
     public float Health;
     public float NetworkProcessInterval;
 
     private float processTimer;
+
+    public SkillConfig defaultSkill;
 
     public bool ProcessingStart { get; set; }
 
@@ -25,7 +27,9 @@ public class Tree : MonoBehaviour
     {
         ProcessingStart = true;
 
-        
+        NetworkModule = new TreeNetworkModule();
+        TreeNode bulletNode = new TreeNode(defaultSkill);
+        NetworkModule.AddNodeToLayer(1, bulletNode);
     }
 
     private void Update()

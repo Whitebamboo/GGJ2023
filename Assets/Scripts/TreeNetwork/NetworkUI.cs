@@ -19,7 +19,9 @@ public class NetworkUI : MonoBehaviour
     public void AddLayer()
     {
         GameObject obj = Instantiate(LayerPrefab, LayerRoot);
+        obj.GetComponent<NetworkLayerUI>().layerIndex = LayerRoot.childCount - 1;
         Layers.Add(obj);
+        
     }
 
 }
