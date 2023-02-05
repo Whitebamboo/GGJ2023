@@ -14,6 +14,7 @@ public class GameManager : CSingletonMono<GameManager>
     public DmgTextManager dmgTextManager;
     public GameState state = GameState.StartMenu;
     public GameObject YesOrNoUI;
+    public YesNoUI YesNoUI;
     public NetworkUI networkUI;
     public DescriptionUI descriptionUI;
     public float dropChance;
@@ -73,6 +74,11 @@ public class GameManager : CSingletonMono<GameManager>
         {
             UIUtils.instance.showUi(lossPanel);
         }
+    }
+
+    public void ResetYesNo()
+    {
+        YesNoUI.ResetUI();
     }
 }
 

@@ -101,6 +101,7 @@ public class Tree : CSingletonMono<Tree>
             currentChain.UpdateWeight(yesOrNo);
         }
         yesOrNoClicked = false;
+        GameManager.instance.ResetYesNo();
 
         TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
         currentChain = chain;
