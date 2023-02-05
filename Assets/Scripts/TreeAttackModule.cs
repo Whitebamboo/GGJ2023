@@ -50,6 +50,9 @@ public class TreeAttackModule : MonoBehaviour
         elementCreateInfo = new ElementTotalInfo();
         foreach (TreeNode n in nodes)
         {
+            if (n.skillConfig == null)
+                continue;
+
             SkillConfig s = n.skillConfig;
             switch (s.skilltype)
             {

@@ -17,12 +17,7 @@ public class Tree : CSingletonMono<Tree>
 
     public TreeNetworkModule NetworkModule { get; private set; }
 
-    private TreeAttackModule AttackModule;
-
-    private void OnEnable()
-    {
-        AttackModule = GetComponent<TreeAttackModule>();
-    }
+    public TreeAttackModule AttackModule;
 
     private void Start()
     {
@@ -70,7 +65,7 @@ public class Tree : CSingletonMono<Tree>
         }
         print(text);
 
-        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 
