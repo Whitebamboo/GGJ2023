@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public SkillConfig skillConfig;
     public Image displayImage;
@@ -97,5 +97,15 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             t = t.parent;
         }
         return comp;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GameManager.instance.ShowDescription(skillConfig.Description);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GameManager.instance.DisableDescription();
     }
 }

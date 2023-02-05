@@ -14,6 +14,7 @@ public class GameManager : CSingletonMono<GameManager>
     public GameState state = GameState.StartMenu;
     public GameObject YesOrNoUI;
     public NetworkUI networkUI;
+    public DescriptionUI descriptionUI;
     public float dropChance;
 
     public void SetState(GameState state)
@@ -29,6 +30,8 @@ public class GameManager : CSingletonMono<GameManager>
 
     public void ProcessDropItemList(List<SkillConfig> skills)
     {
+        Debug.Log("Add Items!!!!");
+
         if(skills == null || skills.Count == 0)
         {
             Debug.LogError("No skill drops in enemey");
@@ -40,6 +43,16 @@ public class GameManager : CSingletonMono<GameManager>
             SkillConfig skillConfig = skills[Random.Range(0, skills.Count)];
             networkUI.AddNewItem(skillConfig);
         }
+    }
+
+    public void ShowDescription(string des)
+    {
+        descriptionUI.SetText(des);
+    }
+
+    public void DisableDescription()
+    {
+        descriptionUI.DisableBox();
     }
 }
 
