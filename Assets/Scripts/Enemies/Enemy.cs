@@ -121,4 +121,13 @@ public class Enemy : MonoBehaviour
     {
         GameManager.instance.ProcessDropItemList(droppedSkills);
     }
+
+    public void AddRank(int rank)
+    {
+        health += rank * 4;
+        attack += rank * 2;
+        attack_interval -= rank * 0.2f;
+        speed += rank * 0.05f;
+        transform.localScale += transform.localScale * (rank *  0.2f);
+    }
 }

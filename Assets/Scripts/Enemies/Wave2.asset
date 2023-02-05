@@ -10,37 +10,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09a97f1db1cbd2b4d9c30702ee5c7aaf, type: 3}
-  m_Name: Wave1
+  m_Name: Wave2
   m_EditorClassIdentifier: 
   spawnInfos:
   - time: 1
     enemyIndex: 0
     spawnPositionIndex: 10
-  - time: 9
+    rank: 0
+  - time: 6
     enemyIndex: 0
-    spawnPositionIndex: 2
-  - time: 17
-    enemyIndex: 2
-    spawnPositionIndex: 3
-  - time: 25
-    enemyIndex: 1
-    spawnPositionIndex: 11
-  - time: 33
-    enemyIndex: 1
-    spawnPositionIndex: 2
-  - time: 37
-    enemyIndex: 0
-    spawnPositionIndex: 9
-  - time: 45
-    enemyIndex: 2
-    spawnPositionIndex: 0
-  - time: 47
+    spawnPositionIndex: 4
+    rank: 0
+  - time: 10
     enemyIndex: 2
     spawnPositionIndex: 1
-  - time: 49
+    rank: 0
+  - time: 12
     enemyIndex: 0
-    spawnPositionIndex: 10
-  - time: 55
+    spawnPositionIndex: 8
+    rank: 0
+  - time: 17
     enemyIndex: 1
-    spawnPositionIndex: 11
-  time: 70
+    spawnPositionIndex: 3
+    rank: 0
+  - time: 18
+    enemyIndex: 1
+    spawnPositionIndex: 2
+    rank: 0
+  - time: 19
+    enemyIndex: 1
+    spawnPositionIndex: 10
+    rank: 0
+  - time: 24
+    enemyIndex: 0
+    spawnPositionIndex: 1
+    rank: 0
+  - time: 25
+    enemyIndex: 2
+    spawnPositionIndex: 9
+    rank: 0
+  - time: 25.5
+    enemyIndex: 2
+    spawnPositionIndex: 2
+    rank: 0
+  - time: 30
+    enemyIndex: 1
+    spawnPositionIndex: 2
+    rank: 5
+  time: 37

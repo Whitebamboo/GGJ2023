@@ -49,7 +49,9 @@ public class EnemyManager : MonoBehaviour
                     var go = Instantiate(enemyPrefabs[spawnInfos[i].enemyIndex],
                         spawnPositions[spawnInfos[i].spawnPositionIndex].transform.position,
                         spawnPositions[spawnInfos[i].spawnPositionIndex].transform.rotation, transform);
-                    enemies.Add(go.GetComponent<Enemy>());
+                    var enemy = go.GetComponent<Enemy>();
+                    enemy.AddRank(spawnInfos[i].rank);
+                    enemies.Add(enemy);
                     i += 1;
                 }
 
@@ -76,7 +78,8 @@ public class EnemyManager : MonoBehaviour
 
                 enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy => {
                     enemy.DropSkills();
-                    Destroy(enemy.gameObject); });
+                    Destroy(enemy.gameObject); 
+                });
                 enemies.RemoveAll(enemy => enemy.health <= 0);
 
 

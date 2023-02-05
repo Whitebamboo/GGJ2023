@@ -16,13 +16,17 @@ MonoBehaviour:
   - time: 1
     enemyIndex: 0
     spawnPositionIndex: 10
+    rank: 5
   - time: 1
     enemyIndex: 0
     spawnPositionIndex: 11
+    rank: 0
   - time: 1
     enemyIndex: 0
     spawnPositionIndex: 9
+    rank: 0
   - time: 1
     enemyIndex: 0
     spawnPositionIndex: 5
+    rank: 0
   time: 5
