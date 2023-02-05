@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: shieldNode
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 93b698610632d2347a41d964aa168284, type: 3}
-  Description: "\u5C04\u51FA\u4E00\u679A\u76FE\u724C"
+  Description: Base node that triggers a sheid
   skilltype: 0
   baseType: 1
   elementType: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodNode
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: d196fe63ac9d7894690f91ec4fd0269f, type: 3}
-  Description: 
+  Description: Add grass element to the attack and sheid.
   skilltype: 1
   baseType: 0
   elementType: 2

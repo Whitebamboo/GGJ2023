@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackOrDefends_Add
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 5b952e61b03dcaf4d9c29a8d1a0f961b, type: 3}
-  Description: "\u589E\u52A0,\u653B\u51FB\u6216\u751F\u547D\u503C+6"
+  Description: Add attack damage or sheid health
   skilltype: 4
   baseType: 0
   elementType: 0

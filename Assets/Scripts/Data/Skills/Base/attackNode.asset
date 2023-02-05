@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: attackNode
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 3f0191551445bb9468119140761dd22e, type: 3}
-  Description: 
+  Description: Base node that triggers an attack
   skilltype: 0
   baseType: 0
   elementType: 0
