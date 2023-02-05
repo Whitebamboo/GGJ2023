@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : CSingletonMono<GameManager>
 {
     public float initialWeight;
@@ -79,6 +79,11 @@ public class GameManager : CSingletonMono<GameManager>
     public void ResetYesNo()
     {
         YesNoUI.ResetUI();
+    }
+
+    public void OnClickRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 
