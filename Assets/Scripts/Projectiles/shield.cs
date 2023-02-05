@@ -71,6 +71,8 @@ public class shield : MonoBehaviour
         dir = dir.normalized;
         move_direction = dir;
         //Quaternion.ve
+
+        transform.LookAt(transform.position + dir);
         //transform.rotation = Quaternion.FromToRotation(transform.right, dir);
         StartCoroutine(PushEnemyMove(dir));
         //prepare to destroy it self by time
