@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : CSingletonMono<GameManager>
@@ -28,7 +29,7 @@ public class GameManager : CSingletonMono<GameManager>
         }
     }
 
-    public void ProcessDropItemList(List<SkillConfig> skills)
+    public void ProcessDropItemList(List<SkillConfig> skills, float dropChance)
     {
         Debug.Log("Add Items!!!!");
 

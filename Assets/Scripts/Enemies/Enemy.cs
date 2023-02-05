@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
     public float speedDecreaseRate = 0;
 
     public GameObject attack_target = null;
+
+    [SerializeField] private float dropSkillChance = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -119,7 +121,7 @@ public class Enemy : MonoBehaviour
     
     public void DropSkills()
     {
-        GameManager.instance.ProcessDropItemList(droppedSkills);
+        GameManager.instance.ProcessDropItemList(droppedSkills, dropSkillChance);
     }
 
     public void AddRank(int rank)
