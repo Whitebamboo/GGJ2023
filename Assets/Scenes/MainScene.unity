@@ -10909,10 +10909,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b6058a0e74bb44993cdeb028ed650c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config_list: []
+  config_list:
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
     type: 3}
-  projectile_spawn_point: {fileID: 0}
+  projectile_spawn_point: {fileID: 146157020}
   attacknode_number: 1
   radius: 5
   node_number_multiply: 1

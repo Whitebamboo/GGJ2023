@@ -130,6 +130,7 @@ MonoBehaviour:
   element_particle_parent: {fileID: 8706886296944694654}
   onhit_particle_list:
   - {fileID: 1775176656868278, guid: 29b7a8c2c0dfa14449b74938c95b0a08, type: 3}
+  - {fileID: 6857328604602866199, guid: 10e14da85c58bbb43872a1271a2ba618, type: 3}
 --- !u!1 &5814418462465339631
 GameObject:
   m_ObjectHideFlags: 0

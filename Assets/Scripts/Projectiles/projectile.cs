@@ -35,6 +35,10 @@ public class projectile : MonoBehaviour
         {
             this.transform.position += move_direction.normalized * speed * Time.deltaTime;
         }
+        if(transform.localPosition.magnitude > 1000)
+        {
+            Dead();
+        }
     }
 
     public void AddElementParticle(ElementsType e_type)
