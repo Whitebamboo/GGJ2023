@@ -113,18 +113,22 @@ public class TreeAttackModule : MonoBehaviour
         }
         if (elementCreateInfo.isFire)
         {
+            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Fire);
             Fire f =  projectile.AddComponent<Fire>();
             f.flame_damage = elementCreateInfo.fire_damage;
            
         }
         if (elementCreateInfo.isWater)
         {
+            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Water);
+        
             Water w = projectile.AddComponent<Water>();
             w.water_decelerate = elementCreateInfo.water_decelerate;
             
         }
         if (elementCreateInfo.isWood)
         {
+            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Wood);
             Wood w = projectile.AddComponent<Wood>();
             w.wood_damageIncrease = elementCreateInfo.wood_damageIncrease;
         }

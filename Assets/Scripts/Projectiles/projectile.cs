@@ -24,6 +24,9 @@ public class projectile : MonoBehaviour
         {ElementsType.Wood, ElementsType.Fire } 
     };
 
+    public List<GameObject> element_particle_list = new List<GameObject>();
+    public Transform element_particle_parent;
+    public List<GameObject> onhit_particle_list = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -34,6 +37,21 @@ public class projectile : MonoBehaviour
         }
     }
 
+    public void AddElementParticle(ElementsType e_type)
+    {
+        switch (e_type)
+        {
+            case ElementsType.Fire:
+                Instantiate(element_particle_list[0], element_particle_parent);
+                break;
+            case ElementsType.Water:
+                Instantiate(element_particle_list[1], element_particle_parent);
+                break;
+            case ElementsType.Wood:
+                Instantiate(element_particle_list[2], element_particle_parent);
+                break;
+        }
+    }
 
     /// <summary>
     /// create projectile and 

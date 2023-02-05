@@ -727,8 +727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config_list:
   - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
-  - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
+  - {fileID: 11400000, guid: 301eaf2e47464634f85c30cc3e4e747e, type: 2}
+  - {fileID: 11400000, guid: d08b66a853c6de0429bd8dd4cacbf5e9, type: 2}
+  - {fileID: 11400000, guid: 1f9d69577253f0a44bca7cd9ff4d94fd, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
     type: 3}
   projectile_spawn_point: {fileID: 1398167573}
