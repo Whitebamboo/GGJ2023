@@ -11296,6 +11296,8 @@ GameObject:
   m_Component:
   - component: {fileID: 714429865}
   - component: {fileID: 714429864}
+  - component: {fileID: 714429866}
+  - component: {fileID: 714429867}
   m_Layer: 0
   m_Name: TreeAttackModules
   m_TagString: Untagged
@@ -11342,6 +11344,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &714429866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714429863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5bcc58d86c73a4299cec9c7224291c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 0}
+  alive_pool: []
+  dead_pool: []
+--- !u!114 &714429867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714429863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab4431c2e0618240b9b5d12b5774d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 0}
+  alive_pool: []
+  dead_pool: []
 --- !u!1001 &716955464
 PrefabInstance:
   m_ObjectHideFlags: 0

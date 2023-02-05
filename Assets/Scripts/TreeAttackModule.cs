@@ -19,12 +19,16 @@ public class TreeAttackModule : MonoBehaviour
     public ElementTotalInfo elementCreateInfo;
     public int node_number_multiply = 1;//only for attack and shild base mode
 
-   
+
+    private ProjcetilePool projcetilePool;
+    private ShiledPool shiledPool;
 
     private void Start()
     {
+        projcetilePool = GetComponent<ProjcetilePool>();
+        shiledPool = GetComponent<ShiledPool>();
         //only for test
-        foreach(var c in config_list)
+        foreach (var c in config_list)
         {
             TreeNode t = new TreeNode(c);
             treeNode_list.Add(t);
@@ -93,7 +97,8 @@ public class TreeAttackModule : MonoBehaviour
         {
             for (int i = 0; i < attacknode_number; i++)
             {
-                GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
+                //GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
+                GameObject go = projcetilePool.PoolCreate(projectile_prefab, projectile_spawn_point);
                 projectile p = go.GetComponent<projectile>();
                 //set go parameters
                 p.SetProjectileParameters(createInfo);
@@ -111,7 +116,8 @@ public class TreeAttackModule : MonoBehaviour
             //create defend shield
             for (int i = 0; i < defendnode_number; i++)
             {
-                GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
+                //GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
+                GameObject go = shiledPool.PoolCreate(shield_prefab, projectile_spawn_point);
                 shield s = go.GetComponent<shield>();
                 //set shild parameters
                 s.SetShieldParameters(createInfo);

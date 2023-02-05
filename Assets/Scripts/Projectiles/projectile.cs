@@ -28,6 +28,11 @@ public class projectile : MonoBehaviour
     public Transform element_particle_parent;
     public List<GameObject> onhit_particle_list = new List<GameObject>();
 
+    private ProjcetilePool projcetilePool;
+    private void Start()
+    {
+        projcetilePool = FindObjectOfType<ProjcetilePool>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -169,7 +174,8 @@ public class projectile : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        projcetilePool.PoolDead(this.gameObject);
     }
     #endregion
 }

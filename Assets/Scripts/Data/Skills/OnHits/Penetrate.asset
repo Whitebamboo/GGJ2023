@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Penetrate
   m_EditorClassIdentifier: 
   skillImage: {fileID: 0}
-  Description: "\u7206\u70B8"
+  Description: "\u7A7F\u900F"
   skilltype: 3
   baseType: 0
   elementType: 0
   elements_parameters: []
   battleCryBehaviorType: 0
-  onHitBehaviorType: 1
+  onHitBehaviorType: 0
   onhit_parameters:
-  - parameters_name: Explode_Radius
+  - parameters_name: penetrate_times
     value: 1
   attributetype: 1
   attribute_information: []

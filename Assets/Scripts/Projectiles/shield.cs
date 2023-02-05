@@ -26,6 +26,12 @@ public class shield : MonoBehaviour
         {ElementsType.Wood, ElementsType.Fire }
     };
 
+    ShiledPool shiledPool;
+    private void Start()
+    {
+        shiledPool = FindObjectOfType<ShiledPool>();
+    }
+
     public void Update()
     {
         if (start_get_damge)
@@ -42,6 +48,21 @@ public class shield : MonoBehaviour
   
         
     }
+
+
+    /// <summary>
+    /// init
+    /// </summary>
+    public void Init()
+    {
+        start_get_damge = false;
+        disappear_timer = 3f;
+        health = health_base;
+        health_add = 0;
+        health_multiply = 1;
+        
+    }
+
     public void StartMove(Vector3 dir)
     {
         //rotate
@@ -154,7 +175,8 @@ public class shield : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        shiledPool.PoolDead(this.gameObject);
     }
 
     /// <summary>
