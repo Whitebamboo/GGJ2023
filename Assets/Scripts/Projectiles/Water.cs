@@ -9,8 +9,7 @@ public class Water : onHitEffect
     {
         base.OnHitBehavior(enemy);
         print("add decelerate buff to enemy");
-
-        Enemy e = enemy.GetComponent<Enemy>();
+        Enemy e = enemy.GetComponentInParent<Enemy>();
         e.AddDebuff(ElementsType.Water, water_decelerate);
     }
 }

@@ -12,7 +12,7 @@ public class Fire : onHitEffect
 
         print("add flame buff to enemy");
 
-        Enemy e = enemy.GetComponent<Enemy>();
+        Enemy e = enemy.GetComponentInParent<Enemy>();
         e.AddDebuff(ElementsType.Fire, flame_damage);
     }
 

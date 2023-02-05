@@ -11,7 +11,7 @@ public class Wood : onHitEffect
         base.OnHitBehavior(enemy);
         print("add damage increase buff to enemy");
 
-        Enemy e = enemy.GetComponent<Enemy>();
+        Enemy e = enemy.GetComponentInParent<Enemy>();
         e.AddDebuff(ElementsType.Wood, wood_damageIncrease);
     }
 }
