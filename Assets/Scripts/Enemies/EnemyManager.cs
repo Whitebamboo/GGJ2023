@@ -105,7 +105,24 @@ public class EnemyManager : MonoBehaviour
                 var angle = Mathf.Atan2(dir.y, dir.x);
                 enemy.slashEffect.transform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle * (enemy.gameObject.transform.localScale.x > 0 ? 1 : -1));
                 enemy.slashEffect.GetComponent<ParticleSystem>().Play();
-                GameManager.instance.tree.Health -= enemy.attack;
+                if (enemy.attack_target)
+                {
+                    //attack target
+                    if(enemy.attack_target.tag == "Tree")
+                    {
+                        GameManager.instance.tree.Health -= enemy.attack;
+                    }
+                    else if(enemy.attack_target.tag == "Shield")
+                    {
+                        enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy.element);
+                    }
+                    
+                }
+                else
+                {
+                    enemy.isAttacking = false;
+                }
+               
             });
             
             

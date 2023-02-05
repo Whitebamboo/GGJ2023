@@ -5916,7 +5916,7 @@ MonoBehaviour:
   CanBeReset: 1
   Health: 200
   NetworkProcessInterval: 1
-  defaultSkill: {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  defaultSkill: {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   AttackModule: {fileID: 714429864}
 --- !u!1 &407462521
 GameObject:
@@ -11319,7 +11319,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
     type: 3}
-  shield_prefab: {fileID: 0}
+  shield_prefab: {fileID: 6438780514538200307, guid: eff9cd3a9f441df40b9cd556637d90b0,
+    type: 3}
   projectile_spawn_point: {fileID: 146157020}
   attacknode_number: 1
   defendnode_number: 0

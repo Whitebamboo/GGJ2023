@@ -16,7 +16,7 @@ public class shield : MonoBehaviour
     public float size = 1f;
     public bool isPenetrate = false;
     public int penetrate_times = 0;//will respawn from dead for each time
-
+    public bool start_get_damge = false;
     //a dictionary to restore elements restraint relationship, first item is the element, second will be the elemnts make 1/2 damage
     private static Dictionary<ElementsType, ElementsType> element_restraint_reverse = new Dictionary<ElementsType, ElementsType>() {
         {ElementsType.Fire,  ElementsType.Water },
@@ -43,23 +43,38 @@ public class shield : MonoBehaviour
         dir = dir.normalized;
         //Quaternion.ve
         //transform.rotation = Quaternion.FromToRotation(transform.right, dir);
-        transform.DOMove(this.transform.position + dir * move_distance, 1.5f);
+        StartCoroutine(PushEnemyMove(dir));
         //prepare to destroy it self by time
     }
 
 
+    /// <summary>
+    /// after finished push,can take damege
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <returns></returns>
+    IEnumerator PushEnemyMove(Vector3 dir)
+    {
+        Tween t = transform.DOMove(this.transform.position + dir * move_distance, 1.5f);
+        yield return t.WaitForCompletion();
+        start_get_damge = true;
+    }
     /// <summary>
     /// shield get damage
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(float damage,ElementsType enemy_type)
     {
-        if (elements_list.Contains(element_restraint_reverse[enemy_type]))
+        if (start_get_damge)
         {
-            damage *= 1 / 2;//damage lower
+            if (elements_list.Contains(element_restraint_reverse[enemy_type]))
+            {
+                damage *= 1 / 2;//damage lower
+            }
+            health -= Mathf.Floor(damage);
+            CheckDead();
         }
-        health -= Mathf.Floor(damage);
-        CheckDead();
+       
     }
 
     /// <summary>

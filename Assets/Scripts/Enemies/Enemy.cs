@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     public GameObject text;
 
     private Coroutine hideTextCoroutine;
-    
+
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     public float damageIncreaseRate = 0;
     public float speedDecreaseRate = 0;
 
+    public GameObject attack_target = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +37,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAttacking)
-        {
-            
-        }
+        
     }
 
 
@@ -92,7 +90,7 @@ public class Enemy : MonoBehaviour
             StopCoroutine(hideTextCoroutine);
         }
         hideTextCoroutine = StartCoroutine(HideText());
-        
+
         print("on hit:" + health);//call UI utils function
     }
 
@@ -104,16 +102,18 @@ public class Enemy : MonoBehaviour
 
     public void OnAttackTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Tree"))
+        if (other.gameObject.CompareTag("Tree") || (other.gameObject.CompareTag("Shield")))
         {
             isAttacking = true;
             rigidbody.velocity = new Vector3();
+            attack_target = other.gameObject;
         }
+    
     }
 
     public void OnAttackTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Tree"))
+        if (other.gameObject.CompareTag("Tree") || (other.gameObject.CompareTag("Shield")))
         {
             isAttacking = false;
         }
