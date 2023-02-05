@@ -12298,8 +12298,15 @@ MonoBehaviour:
   - {fileID: 1248348678500178728, guid: 405a545502104cc4880e18cf5d2385bf, type: 3}
   waveInfos:
   - {fileID: 11400000, guid: 95ad606aeac7838428bec7956f8c0550, type: 2}
+  - {fileID: 11400000, guid: 5f49c1c128ba0264a97af526a765c264, type: 2}
+  - {fileID: 11400000, guid: ae01aecce9886fa4191f2dcd661ffbee, type: 2}
   - {fileID: 11400000, guid: ae01aecce9886fa4191f2dcd661ffbee, type: 2}
   - {fileID: 11400000, guid: 263d078ae345a9c4394299ed988214b0, type: 2}
+  - {fileID: 11400000, guid: 58c54d95c1c6af14ea6af337ada89895, type: 2}
+  - {fileID: 11400000, guid: 2251151c30adf524e8b4040e7ef6c4df, type: 2}
+  - {fileID: 11400000, guid: 2b07f2b794a5fbe4cb3cf9fa918df1fd, type: 2}
+  - {fileID: 11400000, guid: f30e0062d5a2e0746b321858301065ca, type: 2}
+  - {fileID: 11400000, guid: a005b135d1460ed429fa2a47b7f17574, type: 2}
   enemies: []
 --- !u!4 &762198146
 Transform:

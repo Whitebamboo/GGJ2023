@@ -33,8 +33,9 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator WaveCoroutine()
     {
-        foreach (var waveInfo in waveInfos)
+        for (var j = 0; j < waveInfos.Count; j++)
         {
+            var waveInfo = waveInfos[j];
             var spawnInfos = waveInfo.spawnInfos;
             spawnInfos.Sort(SortByTime);
             timer = 0;
@@ -136,10 +137,14 @@ public class EnemyManager : MonoBehaviour
                     }
 
                 });
+
+                if (enemies.Count == 0 && j == waveInfos.Count - 1)
+                {
+                    GameManager.instance.state = GameState.Win;
+                } 
                 yield return null;
                 timer += Time.deltaTime;
             }
-            
             
         }
     }

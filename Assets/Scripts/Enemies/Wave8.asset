@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a97f1db1cbd2b4d9c30702ee5c7aaf, type: 3}
+  m_Name: Wave8
+  m_EditorClassIdentifier: 
+  spawnInfos:
+  - time: 1
+    enemyIndex: 2
+    spawnPositionIndex: 9
+    rank: 6
+  - time: 1.5
+    enemyIndex: 1
+    spawnPositionIndex: 10
+    rank: 4
+  - time: 2
+    enemyIndex: 1
+    spawnPositionIndex: 6
+    rank: 4
+  - time: 1.7
+    enemyIndex: 0
+    spawnPositionIndex: 1
+    rank: 4
+  - time: 2.1
+    enemyIndex: 0
+    spawnPositionIndex: 2
+    rank: 4
+  - time: 2.2
+    enemyIndex: 0
+    spawnPositionIndex: 1
+    rank: 4
+  - time: 6
+    enemyIndex: 1
+    spawnPositionIndex: 7
+    rank: 5
+  - time: 7
+    enemyIndex: 2
+    spawnPositionIndex: 11
+    rank: 4
+  - time: 12
+    enemyIndex: 1
+    spawnPositionIndex: 10
+    rank: 4
+  - time: 14
+    enemyIndex: 2
+    spawnPositionIndex: 5
+    rank: 5
+  - time: 16
+    enemyIndex: 0
+    spawnPositionIndex: 3
+    rank: 5
+  - time: 17
+    enemyIndex: 1
+    spawnPositionIndex: 9
+    rank: 5
+  - time: 18
+    enemyIndex: 1
+    spawnPositionIndex: 2
+    rank: 5
+  - time: 18
+    enemyIndex: 1
+    spawnPositionIndex: 10
+    rank: 4
+  - time: 18.5
+    enemyIndex: 0
+    spawnPositionIndex: 6
+    rank: 4
+  - time: 19
+    enemyIndex: 1
+    spawnPositionIndex: 7
+    rank: 4
+  time: 1000
