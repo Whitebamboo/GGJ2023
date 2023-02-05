@@ -44,7 +44,6 @@ public class DmgTextManager : CSingletonMono<DmgTextManager>
         {
             dmgText = texts[i];
             dmgText.gameObject.SetActive(true);
-            dmgText.textComponent.alpha = 1;
         }
         else
         {
@@ -58,12 +57,14 @@ public class DmgTextManager : CSingletonMono<DmgTextManager>
         dmgText.textComponent.text = "-" + dmgString;
         //dmgText.transform.DOLocalJump(new Vector3(0, 0.2f, 0), 0.1f, 1, textLifeTime);
         //dmgText.transform.DOLocalMoveY()
-        dmgText.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), textLifeTime);
+        dmgText.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), textLifeTime * 0.8f);
         dmgText.textComponent.DOFade(0, textLifeTime).SetEase(Ease.InCirc).OnComplete(() => OnTextFaded(dmgText));
     }
 
     private void OnTextFaded(DmgText dmgText)
     {
+        dmgText.transform.localScale = Vector3.one;
+        dmgText.textComponent.alpha = 1;
         dmgText.gameObject.SetActive(false);
     }
 
