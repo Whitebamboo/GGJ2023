@@ -140,7 +140,8 @@ public class shield : MonoBehaviour
         Enemy e = target.GetComponent<Enemy>();
         //make damage
         float damage = ((health_base + health_add) * health_multiply);
-        e.TakeDamage(damage / 2);//make an damge of 1/2 health
+        
+        e.TakeDamage(damage / 2,false);//make an damge of 1/2 health TODO
     }
 
 
