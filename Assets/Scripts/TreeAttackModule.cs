@@ -12,7 +12,7 @@ public class TreeAttackModule : MonoBehaviour
     public GameObject projectile_prefab;
     public Transform projectile_spawn_point;
     public int attacknode_number = 1;
-    public float radius = 20;
+    public float radius = 5;
     public ProjectileCreateInfo createInfo;
     public ElementTotalInfo elementCreateInfo;
     public int node_number_multiply = 1;//only for attack and shild base mode
@@ -151,7 +151,7 @@ public class TreeAttackModule : MonoBehaviour
         {
             return null;
         }
-        RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 1f);
+        RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.1f);
         List<RaycastHit> raycast_list = new List<RaycastHit>(raycastHits);
         
         while(raycast_list.Count > 0 && num > 0)
@@ -272,6 +272,13 @@ public class TreeAttackModule : MonoBehaviour
                 break;
             
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
     #endregion
 }
