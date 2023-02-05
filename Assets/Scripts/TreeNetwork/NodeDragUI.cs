@@ -8,6 +8,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 {
     public SkillConfig skillConfig;
     public Image displayImage;
+    private GameObject Icon; 
 
     private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
     private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform>();
@@ -28,6 +29,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         // What we want to do is create an icon for this.
 
         GameObject displayIcon = new GameObject("icon");
+        Icon = displayIcon;
         m_DraggingIcons[eventData.pointerId] = displayIcon;
 
         m_DraggingIcons[eventData.pointerId].transform.SetParent(canvas.transform, false);
@@ -65,6 +67,11 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             rt.position = globalMousePos;
             rt.rotation = m_DraggingPlanes[eventData.pointerId].rotation;
         }
+    }
+
+    public void OnEndDrag()
+    {
+        Destroy(Icon);
     }
 
     public void OnEndDrag(PointerEventData eventData)
