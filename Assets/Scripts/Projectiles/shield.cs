@@ -141,7 +141,7 @@ public class shield : MonoBehaviour
         //make damage
         float damage = ((health_base + health_add) * health_multiply);
         
-        e.TakeDamage(damage / 2,false);//make an damge of 1/2 health TODO
+        e.TakeDamage(damage / 2, DmgType.EnemyNormal);//make an damge of 1/2 health TODO
     }
 
 

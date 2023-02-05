@@ -127,14 +127,37 @@ public class projectile : MonoBehaviour
     private void MakeDamage(GameObject enemy)
     {
         Enemy e = enemy.GetComponentInParent<Enemy>();
+        DmgType damge_type = DmgType.EnemyNormal;
         float damage = (attack_base + attack_add) * attack_multiply;
- 
         if ((elements_list.Count > 0) && (elements_list.Contains(element_restraint[e.GetElement()])))// have a restraint elements
         {
             print("find retraint");
             damage *= 2;
         }
-        e.TakeDamage(damage, damage > attack_base);
+        else if ((elements_list.Count > 0))
+        {
+            foreach(ElementsType element_type in elements_list)
+            {
+                if(e.element == element_restraint[element_type])
+                {
+                    damage /= 2;
+                    break;
+                }
+            }
+        }
+        if(damage > (attack_base + attack_add))
+        {
+            if(damage>((attack_base + attack_add) * attack_multiply))
+            {
+                damge_type = DmgType.EnemyRestraint;
+            }
+            damge_type = DmgType.EnemyCritical;
+        }
+        else if(damage < (attack_base + attack_add))
+        {
+            damge_type = DmgType.EnemyWeak;
+        }
+        e.TakeDamage(damage, damge_type);
     }
 
     /// <summary>

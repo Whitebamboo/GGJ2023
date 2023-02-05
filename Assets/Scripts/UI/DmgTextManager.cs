@@ -4,10 +4,14 @@ using DG.Tweening;
 using UnityEngine;
 
 public enum DmgType {
+    EnemyWeak,//xuruo
     EnemyNormal,
-    EnemyCritical,
+    EnemyRestraint,//kezhi
+    EnemyCritical,//chengfabaoji
+    PlayerWeak,
     PlayerNormal,
     PlayerCritical,
+    
 }
 
 public class DmgTextManager : CSingletonMono<DmgTextManager>

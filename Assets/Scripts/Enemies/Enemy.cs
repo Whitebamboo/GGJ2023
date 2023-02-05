@@ -80,12 +80,12 @@ public class Enemy : MonoBehaviour
     /// function to make damage to enemy
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage, bool isCritical)
+    public void TakeDamage(float damage, DmgType damage_type)
     {
         var dmg = damage * (1 + damageIncreaseRate / 100);
 
         health -= dmg;
-        GameManager.instance.dmgTextManager.AddDmgText(dmg, isCritical ? DmgType.EnemyCritical : DmgType.EnemyNormal, transform.position);
+        GameManager.instance.dmgTextManager.AddDmgText(dmg, damage_type, transform.position);
         print("on hit:" + health);//call UI utils function
     }
 
