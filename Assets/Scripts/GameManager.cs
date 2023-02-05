@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class GameManager : CSingletonMono<GameManager>
@@ -12,6 +13,8 @@ public class GameManager : CSingletonMono<GameManager>
     public DmgTextManager dmgTextManager;
     public GameState state = GameState.StartMenu;
     public GameObject YesOrNoUI;
+    public NetworkUI networkUI;
+    public float dropChance;
 
     public void SetState(GameState state)
     {
@@ -21,6 +24,21 @@ public class GameManager : CSingletonMono<GameManager>
         {
             YesOrNoUI.SetActive(true);
             enemyManager.StartWave();
+        }
+    }
+
+    public void ProcessDropItemList(List<SkillConfig> skills)
+    {
+        if(skills == null || skills.Count == 0)
+        {
+            Debug.LogError("No skill drops in enemey");
+        }
+
+        float randomNumber = Random.value;
+        if(dropChance > randomNumber)
+        {
+            SkillConfig skillConfig = skills[Random.Range(0, skills.Count)];
+            networkUI.AddNewItem(skillConfig);
         }
     }
 }

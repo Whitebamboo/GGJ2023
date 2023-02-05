@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public GameObject text;
     [SerializeField]
     public GameObject model;
+    public List<SkillConfig> droppedSkills = new List<SkillConfig>();
     private Coroutine hideTextCoroutine;
 
     private Rigidbody rigidbody;
@@ -114,4 +115,8 @@ public class Enemy : MonoBehaviour
         }
     }
     
+    public void DropSkills()
+    {
+        GameManager.instance.ProcessDropItemList(droppedSkills);
+    }
 }

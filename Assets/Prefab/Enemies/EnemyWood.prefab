@@ -111,10 +111,15 @@ MonoBehaviour:
   slashEffect: {fileID: 4571367348136271490}
   text: {fileID: 3988426076766956893}
   model: {fileID: 7299239665937465516}
+  droppedSkills:
+  - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
+  - {fileID: 11400000, guid: 301eaf2e47464634f85c30cc3e4e747e, type: 2}
+  - {fileID: 11400000, guid: 832a3fd7add3e9d429eea7be97ecaa2e, type: 2}
   isAttacking: 0
   debuffs: []
   damageIncreaseRate: 0
   speedDecreaseRate: 0
+  attack_target: {fileID: 0}
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0

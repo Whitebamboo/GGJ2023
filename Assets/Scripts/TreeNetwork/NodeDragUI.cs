@@ -7,9 +7,16 @@ using UnityEngine.UI;
 public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public SkillConfig skillConfig;
+    public Image displayImage;
 
     private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
     private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform>();
+
+    public void Init(SkillConfig config)
+    {
+        skillConfig = config;
+        displayImage.sprite = config.skillImage;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -32,7 +39,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         var group = m_DraggingIcons[eventData.pointerId].AddComponent<CanvasGroup>();
         group.blocksRaycasts = false;
 
-        image.sprite = GetComponent<Image>().sprite;
+        image.sprite = displayImage.sprite;
         image.SetNativeSize();
         displayIcon.GetComponent<RectTransform>().sizeDelta = GetComponent<RectTransform>().sizeDelta;
 

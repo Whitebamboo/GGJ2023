@@ -6,6 +6,8 @@ public class NetworkUI : MonoBehaviour
 {
     public Transform LayerRoot;
     public GameObject LayerPrefab;
+    public NodeDragUI itemNodePrefab;
+    public Transform ItemRoot;
 
     public List<GameObject> Layers { get; private set; }
 
@@ -23,4 +25,9 @@ public class NetworkUI : MonoBehaviour
         Layers.Add(obj);
     }
 
+    public void AddNewItem(SkillConfig config)
+    {
+        NodeDragUI node = Instantiate(itemNodePrefab, ItemRoot);
+        node.Init(config);
+    }
 }

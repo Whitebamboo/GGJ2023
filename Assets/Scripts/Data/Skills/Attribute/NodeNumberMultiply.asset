@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
   m_Name: NodeNumberMultiply
   m_EditorClassIdentifier: 
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 21300000, guid: 29e336ded4d42a04e8b5e6c44714dad8, type: 3}
   Description: "\u653B\u51FB\u6216\u751F\u547D\u503C\u6B21\u6570*2"
   skilltype: 4
   baseType: 0

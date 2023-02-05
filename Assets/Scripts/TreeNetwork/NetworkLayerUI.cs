@@ -34,7 +34,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         Sprite dropSprite = GetDropSprite(data);
 
         GameObject obj = Instantiate(LayerNodePrefab, transform);
-        obj.GetComponent<Image>().sprite = dropSprite;
+        obj.transform.GetChild(1).GetComponent<Image>().sprite = dropSprite;
 
         if(transform.childCount == 5)
         {
@@ -49,6 +49,9 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         SkillConfig config = GetConfig(data);
 
         Tree.instance.NetworkModule.AddNodeToLayer(layerIndex, new TreeNode(config));
+
+        var originalObj = data.pointerDrag;
+        Destroy(originalObj);
     }
 
     public void OnPointerEnter(PointerEventData data)

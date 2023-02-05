@@ -74,7 +74,9 @@ public class EnemyManager : MonoBehaviour
                     enemy.debuffs.RemoveAll(debuff => debuff.times == 0);
                 });
 
-                enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy => Destroy(enemy.gameObject));
+                enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy => {
+                    enemy.DropSkills();
+                    Destroy(enemy.gameObject); });
                 enemies.RemoveAll(enemy => enemy.health <= 0);
 
 
