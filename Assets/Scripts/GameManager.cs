@@ -18,6 +18,8 @@ public class GameManager : CSingletonMono<GameManager>
     public DescriptionUI descriptionUI;
     public float dropChance;
 
+    public GameObject winPanel;
+    public GameObject lossPanel;
     public void SetState(GameState state)
     {
         this.state = state;
@@ -54,6 +56,18 @@ public class GameManager : CSingletonMono<GameManager>
     public void DisableDescription()
     {
         descriptionUI.DisableBox();
+    }
+
+    public void ShowEndPanel(GameState gameState)
+    {
+        if (gameState == GameState.Win)
+        {
+            UIUtils.instance.showUi(winPanel);
+        }
+        else if (gameState == GameState.Loss)
+        {
+            UIUtils.instance.showUi(lossPanel);
+        }
     }
 }
 
