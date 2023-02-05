@@ -9,6 +9,8 @@ public class TreeNetworkModule
 
     public List<List<TreeNode>> Layers;
 
+    public List<TreeNodeChain> chainList;
+
     public TreeNetworkModule()
     {
         root = new TreeNode(null);
@@ -19,6 +21,17 @@ public class TreeNetworkModule
         List<TreeNode> topRootLayer = new List<TreeNode>();
         topRootLayer.Add(root);
         Layers.Add(topRootLayer); 
+    }
+
+    public TreeNodeChain GetTreeNodeChain()
+    {
+        WeightedRandomGenerator<TreeNodeChain> generator = new WeightedRandomGenerator<TreeNodeChain>("Random");
+        foreach(TreeNodeChain chain in chainList)
+        {
+            generator.AddEntry(chain, chain.GetWeight());
+            Debug.Log("Weight: " + chain.GetWeight());
+        }
+        return generator.GetRandomEntry();
     }
 
     //Layer starts at 0
@@ -45,10 +58,8 @@ public class TreeNetworkModule
         ConnectNodeToParent(layer, newNode);
         ConnectNodeToChildren(layer, newNode);
         PrintTree();
-        List<TreeNodeChain> chainList = new List<TreeNodeChain>();
-        BuildNodeChain(chainList, root);
-        Debug.Log(chainList.Count);
-        Debug.Log(chainList[0].GetWeight());
+
+        chainList = BuildNodeChain(root);
     }
 
     void ConnectNodeToParent(int layer, TreeNode newNode)
@@ -100,32 +111,58 @@ public class TreeNetworkModule
         }
     }
 
-    List<TreeNodeChain> BuildNodeChain(List<TreeNodeChain> chainList, TreeNode node)
+    //List<TreeNodeChain> BuildNodeChain(List<TreeNodeChain> chainList, TreeNode node)
+    //{
+    //    if(node.Children.Count == 0)
+    //    {
+    //        TreeNodeChain chain = new TreeNodeChain();
+    //        chain.treeNodeList.Add(node);
+    //        chainList.Add(chain);
+    //        return chainList;
+    //    }
+
+    //    for(int i = 0; i < node.Children.Count; i++)
+    //    {
+    //        TreeNode child = node.Children[i];
+    //        BuildNodeChain(chainList, child);
+    //    }
+
+    //    foreach(TreeNodeChain chain in chainList)
+    //    {
+    //        chain.treeNodeList.Add(node);
+    //    }
+
+    //    return chainList;
+    //}
+
+    List<TreeNodeChain> BuildNodeChain(TreeNode node)
     {
-        if(node.Children.Count == 0)
+        if (node.Children.Count == 0)
         {
             TreeNodeChain chain = new TreeNodeChain();
             chain.treeNodeList.Add(node);
-            chainList.Add(chain);
-            return chainList;
+            List<TreeNodeChain> baseList = new List<TreeNodeChain>();
+            baseList.Add(chain);
+            return baseList;
         }
 
-        for(int i = 0; i < node.Children.Count; i++)
+        List<TreeNodeChain> returnList = new List<TreeNodeChain>();
+        for (int i = 0; i < node.Children.Count; i++)
         {
             TreeNode child = node.Children[i];
-            BuildNodeChain(chainList, child);
+            var list = BuildNodeChain(child);
+            foreach (TreeNodeChain chain in list)
+            {
+                chain.treeNodeList.Add(node);
+            }
+            returnList.AddRange(list);
         }
 
-        //foreach(TreeNode child in node.Children)
+        //foreach (TreeNodeChain chain in chainList)
         //{
-        //    BuildNodeChain(chainList, child);
+        //    chain.treeNodeList.Add(node);
         //}
 
-        foreach(TreeNodeChain chain in chainList)
-        {
-            chain.treeNodeList.Add(node);
-        }
-
-        return chainList;
+        return returnList;
     }
 }

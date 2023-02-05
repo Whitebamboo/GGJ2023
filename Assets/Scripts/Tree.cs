@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 
 public class Tree : CSingletonMono<Tree>
 {
@@ -16,10 +17,16 @@ public class Tree : CSingletonMono<Tree>
 
     public TreeNetworkModule NetworkModule { get; private set; }
 
-    public TreeAttackModule AttackModule { get; private set; }  
+    private TreeAttackModule AttackModule;
+
+    private void OnEnable()
+    {
+        AttackModule = GetComponent<TreeAttackModule>();
+    }
 
     private void Start()
     {
+        processTimer = 1f;
         Init();
     }
 
@@ -48,7 +55,22 @@ public class Tree : CSingletonMono<Tree>
     
     void ProcessNetwork()
     {
-        
+        TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
+
+        string text = "";
+
+        foreach(TreeNode node in chain.treeNodeList)
+        {
+            if(node.skillConfig == null)
+            {
+                continue;
+            }
+
+            text += node.skillConfig.skilltype + " | ";
+        }
+        print(text);
+
+        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 
