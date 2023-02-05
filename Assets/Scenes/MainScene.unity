@@ -11806,6 +11806,7 @@ MonoBehaviour:
   waveInfos:
   - {fileID: 11400000, guid: 95ad606aeac7838428bec7956f8c0550, type: 2}
   - {fileID: 11400000, guid: ae01aecce9886fa4191f2dcd661ffbee, type: 2}
+  - {fileID: 11400000, guid: 263d078ae345a9c4394299ed988214b0, type: 2}
   enemies: []
 --- !u!4 &762198146
 Transform:
