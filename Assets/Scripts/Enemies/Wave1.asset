@@ -20,27 +20,27 @@ MonoBehaviour:
     enemyIndex: 0
     spawnPositionIndex: 2
   - time: 17
-    enemyIndex: 0
+    enemyIndex: 2
     spawnPositionIndex: 3
   - time: 25
-    enemyIndex: 0
+    enemyIndex: 1
     spawnPositionIndex: 11
   - time: 33
-    enemyIndex: 0
+    enemyIndex: 1
     spawnPositionIndex: 2
   - time: 37
     enemyIndex: 0
     spawnPositionIndex: 9
   - time: 45
-    enemyIndex: 0
+    enemyIndex: 2
     spawnPositionIndex: 0
   - time: 47
-    enemyIndex: 0
+    enemyIndex: 2
     spawnPositionIndex: 1
   - time: 49
     enemyIndex: 0
     spawnPositionIndex: 10
   - time: 55
-    enemyIndex: 0
+    enemyIndex: 1
     spawnPositionIndex: 11
   time: 500
