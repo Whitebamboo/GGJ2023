@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInfos:
   - time: 1
-    enemyIndex: 0
+    enemyIndex: 3
     spawnPositionIndex: 10
   - time: 9
-    enemyIndex: 0
+    enemyIndex: 4
     spawnPositionIndex: 2
   - time: 17
-    enemyIndex: 2
+    enemyIndex: 4
     spawnPositionIndex: 3
   - time: 25
-    enemyIndex: 1
+    enemyIndex: 2
     spawnPositionIndex: 11
   - time: 33
-    enemyIndex: 1
+    enemyIndex: 2
     spawnPositionIndex: 2
   - time: 37
     enemyIndex: 0
