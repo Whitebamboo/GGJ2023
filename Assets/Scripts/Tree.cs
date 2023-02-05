@@ -67,6 +67,17 @@ public class Tree : CSingletonMono<Tree>
         }
     }
 
+
+    public void CheckDead()
+    {
+        if (Health <= 0)
+        {
+            print("loss game");
+            GameManager.instance.state = GameState.Loss;
+        }
+    }
+
+
     public void OnYesClicked()
     {
         yesOrNo = true;
