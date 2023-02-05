@@ -16,7 +16,7 @@ public class HPBar : MonoBehaviour
     {
         if (previousHP > currenHP)
         {
-            previousHP = Mathf.Lerp(previousHP, currenHP, 0.2f);
+            previousHP = Mathf.Lerp(previousHP, currenHP, 0.01f);
             HP_lerp.fillAmount = previousHP / defaultHP;
         }
     }

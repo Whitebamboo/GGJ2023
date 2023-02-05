@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        GetComponentInChildren<HPBar>().InitialHP(health);
     }
 
     // Update is called once per frame
@@ -87,7 +88,8 @@ public class Enemy : MonoBehaviour
 
         health -= dmg;
         GameManager.instance.dmgTextManager.AddDmgText(dmg, damage_type, transform.position);
-        print("on hit:" + health);//call UI utils function
+        GetComponentInChildren<HPBar>().UpdateHP(health);
+        //print("on hit:" + health);//call UI utils function
     }
 
     private IEnumerator HideText()

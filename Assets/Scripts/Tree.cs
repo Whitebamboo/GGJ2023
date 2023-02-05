@@ -28,6 +28,7 @@ public class Tree : CSingletonMono<Tree>
 
     private void Start()
     {
+        GetComponentInChildren<HPBar>().InitialHP(Health);
         processTimer = 1f;
         Init();
     }
@@ -43,6 +44,16 @@ public class Tree : CSingletonMono<Tree>
         
     }
 
+    /// <summary>
+    /// on hit take damage
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="damageType"></param>
+    public void TakeDamage(float damage,DmgType damageType)
+    {
+        Health -= damage;
+        GetComponentInChildren<HPBar>().UpdateHP(Health);
+    }
     private void Update()
     {
         if (ProcessingStart)

@@ -117,7 +117,7 @@ public class EnemyManager : MonoBehaviour
                         //attack target
                         if (enemy.attack_target.tag == "Tree")
                         {
-                            GameManager.instance.tree.Health -= enemy.attack;
+                            GameManager.instance.tree.TakeDamage(enemy.attack, DmgType.PlayerNormal);
                         }
                         else if (enemy.attack_target.tag == "Shield")
                         {
