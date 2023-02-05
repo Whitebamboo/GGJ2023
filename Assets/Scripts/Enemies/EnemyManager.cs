@@ -105,7 +105,7 @@ public class EnemyManager : MonoBehaviour
                 var angle = Mathf.Atan2(dir.y, dir.x);
                 enemy.slashEffect.transform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle * (enemy.gameObject.transform.localScale.x > 0 ? 1 : -1));
                 enemy.slashEffect.GetComponent<ParticleSystem>().Play();
-                if (enemy.attack_target)
+                if (enemy.attack_target && enemy.attack_target.activeSelf)
                 {
                     //attack target
                     if(enemy.attack_target.tag == "Tree")
