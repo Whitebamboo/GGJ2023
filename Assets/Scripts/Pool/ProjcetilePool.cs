@@ -8,7 +8,7 @@ public class ProjcetilePool : Pool
     {
         base.PoolInitial(go);
         go.transform.localPosition = Vector3.zero;
-   
+        
        
     }
 

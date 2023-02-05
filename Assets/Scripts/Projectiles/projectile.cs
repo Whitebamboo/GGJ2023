@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class projectile : MonoBehaviour
 {
-
+    
     //base attributes
     public float attack_base = 5;
     public float attack_add = 0;
@@ -28,10 +28,10 @@ public class projectile : MonoBehaviour
     public Transform element_particle_parent;
     public List<GameObject> onhit_particle_list = new List<GameObject>();
 
-    private ProjcetilePool projcetilePool;
+    //private ProjcetilePool projcetilePool;
     private void Start()
     {
-        projcetilePool = FindObjectOfType<ProjcetilePool>();
+        //projcetilePool = FindObjectOfType<ProjcetilePool>();
     }
     // Update is called once per frame
     void Update()
@@ -151,7 +151,12 @@ public class projectile : MonoBehaviour
             {
                 damge_type = DmgType.EnemyRestraint;
             }
-            damge_type = DmgType.EnemyCritical;
+            else
+            {
+                damge_type = DmgType.EnemyCritical;
+
+            }
+            
         }
         else if(damage < (attack_base + attack_add))
         {
@@ -197,8 +202,9 @@ public class projectile : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        //Destroy(this.gameObject);
-        projcetilePool.PoolDead(this.gameObject);
+        Destroy(this.gameObject);
+        //projcetilePool.PoolDead(this.gameObject);
+       
     }
     #endregion
 }

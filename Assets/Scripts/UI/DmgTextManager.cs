@@ -16,8 +16,10 @@ public enum DmgType {
 
 public class DmgTextManager : CSingletonMono<DmgTextManager>
 {
+    [SerializeField] private GameObject weakTextObject;
     [SerializeField] private GameObject normalTextObject;
     [SerializeField] private GameObject criticalTextObject;
+    [SerializeField] private GameObject restraintTextObject;
     [SerializeField] private float textLifeTime;
     private List<DmgText> texts = new List<DmgText>();
     // Start is called before the first frame update
@@ -73,6 +75,10 @@ public class DmgTextManager : CSingletonMono<DmgTextManager>
                 return Instantiate(normalTextObject, transform);
             case DmgType.EnemyCritical:
                 return Instantiate(criticalTextObject, transform);
+            case DmgType.EnemyWeak:
+                return Instantiate(weakTextObject, transform);
+            case DmgType.EnemyRestraint:
+                return Instantiate(restraintTextObject, transform);
             default:
                 return Instantiate(normalTextObject, transform);
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8397252130070616206}
   - component: {fileID: 5748824895684042866}
   m_Layer: 6
-  m_Name: CriticalDmgText
+  m_Name: WeakDmgText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278191103
-  m_fontColor: {r: 1, g: 0.010550636, b: 0, a: 1}
+  m_fontColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -185,5 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d262baa4468f7f7409e3a5b57cae9e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgType: 1
+  dmgType: 0
   textComponent: {fileID: 8397252130070616206}

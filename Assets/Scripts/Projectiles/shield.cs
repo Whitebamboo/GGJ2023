@@ -26,10 +26,10 @@ public class shield : MonoBehaviour
         {ElementsType.Wood, ElementsType.Fire }
     };
 
-    ShiledPool shiledPool;
+    //ShiledPool shiledPool;
     private void Start()
     {
-        shiledPool = FindObjectOfType<ShiledPool>();
+        //shiledPool = FindObjectOfType<ShiledPool>();
     }
 
     public void Update()
@@ -176,8 +176,8 @@ public class shield : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        //Destroy(this.gameObject);
-        shiledPool.PoolDead(this.gameObject);
+        Destroy(this.gameObject);
+        //shiledPool.PoolDead(this.gameObject);
     }
 
     /// <summary>

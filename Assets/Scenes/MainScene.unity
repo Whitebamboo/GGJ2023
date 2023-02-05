@@ -31962,10 +31962,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanBeReset: 1
+  weakTextObject: {fileID: 3017140877355366108, guid: 7a4af9b147ec84247bfb2acf6eeb35f6,
+    type: 3}
   normalTextObject: {fileID: 3017140877355366108, guid: f58c39692c805424b8bf443e9f03114e,
     type: 3}
   criticalTextObject: {fileID: 3017140877355366108, guid: 68e35efc9fdd26642a14d7251a94a4f6,
     type: 3}
+  restraintTextObject: {fileID: 0}
   textLifeTime: 0.3
 --- !u!4 &1529939037
 Transform:
