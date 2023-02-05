@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -129,6 +130,7 @@ public class Enemy : MonoBehaviour
         health += rank * 4;
         attack += rank * 2;
         attack_interval -= rank * 0.2f;
+        attack_interval = Math.Clamp(attack_interval, 0.3f, Single.MaxValue);
         speed += rank * 0.05f;
         transform.localScale += transform.localScale * (rank *  0.2f);
     }

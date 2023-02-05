@@ -6130,7 +6130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanBeReset: 1
   Health: 200
-  NetworkProcessInterval: 1
+  NetworkProcessInterval: 1.5
   defaultSkill: {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   defaultSkill2: {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   AttackModule: {fileID: 714429864}

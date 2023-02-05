@@ -139,6 +139,8 @@ public class EnemyManager : MonoBehaviour
                 yield return null;
                 timer += Time.deltaTime;
             }
+            
+            
         }
     }
 
