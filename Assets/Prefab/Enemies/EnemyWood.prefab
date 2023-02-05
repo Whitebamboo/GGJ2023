@@ -113,15 +113,22 @@ MonoBehaviour:
   text: {fileID: 3988426076766956893}
   model: {fileID: 7299239665937465516}
   droppedSkills:
-  - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   - {fileID: 11400000, guid: 301eaf2e47464634f85c30cc3e4e747e, type: 2}
   - {fileID: 11400000, guid: 832a3fd7add3e9d429eea7be97ecaa2e, type: 2}
+  - {fileID: 11400000, guid: 832a3fd7add3e9d429eea7be97ecaa2e, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
+  - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
+  - {fileID: 11400000, guid: 6ea0666232d89094f91e7e31e45b74bf, type: 2}
+  - {fileID: 11400000, guid: 6ea0666232d89094f91e7e31e45b74bf, type: 2}
+  - {fileID: 11400000, guid: 6ea0666232d89094f91e7e31e45b74bf, type: 2}
   isAttacking: 0
   debuffs: []
   damageIncreaseRate: 0
   speedDecreaseRate: 0
   attack_target: {fileID: 0}
-  dropSkillChance: 0.4
+  dropSkillChance: 0.5
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0

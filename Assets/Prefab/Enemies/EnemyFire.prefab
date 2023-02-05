@@ -113,15 +113,16 @@ MonoBehaviour:
   text: {fileID: 7100439354465289058}
   model: {fileID: 402833685565594567}
   droppedSkills:
-  - {fileID: 11400000, guid: 6fb4afd897bae4f46a58de8698b7a583, type: 2}
   - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
   - {fileID: 11400000, guid: d08b66a853c6de0429bd8dd4cacbf5e9, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
   isAttacking: 0
   debuffs: []
   damageIncreaseRate: 0
   speedDecreaseRate: 0
   attack_target: {fileID: 0}
-  dropSkillChance: 0.4
+  dropSkillChance: 0.5
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0
