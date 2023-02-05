@@ -81,6 +81,8 @@ public class EnemyManager : MonoBehaviour
                 var dir = transform.position - enemy.gameObject.transform.position;
                 dir.z = 0;
                 dir = dir.normalized;
+                var localScale = enemy.gameObject.transform.localScale;
+                enemy.gameObject.transform.localScale = new Vector3(localScale.x * (dir.x < 0 ? -1 : 1), localScale.y, localScale.z);
                 enemy.gameObject.GetComponent<Rigidbody>().velocity = dir * enemy.speed * (1 - enemy.speedDecreaseRate);
             });
             
@@ -98,6 +100,10 @@ public class EnemyManager : MonoBehaviour
             enemies.Where(enemy => enemy.isAttacking && enemy.attackCoolDown == 0).ToList().ForEach(enemy =>
             {
                 enemy.attackCoolDown = enemy.attack_interval;
+                var dir = transform.position - enemy.gameObject.transform.position;
+                var angle = Mathf.Atan2(dir.y, dir.x);
+                enemy.slashEffect.transform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle * (enemy.gameObject.transform.localScale.x > 0 ? 1 : -1));
+                enemy.slashEffect.GetComponent<ParticleSystem>().Play();
                 GameManager.instance.tree.Health -= enemy.attack;
             });
             

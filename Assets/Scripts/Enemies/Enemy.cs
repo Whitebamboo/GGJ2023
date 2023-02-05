@@ -12,7 +12,9 @@ public class Enemy : MonoBehaviour
     public ElementsType element = ElementsType.Fire;
     public float speed = 0.5f;
     public float attackCoolDown = 0;
-
+    [SerializeField]
+    public GameObject slashEffect;
+    
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
