@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1248348678500178740}
   - component: {fileID: 1248348678500178731}
   - component: {fileID: 1248348678500178730}
-  - component: {fileID: 1248348678500178729}
   - component: {fileID: 7609548829010015532}
   - component: {fileID: 7379852767426001542}
   m_Layer: 6
@@ -91,19 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1248348678500178729
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248348678500178728}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7609548829010015532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +128,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!1 &3403167704059707415
 GameObject:
@@ -652,6 +638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2204c5705491ed45a0ebf8c895fce3f,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b2204c5705491ed45a0ebf8c895fce3f,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -769,6 +760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GlassMonster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451923237686781446, guid: 878bba0d4c46bb543872ea04ad525051,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6451923237686781446, guid: 878bba0d4c46bb543872ea04ad525051,
         type: 3}
