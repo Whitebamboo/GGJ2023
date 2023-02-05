@@ -29,6 +29,11 @@ public class GameManager : CSingletonMono<GameManager>
             YesOrNoUI.SetActive(true);
             enemyManager.StartWave();
         }
+        if((state == GameState.Win) || (state == GameState.Loss))
+        {
+            ShowEndPanel(state);
+        }
+                
     }
 
     public void ProcessDropItemList(List<SkillConfig> skills, float dropChance)

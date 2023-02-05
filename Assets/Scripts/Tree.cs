@@ -73,7 +73,7 @@ public class Tree : CSingletonMono<Tree>
         if (Health <= 0)
         {
             print("loss game");
-            GameManager.instance.state = GameState.Loss;
+            GameManager.instance.SetState(GameState.Loss);
         }
     }
 
