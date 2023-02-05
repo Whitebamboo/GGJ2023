@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -14,6 +15,10 @@ public class Enemy : MonoBehaviour
     public float attackCoolDown = 0;
     [SerializeField]
     public GameObject slashEffect;
+    [SerializeField]
+    public GameObject text;
+
+    private Coroutine hideTextCoroutine;
     
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
@@ -77,8 +82,24 @@ public class Enemy : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        health -= damage * (1 + damageIncreaseRate);
+        var dmg = damage * (1 + damageIncreaseRate);
+
+        health -= dmg;
+        text.SetActive(true);
+        text.GetComponent<TextMeshPro>().text = dmg.ToString();
+        if (hideTextCoroutine != null)
+        {
+            StopCoroutine(hideTextCoroutine);
+        }
+        hideTextCoroutine = StartCoroutine(HideText());
+        
         print("on hit:" + health);//call UI utils function
+    }
+
+    private IEnumerator HideText()
+    {
+        yield return new WaitForSeconds(0.5f);
+        text.SetActive(false);
     }
 
     public void OnAttackTriggerEnter(Collider other)
