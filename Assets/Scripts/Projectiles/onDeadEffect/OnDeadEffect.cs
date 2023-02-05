@@ -8,7 +8,7 @@ public class OnDeadEffect : MonoBehaviour
    /// rewrite this
    /// </summary>
    /// <param name="enemy"></param>
-    public virtual void OnDeadBehavior(GameObject enemy)
+    public virtual void OnDeadBehavior(Enemy enemy)
     {
         if(enemy == null)
         {

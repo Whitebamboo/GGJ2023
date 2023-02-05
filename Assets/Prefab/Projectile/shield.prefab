@@ -63,12 +63,16 @@ MonoBehaviour:
   health_base: 6
   health_add: 0
   health_multiply: 1
-  exist_time: 2
+  move_direction: {x: 0, y: 0, z: 0}
+  exist_time: 3
   move_distance: 5
   elements_list: 
   size: 1
   isPenetrate: 0
   penetrate_times: 0
+  start_get_damge: 0
+  explode_Object: {fileID: 2547659498173578133, guid: 69393752fa334244aa8cfb6d8d05ea9f,
+    type: 3}
 --- !u!33 &7724101645542391345
 MeshFilter:
   m_ObjectHideFlags: 0

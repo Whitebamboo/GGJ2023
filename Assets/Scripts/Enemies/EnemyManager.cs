@@ -114,7 +114,7 @@ public class EnemyManager : MonoBehaviour
                     }
                     else if(enemy.attack_target.tag == "Shield")
                     {
-                        enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy.element);
+                        enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy);
                     }
                     
                 }

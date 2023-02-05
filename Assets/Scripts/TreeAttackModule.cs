@@ -116,11 +116,26 @@ public class TreeAttackModule : MonoBehaviour
                 //set shild parameters
                 s.SetShieldParameters(createInfo);
                 //set on dead effect
+                AddOnDeadComponentToShield(go);
                 //start move
                 s.StartMove(defend_dir[i] - projectile_spawn_point.position);
             }
         }
        
+    }
+
+    /// <summary>
+    /// add when on dead
+    /// </summary>
+    /// <param name="shield"></param>
+    private void AddOnDeadComponentToShield(GameObject shield)
+    {
+        if (createInfo.isExplode)
+        {
+            OnDeadExplode e = shield.AddComponent<OnDeadExplode>();
+            e.explode_radius = createInfo.explode_radius;
+
+        }
     }
 
     /// <summary>

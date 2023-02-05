@@ -65,7 +65,7 @@ public class Tree : CSingletonMono<Tree>
         }
         print(text);
 
-        AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 
