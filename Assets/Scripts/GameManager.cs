@@ -20,6 +20,7 @@ public class GameManager : CSingletonMono<GameManager>
         if(state == GameState.InGame)
         {
             YesOrNoUI.SetActive(true);
+            enemyManager.StartWave();
         }
     }
 }
