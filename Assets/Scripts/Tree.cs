@@ -68,6 +68,7 @@ public class Tree : CSingletonMono<Tree>
                 processTimer = NetworkProcessInterval;
             }
         }
+        CheckDead();
     }
 
 
