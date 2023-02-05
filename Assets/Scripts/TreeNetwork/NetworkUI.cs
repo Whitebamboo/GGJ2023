@@ -13,15 +13,14 @@ public class NetworkUI : MonoBehaviour
     {
         Layers = new List<GameObject>();
         AddLayer();
-        AddLayer();
     }
 
     public void AddLayer()
     {
         GameObject obj = Instantiate(LayerPrefab, LayerRoot);
         obj.GetComponent<NetworkLayerUI>().layerIndex = LayerRoot.childCount - 1;
+        obj.GetComponent<NetworkLayerUI>().canAdd = true;
         Layers.Add(obj);
-        
     }
 
 }

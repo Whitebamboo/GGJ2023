@@ -12,8 +12,9 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     private Color normalColor;
     public Color highlightColor = Color.yellow;
+    public Color hintColor = Color.yellow;
 
-    public bool addable;
+    public bool canAdd = true;
 
     public int layerIndex;
 
@@ -21,13 +22,11 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
     {
         if (containerImage != null)
             normalColor = containerImage.color;
-
-        addable = true;
     }
 
     public void OnDrop(PointerEventData data)
     {
-        if (!addable)
+        if (!canAdd)
             return;
         
         containerImage.color = normalColor;
@@ -39,7 +38,12 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
         if(transform.childCount == 5)
         {
-            addable = false;
+            canAdd = false;
+        }
+
+        if (transform.childCount == 3 && layerIndex >= 2)
+        {
+            GetComponentInParent<NetworkUI>().AddLayer();
         }
 
         SkillConfig config = GetConfig(data);
@@ -49,7 +53,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (containerImage == null || !addable)
+        if (containerImage == null || !canAdd)
             return;
 
         Sprite dropSprite = GetDropSprite(data);
@@ -59,7 +63,7 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 
     public void OnPointerExit(PointerEventData data)
     {
-        if (containerImage == null || !addable)
+        if (containerImage == null || !canAdd)
             return;
 
         containerImage.color = normalColor;
