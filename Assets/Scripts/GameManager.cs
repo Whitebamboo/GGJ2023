@@ -47,4 +47,6 @@ public enum GameState
 {
     StartMenu,
     InGame,
+    Win,
+    Loss,
 }
