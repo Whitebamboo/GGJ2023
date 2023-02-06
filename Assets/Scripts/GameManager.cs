@@ -46,6 +46,7 @@ public class GameManager : CSingletonMono<GameManager>
             Debug.LogError("No skill drops in enemey");
         }
 
+        dropChance /= Mathf.Sqrt(enemyManager.enemies.Count);
         float randomNumber = Random.value;
         if(dropChance > randomNumber)
         {

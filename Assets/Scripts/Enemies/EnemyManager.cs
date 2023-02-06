@@ -45,6 +45,7 @@ public class EnemyManager : MonoBehaviour
                 waveIndex += 1;
                 if (waveIndex != waveInfos.Count)
                 {
+                    Debug.Log($"Round {waveIndex + 1} ");
                     timer = 0;
                     waveInfo = waveInfos[waveIndex];
                     spawnInfos = waveInfo.spawnInfos;

@@ -77,4 +77,4 @@ MonoBehaviour:
     enemyIndex: 1
     spawnPositionIndex: 7
     rank: 4
-  time: 1000
+  time: 25
