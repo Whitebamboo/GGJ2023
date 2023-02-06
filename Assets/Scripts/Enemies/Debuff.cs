@@ -60,6 +60,15 @@
         {
             elementType = ElementsType.Fire;
         }
+
+        public override void OnApply(Enemy enemy)
+        {
+            enemy.CreateEnemyDebuffEffect(ElementsType.Fire);
+        }
+        public override void OnRemove(Enemy enemy)
+        {
+            enemy.RemoveEnemyDebuffEffect(ElementsType.Fire);
+        }
         public override void OnRepeat(Enemy enemy)
         {
             enemy.health -= value;
@@ -76,11 +85,13 @@
         public override void OnApply(Enemy enemy)
         {
             enemy.speedDecreaseRate = value;
+            enemy.CreateEnemyDebuffEffect(ElementsType.Water);
         }
 
         public override void OnRemove(Enemy enemy)
         {
             enemy.speedDecreaseRate = 0;
+            enemy.RemoveEnemyDebuffEffect(ElementsType.Water);
         }
     }
 
@@ -93,10 +104,12 @@
         public override void OnApply(Enemy enemy)
         {
             enemy.damageIncreaseRate = value;
+            enemy.CreateEnemyDebuffEffect(ElementsType.Wood);
         }
 
         public override void OnRemove(Enemy enemy)
         {
             enemy.damageIncreaseRate = 0;
+            enemy.RemoveEnemyDebuffEffect(ElementsType.Wood);
         }
     }

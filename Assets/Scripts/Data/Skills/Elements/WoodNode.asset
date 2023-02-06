@@ -19,7 +19,7 @@ MonoBehaviour:
   elementType: 2
   elements_parameters:
   - parameters_name: Wood_damageIncrease
-    value: 5
+    value: 30
   battleCryBehaviorType: 0
   onHitBehaviorType: 1
   onhit_parameters: []

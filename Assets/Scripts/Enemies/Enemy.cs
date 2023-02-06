@@ -34,6 +34,10 @@ public class Enemy : MonoBehaviour
     public GameObject attack_target = null;
 
     [SerializeField] private float dropSkillChance = 0.3f;
+
+
+    public List<GameObject> enemy_debuff_Effect_List = new List<GameObject>();
+    public Dictionary<ElementsType, GameObject> enemy_had_effect = new Dictionary<ElementsType, GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +83,56 @@ public class Enemy : MonoBehaviour
     public ElementsType GetElement()
     {
         return element;
+    }
+
+
+
+    public void CreateEnemyDebuffEffect(ElementsType eType)
+    {
+        if (enemy_had_effect.ContainsKey(eType))
+        {
+            if (enemy_had_effect[eType] != null)
+            {
+                return;
+            }
+        }
+        //create element effect
+        GameObject go = null;
+        switch (eType)
+        {
+            case ElementsType.Fire:
+                go = Instantiate(enemy_debuff_Effect_List[0], this.transform);
+                break;
+            case ElementsType.Water:
+                go = Instantiate(enemy_debuff_Effect_List[1], this.transform);
+                break;
+            case ElementsType.Wood:
+                go = Instantiate(enemy_debuff_Effect_List[2], this.transform);
+                break;
+
+        }
+        if(go)
+        {
+            if (enemy_had_effect.ContainsKey(eType))
+            {
+                enemy_had_effect[eType] = go;
+            }
+            else
+            {
+                enemy_had_effect.Add(eType, go);
+            }
+        }
+            
+    }
+
+    public void RemoveEnemyDebuffEffect(ElementsType eType)
+    {
+        if (enemy_had_effect.ContainsKey(eType) && enemy_had_effect[eType])
+        {
+            GameObject go = enemy_had_effect[eType];
+            Destroy(go);
+            enemy_had_effect[eType] = null;
+        }
     }
 
     /// <summary>

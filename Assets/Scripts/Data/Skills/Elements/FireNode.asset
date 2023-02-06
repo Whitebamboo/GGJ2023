@@ -19,7 +19,7 @@ MonoBehaviour:
   elementType: 0
   elements_parameters:
   - parameters_name: flame_damage
-    value: 1
+    value: 3
   battleCryBehaviorType: 0
   onHitBehaviorType: 1
   onhit_parameters: []
