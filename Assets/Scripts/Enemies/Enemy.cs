@@ -181,11 +181,11 @@ public class Enemy : MonoBehaviour
 
     public void AddRank(int rank)
     {
-        health += rank * 4;
+        health += rank * 10;
         attack += rank * 2;
         attack_interval -= rank * 0.2f;
         attack_interval = Math.Clamp(attack_interval, 0.3f, Single.MaxValue);
-        speed += rank * 0.05f;
+        speed += rank * 0.1f;
         transform.localScale += transform.localScale * (rank *  0.2f);
     }
 }

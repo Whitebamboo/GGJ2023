@@ -103,11 +103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ae85b991a19bb4c84b59e2c66495e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 40
   attack: 3
   attack_interval: 1
   element: 1
-  speed: 0.5
+  speed: 0.6
   attackCoolDown: 0
   slashEffect: {fileID: 4571367348136271490}
   text: {fileID: 6338116893421868402}

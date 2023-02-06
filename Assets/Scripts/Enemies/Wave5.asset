@@ -17,18 +17,34 @@ MonoBehaviour:
     enemyIndex: 0
     spawnPositionIndex: 10
     rank: 2
+  - time: 1.5
+    enemyIndex: 1
+    spawnPositionIndex: 9
+    rank: 3
+  - time: 3
+    enemyIndex: 2
+    spawnPositionIndex: 3
+    rank: 3
+  - time: 4
+    enemyIndex: 2
+    spawnPositionIndex: 10
+    rank: 3
+  - time: 4.2
+    enemyIndex: 1
+    spawnPositionIndex: 2
+    rank: 3
   - time: 6
     enemyIndex: 0
     spawnPositionIndex: 4
-    rank: 2
+    rank: 3
   - time: 10
     enemyIndex: 2
     spawnPositionIndex: 1
-    rank: 2
+    rank: 3
   - time: 12
     enemyIndex: 0
     spawnPositionIndex: 8
-    rank: 2
+    rank: 3
   - time: 17
     enemyIndex: 1
     spawnPositionIndex: 3

@@ -21,9 +21,29 @@ MonoBehaviour:
     enemyIndex: 0
     spawnPositionIndex: 4
     rank: 0
+  - time: 7
+    enemyIndex: 0
+    spawnPositionIndex: 8
+    rank: 0
   - time: 10
     enemyIndex: 2
     spawnPositionIndex: 1
+    rank: 0
+  - time: 11
+    enemyIndex: 1
+    spawnPositionIndex: 2
+    rank: 0
+  - time: 11
+    enemyIndex: 1
+    spawnPositionIndex: 9
+    rank: 0
+  - time: 16
+    enemyIndex: 0
+    spawnPositionIndex: 9
+    rank: 0
+  - time: 19
+    enemyIndex: 2
+    spawnPositionIndex: 9
     rank: 0
   - time: 12
     enemyIndex: 0
