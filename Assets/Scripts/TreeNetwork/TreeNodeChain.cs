@@ -51,11 +51,11 @@ public class TreeNodeChain
         {
             if(increase)
             {
-                e.UpdateWeight(0.05f);
+                e.UpdateWeight(0.2f);
             }
             else
             {
-                e.UpdateWeight(-0.05f);
+                e.UpdateWeight(-0.2f);
             }
         }
     }

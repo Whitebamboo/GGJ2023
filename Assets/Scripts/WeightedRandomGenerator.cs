@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 //An generic weighted random generator used to get a random entry from the list it holds
 public class WeightedRandomGenerator<T>
 {
@@ -16,44 +16,57 @@ public class WeightedRandomGenerator<T>
   private List<Entry> entryList = new List<Entry>(); //A list of entry for generator to choose from
   private double accumulatedWeight;                  //Weight for all entries
   private string randomType;                         
-  private Random rand = new Random(); 
+  private System.Random rand = new System.Random(); 
 
-  public WeightedRandomGenerator(string randomType)
+   public WeightedRandomGenerator(string randomType)
   {
     this.randomType = randomType;
   }
 
-  //Add entry to the list for generator to choose from
-  public void AddEntry(T item, double weight) 
-  {
-    accumulatedWeight += weight;
-    entryList.Add(new Entry{Item = item, AccumulatedWeight = accumulatedWeight, 
-    Weight = weight, IsSelected = false});    
-  }
-
-  //Get an entry based on the random type
-  public T GetRandomEntry()
-  {
-    if(entryList.Count == 0)
+  ////Add entry to the list for generator to choose from
+  //public void AddEntry(T item, double weight) 
+  //{
+  //  accumulatedWeight += weight;
+  //  entryList.Add(new Entry{Item = item, AccumulatedWeight = accumulatedWeight, 
+  //  Weight = weight, IsSelected = false});    
+  //}
+  
+    /// <summary>
+    /// first calculate e^x
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="weight"></param>
+    public void AddEntry(T item, double weight)
     {
-      Console.WriteLine(string.Format("Generator does not contain any entry. Did you add any entry to your table?"));
-      return default(T);
+        weight = Math.Exp(weight);
+        accumulatedWeight += weight;
+        entryList.Add(new Entry{Item = item,AccumulatedWeight = accumulatedWeight,Weight = weight, IsSelected = false});    
     }
 
-    if(randomType == "Random")
+    //Get an entry based on the random type
+    public T GetRandomEntry()
     {
-      return GetRandom();
-    }
-    else if(randomType == "UniqueRandom")
-    {
-      return GetUniqueRandom();
-    }
-    
-    return default(T);
-  }
+        if (entryList.Count == 0)
+        {
+            Console.WriteLine(string.Format("Generator does not contain any entry. Did you add any entry to your table?"));
+            return default(T);
+        }
 
-  //Reset the list for unique random
-  public void Reset()
+        if (randomType == "Random")
+        {
+            //return GetRandom();
+            return GetRandomWithSoftMax();
+        }
+        else if (randomType == "UniqueRandom")
+        {
+            return GetUniqueRandom();
+        }
+
+        return default(T);
+    }
+
+    //Reset the list for unique random
+    public void Reset()
   {
     accumulatedWeight = 0;
     for (int i = 0; i < entryList.Count; i++) 
@@ -65,21 +78,42 @@ public class WeightedRandomGenerator<T>
     }
   }
 
-  //Return an entry based on normal weighted random algorithm
-  T GetRandom() 
-  {
-    double r = rand.NextDouble() * accumulatedWeight;
+  ////Return an entry based on normal weighted random algorithm
+  //T GetRandom() 
+  //{
+  //  double r = rand.NextDouble() * accumulatedWeight;
 
-    for (int i = 0; i < entryList.Count; i++) 
-    {
-        Entry e = entryList[i];
-        if (e.AccumulatedWeight >= r) 
+  //  for (int i = 0; i < entryList.Count; i++) 
+  //  {
+  //      Entry e = entryList[i];
+  //      if (e.AccumulatedWeight >= r) 
+  //      {
+  //        return e.Item;
+  //      }
+  //  }
+  //  return default(T); //should only happen when there are no entries
+  //}
+
+    //return a object base on soft max
+   T GetRandomWithSoftMax()
+   {
+        double weightsum = 0;
+        double r = rand.NextDouble();
+        for(int i = 0; i < entryList.Count; i++)
         {
-          return e.Item;
+            Entry e = entryList[i];
+            double softmax_weight = e.Weight / accumulatedWeight;
+            e.Weight = softmax_weight + weightsum;
+            weightsum += softmax_weight;
+            if(e.Weight > r)
+            {
+                Debug.Log("edge weight" + e.Weight + "random num" + r);
+                return e.Item;
+            }
+            
         }
-    }
-    return default(T); //should only happen when there are no entries
-  }
+        return default(T);
+   }
 
   //Return an entry based on unique weighted random algorithm
   T GetUniqueRandom() 
