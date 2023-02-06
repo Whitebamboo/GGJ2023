@@ -120,6 +120,10 @@ MonoBehaviour:
   speedDecreaseRate: 0
   attack_target: {fileID: 0}
   dropSkillChance: 0.8
+  enemy_debuff_Effect_List:
+  - {fileID: 3050942199546623091, guid: 27ac228eb650df44085c001a5aea7866, type: 3}
+  - {fileID: 331070572485602313, guid: de0136304d240dd4ea85b38f907d6c49, type: 3}
+  - {fileID: 1611423634823840, guid: 5edb65bb19672614a82a3e9e827e8512, type: 3}
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0
