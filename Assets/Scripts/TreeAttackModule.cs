@@ -20,13 +20,16 @@ public class TreeAttackModule : MonoBehaviour
     public int node_number_multiply = 1;//only for attack and shild base mode
 
 
-    //private ProjcetilePool projcetilePool;
-    //private ShiledPool shiledPool;
+    private ProjcetilePool projcetilePool;
+    private ShiledPool shiledPool;
 
     private void Start()
     {
-        //projcetilePool = GetComponent<ProjcetilePool>();
-        //shiledPool = GetComponent<ShiledPool>();
+        projcetilePool = GetComponent<ProjcetilePool>();
+        projcetilePool.PoolPrecreate(5, projectile_prefab, projectile_spawn_point);
+        
+        shiledPool = GetComponent<ShiledPool>();
+        shiledPool.PoolPrecreate(5, shield_prefab, projectile_spawn_point);
         //only for test
         foreach (var c in config_list)
         {
@@ -83,7 +86,9 @@ public class TreeAttackModule : MonoBehaviour
 
 
         //final multiply for the attack node
+        print(attacknode_number);
         attacknode_number *= node_number_multiply;
+        print(attacknode_number);
         defendnode_number *= node_number_multiply;
         //when have a multply node for base node
         //
@@ -97,8 +102,8 @@ public class TreeAttackModule : MonoBehaviour
         {
             for (int i = 0; i < attacknode_number; i++)
             {
-                GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
-                //GameObject go = projcetilePool.PoolCreate(projectile_prefab, projectile_spawn_point);
+                //GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
+                GameObject go = projcetilePool.PoolCreate(projectile_prefab, projectile_spawn_point);
                 projectile p = go.GetComponent<projectile>();
                 //set go parameters
                 p.SetProjectileParameters(createInfo);
@@ -116,8 +121,8 @@ public class TreeAttackModule : MonoBehaviour
             //create defend shield
             for (int i = 0; i < defendnode_number; i++)
             {
-                GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
-                //GameObject go = shiledPool.PoolCreate(shield_prefab, projectile_spawn_point);
+                //GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
+                GameObject go = shiledPool.PoolCreate(shield_prefab, projectile_spawn_point);
                 shield s = go.GetComponent<shield>();
                 //set shild parameters
                 s.SetShieldParameters(createInfo);

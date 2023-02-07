@@ -6,8 +6,38 @@ public class Pool : MonoBehaviour
 {
     public GameObject go;
     public List<GameObject> alive_pool = new List<GameObject>();
-    public List<GameObject> dead_pool = new List<GameObject>(); 
-    
+    public List<GameObject> dead_pool = new List<GameObject>();
+    public int precreate_num;
+
+
+    /// <summary>
+    /// create a bunch of gameobject when game start
+    /// </summary>
+    public void PoolPrecreate(int precreate_num, GameObject obj, Transform t)
+    {
+        for(int i = 0; i < precreate_num; i++)
+        {
+            go = Instantiate(obj, t);
+            dead_pool.Add(go);
+            go.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// create a bunch of gameobject when game start
+    /// </summary>
+    public void PoolPrecreate(int precreate_num, GameObject obj, Vector3 v)
+    {
+        for (int i = 0; i < precreate_num; i++)
+        {
+            go = Instantiate(obj, v, Quaternion.identity);
+            dead_pool.Add(go);
+            go.SetActive(false);
+        }
+    }
+
+
+
     /// <summary>
     /// use transform
     /// </summary>
@@ -18,6 +48,7 @@ public class Pool : MonoBehaviour
     {
         if (dead_pool.Count > 0)
         {
+            
             go = dead_pool[0];
             dead_pool.RemoveAt(0);
             alive_pool.Add(go);
@@ -62,16 +93,17 @@ public class Pool : MonoBehaviour
 
     public virtual void PoolInitial(GameObject go)
     {
-
+        print("initial when object create");
     }
 
-    public void PoolDead(GameObject go)
+    public virtual void PoolDead(GameObject go)
     {
         if (alive_pool.Contains(go))
         {
             alive_pool.Remove(go);
         }
         dead_pool.Add(go);
-        go.SetActive(false);
+        //real dead
+
     }
 }

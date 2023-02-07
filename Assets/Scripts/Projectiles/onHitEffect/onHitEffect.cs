@@ -13,4 +13,12 @@ public class onHitEffect : MonoBehaviour
        
         //print("hit enemy");
     }
+
+    /// <summary>
+    /// this Component will dead when pool make it dead
+    /// </summary>
+    public virtual void PoolDead()
+    {
+        Destroy(this);
+    }
 }

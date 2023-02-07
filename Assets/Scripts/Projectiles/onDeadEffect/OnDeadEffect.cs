@@ -15,4 +15,13 @@ public class OnDeadEffect : MonoBehaviour
             return;
         }
     }
+
+
+    /// <summary>
+    /// this function will dead when pool dead
+    /// </summary>
+    public virtual void PoolDead()
+    {
+        Destroy(this);
+    }
 }

@@ -28,10 +28,20 @@ public class projectile : MonoBehaviour
     public Transform element_particle_parent;
     public List<GameObject> onhit_particle_list = new List<GameObject>();
 
-    //private ProjcetilePool projcetilePool;
+    private ProjcetilePool projcetilePool;
     private void Start()
     {
-        //projcetilePool = FindObjectOfType<ProjcetilePool>();
+        if(projcetilePool == null)
+            projcetilePool = FindObjectOfType<ProjcetilePool>();
+     
+    }
+
+    private void OnEnable()
+    {
+        foreach (var element in element_particle_list)
+        {
+            element.SetActive(false);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -51,13 +61,13 @@ public class projectile : MonoBehaviour
         switch (e_type)
         {
             case ElementsType.Fire:
-                Instantiate(element_particle_list[0], element_particle_parent);
+                element_particle_list[0].SetActive(true);
                 break;
             case ElementsType.Water:
-                Instantiate(element_particle_list[1], element_particle_parent);
+                element_particle_list[1].SetActive(true);
                 break;
             case ElementsType.Wood:
-                Instantiate(element_particle_list[2], element_particle_parent);
+                element_particle_list[2].SetActive(true);
                 break;
         }
     }
@@ -202,8 +212,8 @@ public class projectile : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        Destroy(this.gameObject);
-        //projcetilePool.PoolDead(this.gameObject);
+        //Destroy(this.gameObject);
+        projcetilePool.PoolDead(this.gameObject);
        
     }
     #endregion
