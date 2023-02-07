@@ -23,6 +23,20 @@ public class TreeAttackModule : MonoBehaviour
     private ProjcetilePool projcetilePool;
     private ShiledPool shiledPool;
 
+
+
+    //battle cry info
+    public string DroneName;
+    [System.Serializable]
+    public struct DroneInfo
+    {
+        public string name;
+        public GameObject DronePrefab;
+    }
+    public List<DroneInfo> dronePrefabList = new List<DroneInfo>();
+    private Dictionary<string, GameObject> dronePrefabDict = new Dictionary<string, GameObject>();
+
+    private List<string> SummonList = new List<string>();
     private void Start()
     {
         projcetilePool = GetComponent<ProjcetilePool>();
@@ -36,6 +50,12 @@ public class TreeAttackModule : MonoBehaviour
             TreeNode t = new TreeNode(c);
             treeNode_list.Add(t);
         }
+
+        //get drone dict
+        foreach(var i in dronePrefabList)
+        {
+            dronePrefabDict.Add(i.name, i.DronePrefab);
+        }
     }
 
     private void Update()
@@ -45,6 +65,7 @@ public class TreeAttackModule : MonoBehaviour
             ProcessTreeNodes(treeNode_list);
         }
     }
+
     /// <summary>
     /// Process tree nodes
     /// </summary>
@@ -112,7 +133,7 @@ public class TreeAttackModule : MonoBehaviour
                 //set go move direction and start move
                 //print(projectile_spawn_point.position);
                 p.StartMove(dir[i] - projectile_spawn_point.position);
-
+                BattleCryBehavior(dir[i] - projectile_spawn_point.position);
             }
         }
         
@@ -130,6 +151,7 @@ public class TreeAttackModule : MonoBehaviour
                 AddOnDeadComponentToShield(go);
                 //start move
                 s.StartMove(defend_dir[i] - projectile_spawn_point.position);
+                BattleCryBehavior(defend_dir[i] - projectile_spawn_point.position);
             }
         }
        
@@ -183,8 +205,23 @@ public class TreeAttackModule : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// because this behavior may not relative to projectile, write in here first
+    /// </summary>
+    private void BattleCryBehavior(Vector3 dir)
+    {
+        //Buff ToDo
 
-
+        //Summon
+        if(createInfo.isSummon)
+        {
+            foreach(string s in SummonList)
+            {
+                GameObject go =  Instantiate(dronePrefabDict[s], projectile_spawn_point.position, Quaternion.identity);
+                go.GetComponent<DroneBase>().StartMove(dir);
+            }
+        }
+    }
 
 
 
@@ -193,7 +230,7 @@ public class TreeAttackModule : MonoBehaviour
     /// </summary>
     /// <param name="num"></param>
     /// <returns></returns>
-    private List<Vector3> FindClosestEnemyPosition(int num)
+    public List<Vector3> FindClosestEnemyPosition(int num)
     {
         List<Vector3> enemy_position = new List<Vector3>();
         if(num == 0)
@@ -278,7 +315,20 @@ public class TreeAttackModule : MonoBehaviour
 
     private void CompileBattleCryBehavior(SkillConfig s)
     {
-
+        switch (s.battleCryBehaviorType)
+        {
+            case BattleCryBehaviorType.Buff:
+                //todo
+                break;
+            case BattleCryBehaviorType.Summon:
+                SummonList.Clear();
+                foreach(var i in s.battleCryBehavior_parameters)
+                {
+                    SummonList.Add(i.value);
+                }
+                createInfo.isSummon = true;
+                break;
+        }
     }
 
     private void CompileOnHitBehavior(SkillConfig s)
@@ -352,6 +402,7 @@ public class ProjectileCreateInfo
     public int penetrate = 0;
     public bool isExplode = false;
     public float explode_radius = 0;
+    public bool isSummon = false;
     public float size = 1;
     public List<ElementsType> elements_list = new List<ElementsType>();
     

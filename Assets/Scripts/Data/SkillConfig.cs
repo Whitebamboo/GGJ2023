@@ -15,6 +15,7 @@ public class SkillConfig : ScriptableObject
     public List<FloatParameters> elements_parameters = new List<FloatParameters>();
     //BattleCry_parameters
     public BattleCryBehaviorType battleCryBehaviorType = BattleCryBehaviorType.Buff;
+    public List<StringParameters> battleCryBehavior_parameters = new List<StringParameters>();
     //onhit behavior
     public OnHitBehaviorType onHitBehaviorType = OnHitBehaviorType.Explode;
     public List<FloatParameters> onhit_parameters = new List<FloatParameters>();

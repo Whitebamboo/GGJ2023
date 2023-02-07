@@ -12036,6 +12036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config_list:
   - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
+  - {fileID: 11400000, guid: 8e115961cc04994408954309ddd45e84, type: 2}
   projectile_prefab: {fileID: 1783597213092261408, guid: 396773b49f9454940810a3a39728c82f,
     type: 3}
   shield_prefab: {fileID: 6438780514538200307, guid: eff9cd3a9f441df40b9cd556637d90b0,
@@ -12045,6 +12046,11 @@ MonoBehaviour:
   defendnode_number: 0
   radius: 5
   node_number_multiply: 1
+  DroneName: 
+  dronePrefabList:
+  - name: Drone_Normal
+    DronePrefab: {fileID: 947709237927465123, guid: b0a0b78f1d4f30d4c8e8d8a2165e776a,
+      type: 3}
 --- !u!4 &714429865
 Transform:
   m_ObjectHideFlags: 0
@@ -12076,6 +12082,7 @@ MonoBehaviour:
   go: {fileID: 0}
   alive_pool: []
   dead_pool: []
+  precreate_num: 0
 --- !u!114 &714429867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12091,6 +12098,7 @@ MonoBehaviour:
   go: {fileID: 0}
   alive_pool: []
   dead_pool: []
+  precreate_num: 0
 --- !u!1001 &716955464
 PrefabInstance:
   m_ObjectHideFlags: 0

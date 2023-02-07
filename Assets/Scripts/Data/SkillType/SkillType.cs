@@ -72,3 +72,12 @@ public struct FloatParameters
     public string parameters_name;
     public float value;
 }
+[System.Serializable]
+/// <summary>
+/// a structure for string parameters
+/// </summary>
+public struct StringParameters
+{
+    public string parameters_name;
+    public string value;
+}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
+  m_Name: SummonDrone
+  m_EditorClassIdentifier: 
+  skillImage: {fileID: 21300000, guid: 5b952e61b03dcaf4d9c29a8d1a0f961b, type: 3}
+  Description: Add attack damage or sheid health
+  skilltype: 2
+  baseType: 0
+  elementType: 0
+  elements_parameters: []
+  battleCryBehaviorType: 1
+  battleCryBehavior_parameters:
+  - parameters_name: Drone_Name
+    value: Drone_Normal
+  onHitBehaviorType: 1
+  onhit_parameters: []
+  attributetype: 1
+  attribute_information:
+  - parameters_name: AttackOrDefend_Add
+    value: 6
