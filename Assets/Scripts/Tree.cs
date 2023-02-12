@@ -113,6 +113,7 @@ public class Tree : CSingletonMono<Tree>
 
         TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
         currentChain = chain;
+        GameManager.instance.networkUI.ProcessTreeNodeChain(currentChain);
 
         string text = "";
 

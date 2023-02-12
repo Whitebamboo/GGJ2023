@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -16,6 +17,7 @@ public class NetworkUI : MonoBehaviour
     public Transform LineRoot;
     public Material lineMaterial;
     public LineRenderObj lineObj;
+    public GameObject particle;
 
     public List<GameObject> Layers { get; private set; }
     public List<List<LineRenderObj>> lineRenderObjs = new List<List<LineRenderObj>>();
@@ -88,10 +90,42 @@ public class NetworkUI : MonoBehaviour
                     LineRenderObj lineObj = lineRenderObjs[i][k + Layers[i + 1].Count * j];
                     Transform endNode = nodePositionData.GetPosition(Layers[i + 1].Count, k);
                     Vector3 end = new Vector3(endNode.position.x, topLayerPosition - (i + 1) * layerPositionOffset, endNode.position.z + 0.5f);
-                    UpdateLineRender(lineObj, start, end, LineRoot,node.Edges[k].Weight);
+                    UpdateLineRender(lineObj, start, end, LineRoot, node.Edges[k].Weight);
                 }
             }
         }
+    }
+
+    public void ProcessTreeNodeChain(TreeNodeChain chain)
+    {
+        List<TreeNode> nodeList = chain.treeNodeList;
+        List<int> nodePosition = new List<int>();
+
+        nodePosition.Add(0);
+
+        for(int i = nodeList.Count - 1; i >= 1; i--)
+        {
+            TreeNode node = nodeList[i];
+            TreeNode nextNode = nodeList[i - 1];
+            int index = node.Children.IndexOf(nextNode);
+            nodePosition.Add(index);
+        }
+
+        for(int j = nodePosition.Count - 1; j >= 0; j--)
+        {
+            int index = nodePosition[j];
+
+            Vector3 position = nodePositionData.GetPosition(Layers[j].transform.childCount, index).position;
+            Vector3 start = new Vector3(position.x, topLayerPosition - j * layerPositionOffset, position.z - 0.1f);
+            GameObject obj = Instantiate(particle, start, Quaternion.identity);
+            StartCoroutine(DestroyParticle(obj, 1.4f));
+        }
+    }
+
+    IEnumerator DestroyParticle(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(obj);
     }
 
     void UpdateLineRender(LineRenderObj obj, Vector3 start, Vector3 end, Transform parent, float weight = 1)

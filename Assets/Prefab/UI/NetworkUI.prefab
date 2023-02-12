@@ -128,6 +128,7 @@ MonoBehaviour:
   LineRoot: {fileID: 0}
   lineMaterial: {fileID: 2100000, guid: 058017d9b3e457748b69b0d796e95a91, type: 2}
   lineObj: {fileID: 4940120844946369217, guid: 16eb6ca116674c644a52718eae784d25, type: 3}
+  particle: {fileID: 1448971607870028, guid: d41fb9b69326fe94dbcdcc629d4ca688, type: 3}
 --- !u!1 &2067819527968693705
 GameObject:
   m_ObjectHideFlags: 0
