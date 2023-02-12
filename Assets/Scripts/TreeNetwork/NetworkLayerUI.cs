@@ -47,8 +47,8 @@ public class NetworkLayerUI : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         }
 
         SkillConfig config = GetConfig(data);
-
-        Tree.instance.NetworkModule.AddNodeToLayer(layerIndex, new TreeNode(config));
+        TreeNode newNode = new TreeNode(config);
+        Tree.instance.NetworkModule.AddNodeToLayer(layerIndex, newNode);
 
         var originalObj = data.pointerDrag;
         originalObj.GetComponent<NodeDragUI>().OnEndDrag();

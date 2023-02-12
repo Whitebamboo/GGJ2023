@@ -121,6 +121,13 @@ MonoBehaviour:
   itemNodePrefab: {fileID: 5127350837849333561, guid: aafc2bb453e59e1448754e7e3cf97d86,
     type: 3}
   ItemRoot: {fileID: 8129748526273133391}
+  nodePositionData: {fileID: 7570335846519424445, guid: dd5cf3e4049b1e64196033dfe94676f7,
+    type: 3}
+  topLayerPosition: 0.7311459
+  layerPositionOffset: 2.4977
+  LineRoot: {fileID: 0}
+  lineMaterial: {fileID: 2100000, guid: 058017d9b3e457748b69b0d796e95a91, type: 2}
+  lineObj: {fileID: 4940120844946369217, guid: 16eb6ca116674c644a52718eae784d25, type: 3}
 --- !u!1 &2067819527968693705
 GameObject:
   m_ObjectHideFlags: 0

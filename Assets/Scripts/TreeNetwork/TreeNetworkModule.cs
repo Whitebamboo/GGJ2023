@@ -57,6 +57,7 @@ public class TreeNetworkModule
         ConnectNodeToParent(layer, newNode);
         ConnectNodeToChildren(layer, newNode);
         PrintTree();
+        GameManager.instance.networkUI.ProcessLineRender(GameManager.instance.tree.NetworkModule.Layers);
 
         chainList = BuildNodeChain(root);
     }
@@ -72,6 +73,7 @@ public class TreeNetworkModule
         foreach(TreeNode node in Layers[layer - 1])
         {
             node.AddChildren(newNode);
+            GameManager.instance.networkUI.AddLineRender(layer - 1);
         }
     }
 
@@ -86,6 +88,7 @@ public class TreeNetworkModule
         foreach (TreeNode node in Layers[layer + 1])
         {
             newNode.AddChildren(node);
+            GameManager.instance.networkUI.AddLineRender(layer);
         }
     }
 

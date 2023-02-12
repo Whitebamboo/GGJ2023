@@ -42,8 +42,6 @@ public class Tree : CSingletonMono<Tree>
         TreeNode sheidNode = new TreeNode(defaultSkill2);
         NetworkModule.AddNodeToLayer(1, bulletNode);
         NetworkModule.AddNodeToLayer(1, sheidNode);
-
-        
     }
 
     /// <summary>
@@ -68,9 +66,18 @@ public class Tree : CSingletonMono<Tree>
                 processTimer = NetworkProcessInterval;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnYesClicked();
+        }
+        else if(Input.GetKeyDown(KeyCode.E))
+        {
+            OnNoClicked();
+        }
+
         CheckDead();
     }
-
 
     public void CheckDead()
     {
@@ -102,6 +109,7 @@ public class Tree : CSingletonMono<Tree>
         }
         yesOrNoClicked = false;
         GameManager.instance.ResetYesNo();
+        GameManager.instance.networkUI.ProcessLineRender(NetworkModule.Layers);
 
         TreeNodeChain chain = NetworkModule.GetTreeNodeChain();
         currentChain = chain;

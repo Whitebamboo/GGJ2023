@@ -11,6 +11,18 @@ public class YesNoUI : MonoBehaviour
     public GameObject YesImage;
     public GameObject NoImage;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnYesClick();
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnNoClick();
+        }
+    }
+
     public void OnYesClick()
     {
         YesImage.SetActive(true);
