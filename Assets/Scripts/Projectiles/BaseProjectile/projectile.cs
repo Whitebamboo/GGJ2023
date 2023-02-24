@@ -56,37 +56,8 @@ public class projectile : MonoBehaviour
         }
     }
 
-    public void AddElementParticle(ElementsType e_type)
-    {
-        switch (e_type)
-        {
-            case ElementsType.Fire:
-                element_particle_list[0].SetActive(true);
-                break;
-            case ElementsType.Water:
-                element_particle_list[1].SetActive(true);
-                break;
-            case ElementsType.Wood:
-                element_particle_list[2].SetActive(true);
-                break;
-        }
-    }
 
-    /// <summary>
-    /// create projectile and 
-    /// </summary>
-    /// <param name="p_info"></param>
-    public void SetProjectileParameters(ProjectileCreateInfo p_info)
-    {
-        attack_add = p_info.attack_add;
-        attack_multiply = p_info.attack_multiply;
-        isPenetrate = p_info.isPenetrate;
-        penetrate_times = p_info.penetrate;
-        elements_list = p_info.elements_list;
-        size = p_info.size;
-        //change size fuct TODO
 
-    }
 
     /// <summary>
     /// start move
@@ -109,26 +80,11 @@ public class projectile : MonoBehaviour
         {
             //1.make damage
             MakeDamage(other.gameObject);
-            //2.call all on hit effect
-            CallAllOnHit(other.gameObject);
-            //3.destroy itself
-            CallDeadOnHit();
+ 
         }
     }
 
-    /// <summary>
-    /// explosion will call this
-    /// </summary>
-    /// <param name="enemy"></param>
-    public void MakeExplodeDamage(GameObject enemy)
-    {
-        if (enemy)
-        {
-            MakeDamage(enemy);
-            CallAllOnHit(enemy);
-        }
-        
-    }
+
 
     /// <summary>
     /// calculate and make damage
@@ -137,74 +93,14 @@ public class projectile : MonoBehaviour
     private void MakeDamage(GameObject enemy)
     {
         Enemy e = enemy.GetComponentInParent<Enemy>();
-        DmgType damge_type = DmgType.EnemyNormal;
-        float damage = (attack_base + attack_add) * attack_multiply;
-        if ((elements_list.Count > 0) && (elements_list.Contains(element_restraint[e.GetElement()])))// have a restraint elements
-        {
-            print("find retraint");
-            damage *= 2;
-        }
-        else if ((elements_list.Count > 0))
-        {
-            foreach(ElementsType element_type in elements_list)
-            {
-                if(e.element == element_restraint[element_type])
-                {
-                    damage /= 2;
-                    break;
-                }
-            }
-        }
-        if(damage > (attack_base + attack_add))
-        {
-            if(damage>((attack_base + attack_add) * attack_multiply))
-            {
-                damge_type = DmgType.EnemyRestraint;
-            }
-            else
-            {
-                damge_type = DmgType.EnemyCritical;
-
-            }
-            
-        }
-        else if(damage < (attack_base + attack_add))
-        {
-            damge_type = DmgType.EnemyWeak;
-        }
-        e.TakeDamage(damage, damge_type);
-    }
-
-    /// <summary>
-    /// call the onhit effect attach to this object
-    /// </summary>
-    /// <param name="enemy"></param>
-    private void CallAllOnHit(GameObject enemy)
-    {
-        List<onHitEffect> onhit_list = new List<onHitEffect>(GetComponents<onHitEffect>());
-        if (onhit_list.Count == 0)
-        { 
-            return; 
-        }
-        foreach(onHitEffect onhitComponent in onhit_list)
-        {
-            onhitComponent.OnHitBehavior(enemy);//an onhit behavior will be override later
-        }
+   
+        //e.TakeDamage(damage, damge_type);
     }
 
 
-    /// <summary>
-    /// only call this on hit
-    /// </summary>
-    private void CallDeadOnHit()
-    {
-        if(isPenetrate && penetrate_times > 0)
-        {
-            penetrate_times -= 1;
-            return;
-        }
-        Dead();
-    }
+
+
+
 
 
     /// <summary>

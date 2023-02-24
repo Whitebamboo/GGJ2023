@@ -124,9 +124,9 @@ public class Tree : CSingletonMono<Tree>
                 continue;
             }
 
-            text += node.skillConfig.skilltype + " | ";
+            //text += node.skillConfig.skilltype + " | ";
         }
-        print(text);
+        //print(text);
 
         AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }

@@ -4,66 +4,16 @@ using UnityEngine;
 
 public class TreeAttackModule : MonoBehaviour
 {
-    //only for test
-    public List<SkillConfig> config_list = new List<SkillConfig>();
-    private List<TreeNode> treeNode_list = new List<TreeNode>();
-    //
- 
-    public GameObject projectile_prefab;
-    public GameObject shield_prefab;
-    public Transform projectile_spawn_point;
-    public int attacknode_number = 0;
-    public int defendnode_number = 0;
-    public float radius = 5;
-    public ProjectileCreateInfo createInfo;
-    public ElementTotalInfo elementCreateInfo;
-    public int node_number_multiply = 1;//only for attack and shild base mode
 
-
-    private ProjcetilePool projcetilePool;
-    private ShiledPool shiledPool;
-
-
-
-    //battle cry info
-    public string DroneName;
-    [System.Serializable]
-    public struct DroneInfo
-    {
-        public string name;
-        public GameObject DronePrefab;
-    }
-    public List<DroneInfo> dronePrefabList = new List<DroneInfo>();
-    private Dictionary<string, GameObject> dronePrefabDict = new Dictionary<string, GameObject>();
-
-    private List<string> SummonList = new List<string>();
     private void Start()
     {
-        projcetilePool = GetComponent<ProjcetilePool>();
-        projcetilePool.PoolPrecreate(5, projectile_prefab, projectile_spawn_point);
-        
-        shiledPool = GetComponent<ShiledPool>();
-        shiledPool.PoolPrecreate(5, shield_prefab, projectile_spawn_point);
-        //only for test
-        foreach (var c in config_list)
-        {
-            TreeNode t = new TreeNode(c);
-            treeNode_list.Add(t);
-        }
-
-        //get drone dict
-        foreach(var i in dronePrefabList)
-        {
-            dronePrefabDict.Add(i.name, i.DronePrefab);
-        }
+   
+   
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ProcessTreeNodes(treeNode_list);
-        }
+
     }
 
     /// <summary>
@@ -72,158 +22,23 @@ public class TreeAttackModule : MonoBehaviour
     /// <param name="nodes"></param>
     public void ProcessTreeNodes(List<TreeNode> nodes)
     {
-        //init some variable
-        attacknode_number = 0;
-        defendnode_number = 0;
-        node_number_multiply = 1;
-        //first get how manys base nodes in it
-        createInfo = new ProjectileCreateInfo();
-        elementCreateInfo = new ElementTotalInfo();
-        foreach (TreeNode n in nodes)
+        List<SkillConfig> turn_skill = new List<SkillConfig>();
+        foreach(var n in nodes)
         {
-            if (n.skillConfig == null)
-                continue;
-
-            SkillConfig s = n.skillConfig;
-            switch (s.skilltype)
+            if (n.skillConfig)
             {
-                case SkillType.Base:
-                    CompileBaseNode(s);
-                    break;
-                case SkillType.Elements:
-                    CompileElementsNode(s);
-                    break;
-                case SkillType.BattleCryBehavior:
-                    CompileBattleCryBehavior(s);//TODO
-                    break;
-                case SkillType.OnHitBehavior:
-                    CompileOnHitBehavior(s);
-                    break;
-                case SkillType.Attibutes:
-                    CompileAttributes(s);
-                    break;
+                turn_skill.Add(n.skillConfig);
             }
         }
+        turn_skill.Sort(sortBySkillOrder);
 
-
-        //final multiply for the attack node
-        print(attacknode_number);
-        attacknode_number *= node_number_multiply;
-        print(attacknode_number);
-        defendnode_number *= node_number_multiply;
-        //when have a multply node for base node
-        //
-        //create attack projectile
-        //find position
-        List<Vector3> dir =  FindClosestEnemyPosition(attacknode_number);
-        List<Vector3> defend_dir = FindClosestEnemyPosition(defendnode_number);
-       
-        //create attack projectiles
-        if((dir != null) && (dir.Count > 0))
-        {
-            for (int i = 0; i < attacknode_number; i++)
-            {
-                //GameObject go = Instantiate(projectile_prefab, projectile_spawn_point);
-                GameObject go = projcetilePool.PoolCreate(projectile_prefab, projectile_spawn_point);
-                projectile p = go.GetComponent<projectile>();
-                //set go parameters
-                p.SetProjectileParameters(createInfo);
-                //add onhit effect to go
-                AddOnhitComponentToProjectile(go);
-                //set go move direction and start move
-                //print(projectile_spawn_point.position);
-                p.StartMove(dir[i] - projectile_spawn_point.position);
-                BattleCryBehavior(dir[i] - projectile_spawn_point.position);
-            }
-        }
-        
-        if((defend_dir != null) && (defend_dir.Count > 0))
-        {
-            //create defend shield
-            for (int i = 0; i < defendnode_number; i++)
-            {
-                //GameObject go = Instantiate(shield_prefab, projectile_spawn_point);
-                GameObject go = shiledPool.PoolCreate(shield_prefab, projectile_spawn_point);
-                shield s = go.GetComponent<shield>();
-                //set shild parameters
-                s.SetShieldParameters(createInfo);
-                //set on dead effect
-                AddOnDeadComponentToShield(go);
-                //start move
-                s.StartMove(defend_dir[i] - projectile_spawn_point.position);
-                BattleCryBehavior(defend_dir[i] - projectile_spawn_point.position);
-            }
-        }
-       
+        print(turn_skill[0].First_Compile_Order);
     }
 
-    /// <summary>
-    /// add when on dead
-    /// </summary>
-    /// <param name="shield"></param>
-    private void AddOnDeadComponentToShield(GameObject shield)
+    private int sortBySkillOrder(SkillConfig a, SkillConfig b)
     {
-        if (createInfo.isExplode)
-        {
-            OnDeadExplode e = shield.AddComponent<OnDeadExplode>();
-            e.explode_radius = createInfo.explode_radius;
-
-        }
+        return (int)(a.First_Compile_Order - b.First_Compile_Order);
     }
-
-    /// <summary>
-    /// add a on hit component to projectile
-    /// </summary>
-    private void AddOnhitComponentToProjectile(GameObject projectile)
-    {
-        if (createInfo.isExplode)
-        {
-            Explode e =  projectile.AddComponent<Explode>();
-            e.explode_radius = createInfo.explode_radius;
-         
-        }
-        if (elementCreateInfo.isFire)
-        {
-            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Fire);
-            Fire f =  projectile.AddComponent<Fire>();
-            f.flame_damage = elementCreateInfo.fire_damage;
-           
-        }
-        if (elementCreateInfo.isWater)
-        {
-            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Water);
-        
-            Water w = projectile.AddComponent<Water>();
-            w.water_decelerate = elementCreateInfo.water_decelerate;
-            
-        }
-        if (elementCreateInfo.isWood)
-        {
-            projectile.GetComponent<projectile>().AddElementParticle(ElementsType.Wood);
-            Wood w = projectile.AddComponent<Wood>();
-            w.wood_damageIncrease = elementCreateInfo.wood_damageIncrease;
-        }
-    }
-
-    /// <summary>
-    /// because this behavior may not relative to projectile, write in here first
-    /// </summary>
-    private void BattleCryBehavior(Vector3 dir)
-    {
-        //Buff ToDo
-
-        //Summon
-        if(createInfo.isSummon)
-        {
-            foreach(string s in SummonList)
-            {
-                GameObject go =  Instantiate(dronePrefabDict[s], projectile_spawn_point.position, Quaternion.identity);
-                go.GetComponent<DroneBase>().StartMove(dir);
-            }
-        }
-    }
-
-
 
     /// <summary>
     /// find a closest enemy
@@ -266,158 +81,20 @@ public class TreeAttackModule : MonoBehaviour
 
 
     }
-
-
-    #region Compile Node infomaion
-    /// <summary>
-    /// compile base Node
-    /// </summary>
-    /// <param name="s"></param>
-    private void CompileBaseNode(SkillConfig s)
-    {
-        switch (s.baseType)
-        {
-            case BaseType.Attack:
-                attacknode_number += 1;
-                break;
-            case BaseType.Shiled:
-                defendnode_number += 1;
-                break;
-        }
-
-        
-    }
-
-    /// <summary>
-    /// compile elements node
-    /// </summary>
-    /// <param name="s"></param>
-    private void CompileElementsNode(SkillConfig s)
-    {
-        createInfo.elements_list.Add(s.elementType);
-        switch (s.elementType)
-        {
-            case ElementsType.Fire:
-                elementCreateInfo.isFire = true;
-                elementCreateInfo.fire_damage += s.elements_parameters[0].value;
-                break;
-            case ElementsType.Water:
-                elementCreateInfo.isWater = true;
-                elementCreateInfo.water_decelerate += s.elements_parameters[0].value;
-                break;
-            case ElementsType.Wood:
-                elementCreateInfo.isWood = true;
-                elementCreateInfo.wood_damageIncrease += s.elements_parameters[0].value;
-                break;
-        }
-    
-    }
-
-    private void CompileBattleCryBehavior(SkillConfig s)
-    {
-        switch (s.battleCryBehaviorType)
-        {
-            case BattleCryBehaviorType.Buff:
-                //todo
-                break;
-            case BattleCryBehaviorType.Summon:
-                SummonList.Clear();
-                foreach(var i in s.battleCryBehavior_parameters)
-                {
-                    SummonList.Add(i.value);
-                }
-                createInfo.isSummon = true;
-                break;
-        }
-    }
-
-    private void CompileOnHitBehavior(SkillConfig s)
-    {
-        switch (s.onHitBehaviorType)
-        {
-            case OnHitBehaviorType.Explode:
-                createInfo.isExplode = true;
-                createInfo.explode_radius += s.onhit_parameters[0].value;//"explode radius"
-                break;
-            case OnHitBehaviorType.Penetrate:
-                createInfo.isPenetrate = true;
-                createInfo.penetrate += 1;
-                break;
-        }
-    }
-
-    private void CompileAttributes(SkillConfig s)
-    {
-        switch (s.attributetype)
-        {
-            case Attributetype.NodeNumber:
-                //only for multiply
-                node_number_multiply *= (int)s.attribute_information[0].value;//how many attack node
-                break;
-            case Attributetype.AttackOrDefend:
-                //for add or multiply
-                if (s.attribute_information[0].parameters_name == "AttackOrDefend_Add")
-                {
-                    createInfo.attack_add += s.attribute_information[0].value;
-                }
-                else if(s.attribute_information[0].parameters_name == "AttackOrDefend_Mul")
-                {
-                    createInfo.attack_multiply *= s.attribute_information[0].value;
-                }
-                break;
-            
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        // Display the explosion radius when selected
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
-    #endregion
-
     /// <summary>
     /// sort by vector distance
     /// </summary>
     /// <returns></returns>
-    private int SortByVector(Enemy a,Enemy b)
+    private int SortByVector(Enemy a, Enemy b)
     {
         float a_dis = (a.transform.position - transform.position).magnitude;
 
         float b_dis = (b.transform.position - transform.position).magnitude;
         return (int)(a_dis - b_dis);
     }
+
+
+
+
 }
 
-
-/// <summary>
-/// the infomation needs to creat each project
-/// </summary>
-public class ProjectileCreateInfo
-{
-    public float attack_add = 0;
-    public float attack_multiply = 1;
-    public bool isPenetrate = false;
-    public int penetrate = 0;
-    public bool isExplode = false;
-    public float explode_radius = 0;
-    public bool isSummon = false;
-    public float size = 1;
-    public List<ElementsType> elements_list = new List<ElementsType>();
-    
-}
-
-/// <summary>
-/// a class restore all elements parameters
-/// </summary>
-public class ElementTotalInfo
-{
-    public bool isFire = false;
-    public float fire_damage = 0f;
-    public bool isWater = false;
-    public float water_decelerate = 0f;
-    public bool isWood = false;
-    public float wood_damageIncrease = 0f;
-
-}

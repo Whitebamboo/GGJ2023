@@ -14,14 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 29e336ded4d42a04e8b5e6c44714dad8, type: 3}
   Description: Multiply attack times or sheid numbers
-  skilltype: 4
-  baseType: 0
-  elementType: 0
-  elements_parameters: []
-  battleCryBehaviorType: 0
-  onHitBehaviorType: 1
-  onhit_parameters: []
-  attributetype: 0
-  attribute_information:
-  - parameters_name: number_multiply
-    value: 2
+  Node_Effect: 
+  First_Compile_Order: 1

@@ -106,10 +106,10 @@ public class TreeNetworkModule
                     continue;
                 }
 
-                text += node.skillConfig.skilltype + " | ";
+                //text += node.skillConfig.skilltype + " | ";
             }
 
-            Debug.Log(text);
+            //Debug.Log(text);
         }
     }
 

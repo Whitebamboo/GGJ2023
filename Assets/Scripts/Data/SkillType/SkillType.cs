@@ -4,80 +4,26 @@ using UnityEngine;
 
 
 /// <summary>
-/// what type of skill
+/// what type of skill,effect first compiling in tree attack module
 /// </summary>
 public enum SkillType
 {
     Base,//bullet or shiled
-    Elements,//fire, water, wood
-    BattleCryBehavior,//when projectile create
-    OnHitBehavior,//when projectile hit monster
-    Attibutes,//number,attack,hp,size
-}
-
-
-/// <summary>
-/// base node
-/// </summary>
-public enum BaseType
-{
-    Attack,
-    Shiled,
+    Attribute,//calculate when compile
+    OnHit,//calculate when onhit
+    BeHit,//when be hit
+    OnCreate,//when instantiate, create
+    OnDead,//When dead will be calculate
 }
 
 /// <summary>
-/// what type of elements
+/// element type
 /// </summary>
 public enum ElementsType
 {
     Fire,
     Water,
     Wood,
-}
-
-/// <summary>
-/// battle cry
-/// </summary>
-public enum BattleCryBehaviorType
-{
-    Buff,
-    Summon,
-}
-
-/// <summary>
-/// on hit
-/// </summary>
-public enum OnHitBehaviorType
-{
-   Penetrate,
-   Explode,
-}
-
-/// <summary>
-/// attributes
-/// </summary>
-public enum Attributetype
-{
-    NodeNumber,
-    AttackOrDefend,
-    Size,
-}
-
-[System.Serializable]
-/// <summary>
-/// a structure for Float parameters,include parameter name and value 
-/// </summary>
-public struct FloatParameters
-{
-    public string parameters_name;
-    public float value;
-}
-[System.Serializable]
-/// <summary>
-/// a structure for string parameters
-/// </summary>
-public struct StringParameters
-{
-    public string parameters_name;
-    public string value;
+    Thunder,
+    Ice,
 }

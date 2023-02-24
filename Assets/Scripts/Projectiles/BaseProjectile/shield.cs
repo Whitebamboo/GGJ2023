@@ -83,17 +83,9 @@ public class shield : MonoBehaviour
     /// initial behavor
     /// </summary>
     /// <param name="info"></param>
-    public void SetShieldParameters(ProjectileCreateInfo info)
+    public void SetShieldParameters()
     {
-        health_add = info.attack_add;
-        health_multiply = info.attack_multiply;
-        isPenetrate = info.isPenetrate;
-        penetrate_times = info.penetrate;
-        elements_list = info.elements_list;
-        size = info.size;
-
-        //calculate real health
-        health = (health_base + health_add) * health_multiply;
+      
     }
 
 
