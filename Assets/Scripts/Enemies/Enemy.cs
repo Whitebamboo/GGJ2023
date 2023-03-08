@@ -49,11 +49,7 @@ public class Enemy : MonoBehaviour
         GetComponentInChildren<HPBar>().InitialHP(health);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
 
     /// <summary>
@@ -115,7 +111,7 @@ public class Enemy : MonoBehaviour
                 break;
 
         }
-        if(go)
+        if (go)
         {
             if (enemy_had_effect.ContainsKey(eType))
             {
@@ -126,7 +122,7 @@ public class Enemy : MonoBehaviour
                 enemy_had_effect.Add(eType, go);
             }
         }
-            
+
     }
 
     public void RemoveEnemyDebuffEffect(ElementsType eType)

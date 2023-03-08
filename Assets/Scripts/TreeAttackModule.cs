@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class TreeAttackModule : MonoBehaviour
 {
-
+    //for test 
     public List<SkillConfig> ns = new List<SkillConfig>();
     private List<TreeNode> ts = new List<TreeNode>();
 
+
+    //real variable
+    public Transform spawnPoint;
+    public GameObject bullet_prefab;
     private int bullet_num = 0;
     private int shield_num = 0;
     private void Start()
@@ -57,12 +61,24 @@ public class TreeAttackModule : MonoBehaviour
             SkillCompiler.instance.Compile(skill, this, new_ability);
         }
         //TODO Lauch 
+        List<Vector3> lauch_dir = FindClosestEnemyPosition(Bullet);
+        for (int i =0;i< bullet_num; i++)
+        {
+            GameObject bullet_obj = Instantiate(bullet_prefab, spawnPoint);
+            Bullet b = bullet_obj.GetComponent<Bullet>();
+            b.InstantiateInit(new_ability);
+            b.StartMove(lauch_dir[i] - spawnPoint.position);
+        }
 
-        print("water num : " + new_ability.GetAspect<Water>().num);
-        new_ability.GetAspect<Decelerate>().onHitExec(null);
-        //print("layer num of decelerate: " + );
-        print("bullet num: " + bullet_num);
-        print("shield num: " + shield_num);
+
+
+
+        //Debug
+        //print("water num : " + new_ability.GetAspect<Water>().num);
+        //new_ability.GetAspect<Decelerate>().onHitExec(null);
+        ////print("layer num of decelerate: " + );
+        //print("bullet num: " + bullet_num);
+        //print("shield num: " + shield_num);
     }
 
     private int sortBySkillOrder(SkillConfig a, SkillConfig b)
@@ -87,6 +103,7 @@ public class TreeAttackModule : MonoBehaviour
         }
         List<Enemy> enemy_targets_list = GameManager.instance.enemyManager.enemies;
         enemy_targets_list.Sort(SortByVector);
+     
         if(enemy_targets_list.Count > 0)
         {
             if(enemy_targets_list.Count >= num)
@@ -109,6 +126,7 @@ public class TreeAttackModule : MonoBehaviour
                 }
             }
         }
+        print(enemy_position[0]);
         return enemy_position;
         
 

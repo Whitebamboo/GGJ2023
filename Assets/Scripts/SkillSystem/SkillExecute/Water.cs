@@ -10,7 +10,6 @@ public class Water : ElementExecute
     public Water()
     {
         num = 1;
-        triggerType = TriggerTime.onDamage;
         RestraintElement = new List<ElementsType>();
         RestraintElement.Add(ElementsType.Fire);
     }

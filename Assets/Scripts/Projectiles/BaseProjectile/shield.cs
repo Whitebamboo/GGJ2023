@@ -179,15 +179,7 @@ public class shield : MonoBehaviour
     /// </summary>
     private void CallOnDeadEffect(Enemy enemy)
     {
-        List<OnDeadEffect> ondead_list = new List<OnDeadEffect>(GetComponents<OnDeadEffect>());
-        if (ondead_list.Count == 0)
-        {
-            return;
-        }
-        foreach (OnDeadEffect ondeadComponent in ondead_list)
-        {
-            ondeadComponent.OnDeadBehavior(enemy);//an onhit behavior will be override later
-        }
+        
     }
     #endregion
 }

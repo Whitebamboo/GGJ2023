@@ -11,10 +11,11 @@ public class ElementExecute : SkillExecute
     {
         base.onDamageExec(target);
         Enemy e = target.GetComponent<Enemy>();
-        if (RestraintElement.Contains(e.element))
+        if (RestraintElement.Contains(e.GetElement()))
         {
             e.finalDamage *= Mathf.Pow(baseAttributeRestraintMultiplier, num);
 
         }
+        Debug.Log("do element execute on damage"+ num);
     }
 }
