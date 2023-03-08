@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: WaterBase
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 3ed51210b569b4e48a57b33359b5b76c, type: 3}
-  Description: 1 water element on this attack
+  name: Water
+  id: 1001
+  description: 1 water element
   skilltype: 1
-  Node_Effect: Water
-  First_Compile_Order: 0
+  reqProjectileType: 0
+  triggerType: 1
+  SkillCode: Water
+  compile_Order: 1

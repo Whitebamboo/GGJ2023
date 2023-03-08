@@ -5,16 +5,30 @@ using UnityEngine;
 public class TreeAttackModule : MonoBehaviour
 {
 
+    public List<SkillConfig> ns = new List<SkillConfig>();
+    private List<TreeNode> ts = new List<TreeNode>();
+
+    private int bullet_num = 0;
+    private int shield_num = 0;
     private void Start()
     {
-   
+        //for test
+        foreach(var i in ns)
+        {
+            TreeNode t = new TreeNode(i);
+            ts.Add(t);
+        }
    
     }
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ProcessTreeNodes(ts);
+        }
     }
+
 
     /// <summary>
     /// Process tree nodes
@@ -22,6 +36,10 @@ public class TreeAttackModule : MonoBehaviour
     /// <param name="nodes"></param>
     public void ProcessTreeNodes(List<TreeNode> nodes)
     {
+        //TODO Initial
+        bullet_num = 0;
+        shield_num = 0;
+        // order the skill base on its compile order
         List<SkillConfig> turn_skill = new List<SkillConfig>();
         foreach(var n in nodes)
         {
@@ -31,14 +49,24 @@ public class TreeAttackModule : MonoBehaviour
             }
         }
         turn_skill.Sort(sortBySkillOrder);
-
-        print(turn_skill[0].First_Compile_Order);
+        //compile skill
+        Ability new_ability = new Ability();
+        foreach(var skill in turn_skill)
+        {
+            SkillCompiler.instance.Compile(skill.SkillCode, this, new_ability);
+        }
+        //TODO Lauch 
+        print("bullet num" + bullet_num);
+        print("shield num" + shield_num);
     }
 
     private int sortBySkillOrder(SkillConfig a, SkillConfig b)
     {
-        return (int)(a.First_Compile_Order - b.First_Compile_Order);
+        return (int)(a.compile_Order - b.compile_Order);
     }
+
+
+    #region Target Finding Methods maybe add more later
 
     /// <summary>
     /// find a closest enemy
@@ -94,7 +122,24 @@ public class TreeAttackModule : MonoBehaviour
     }
 
 
+    #endregion
 
 
+    #region Utils
+    /// <summary>
+    /// calculate bullet
+    /// </summary>
+    public int Bullet
+    {
+        get => bullet_num;
+        set => bullet_num = value;
+    }
+
+    public int Shield
+    {
+        get => shield_num;
+        set => shield_num = value;
+    }
+    #endregion
 }
 

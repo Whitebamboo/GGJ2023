@@ -101,7 +101,7 @@ public class NodeDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.instance.ShowDescription(skillConfig.Description);
+        GameManager.instance.ShowDescription(skillConfig.description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

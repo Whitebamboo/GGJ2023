@@ -6,10 +6,14 @@ using UnityEngine;
 public class SkillConfig : ScriptableObject
 {
     public Sprite skillImage;
-    public string Description;
+    public string name;
+    public int id;
+    public string description;
     public SkillType skilltype = SkillType.Base;
-    public string Node_Effect;
-    public int First_Compile_Order;
+    public ReqProjectileType reqProjectileType = ReqProjectileType.Bullet;
+    public TriggerTime triggerType = TriggerTime.onHit;
+    public string SkillCode;
+    public int compile_Order;//0,1,2,3,4
    
 
 

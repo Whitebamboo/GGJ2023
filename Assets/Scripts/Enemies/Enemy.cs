@@ -38,6 +38,10 @@ public class Enemy : MonoBehaviour
 
     public List<GameObject> enemy_debuff_Effect_List = new List<GameObject>();
     public Dictionary<ElementsType, GameObject> enemy_had_effect = new Dictionary<ElementsType, GameObject>();
+
+
+    public float baseDamage = 0;//each on hit has a base damage
+    public float finalDamage = 0;//the final damage it take's base on a series of execute
     // Start is called before the first frame update
     void Start()
     {
@@ -135,14 +139,52 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    #region on Hit
+
+    //new getting hit's logic will becom
+    // 1. get base damage
+    // 2. execute all onhit trigger
+    // 3. execute all onDamage trigger
+    // 4. execute all after On hit trigger
+    public void TakeBaseDamage(float damage)
+    {
+        baseDamage = damage;
+        finalDamage = damage;
+    }
+
+
     /// <summary>
-    /// function to make damage to enemy
+    /// after all calculation do this damage
+    /// </summary>
+    public void TakeFinalDamage()
+    {
+        if(finalDamage < baseDamage)
+        {
+            TakeDamage(finalDamage, DmgType.EnemyWeak);
+        }
+        else if(finalDamage == baseDamage)
+        {
+            TakeDamage(finalDamage, DmgType.EnemyNormal);
+        }
+        else if((finalDamage < baseDamage * 1.5) && (finalDamage > baseDamage))
+        {
+            TakeDamage(finalDamage, DmgType.EnemyRestraint);
+        }
+        else if (finalDamage > 1.5)
+        {
+            TakeDamage(finalDamage, DmgType.EnemyCritical);
+        }
+    }
+
+
+    /// <summary>
+    /// function to actually make damage to enemy
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(float damage, DmgType damage_type)
     {
-        var dmg = damage * (1 + damageIncreaseRate / 100);
-
+        var dmg = damage ;
         health -= dmg;
         GameManager.instance.dmgTextManager.AddDmgText(dmg, damage_type, transform.position);
         GetComponentInChildren<HPBar>().UpdateHP(health);
@@ -155,6 +197,7 @@ public class Enemy : MonoBehaviour
         text.SetActive(false);
     }
 
+    #endregion
     public void OnAttackTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Tree") || (other.gameObject.CompareTag("Shield")))
