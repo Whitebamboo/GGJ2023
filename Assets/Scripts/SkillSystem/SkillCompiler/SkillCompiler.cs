@@ -6,25 +6,49 @@ using System;
 [System.Serializable]
 public class SkillCompiler : CSingletonMono<SkillCompiler>
 {
+    private Ability current_ability;
   
     /// <summary>
     /// compile a specific skill
     /// </summary>
     /// <param name="Skill_Code"></param>
     /// <param name="ability"></param>
-    public virtual void Compile(string skill_code, TreeAttackModule tree_attack, Ability ability)
+    public virtual void Compile(SkillConfig skill, TreeAttackModule tree_attack, Ability ability)
     {
+        string skill_code = skill.SkillCode;
+        current_ability = ability;
+        //pre constraint
+        if((skill.reqProjectileType == ReqProjectileType.Bullet) && (tree_attack.Bullet <= 0))
+        {
+            return;
+        }
+        else if ((skill.reqProjectileType == ReqProjectileType.Shield) && (tree_attack.Shield <= 0))
+        {
+            return;
+        }
+        else if ((skill.reqProjectileType == ReqProjectileType.Both) && ((tree_attack.Shield <= 0) && (tree_attack.Bullet <= 0)))
+        {
+            return;
+        }
+        //start parsing string
         string[] skill_sentences = skill_code.Split(";");
         for(int i = 0; i < skill_sentences.Length; i++)
         {
-            string[] words = skill_sentences[i].Split(" ");
+            string code_sentence = skill_sentences[i].Trim();
+            string[] words = code_sentence.Split(" ");
             switch (words.Length)
             {
                 case 1:
-                    CompileSingleWords(words, tree_attack, ability);
+                    CompileSingleWords(words, tree_attack);
+                    break;
+                case 3:
+                    CompileThreeWords(words, tree_attack);
                     break;
             }
         }
+        //test
+      
+
     }
 
     #region when the code sentences only a words
@@ -33,7 +57,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// if this code sentence only one words
     /// </summary>
     /// <param name="words"></param>
-    private void CompileSingleWords(string[] words, TreeAttackModule tree_attack, Ability ability)
+    private void CompileSingleWords(string[] words, TreeAttackModule tree_attack)
     {
         
         if(words[0] == "Bullet")
@@ -46,7 +70,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
         }
         else 
         {
-            CompileKeyWord(words[0], ability);
+            CompileKeyWord(words[0]);
         }
     }
 
@@ -54,9 +78,9 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// use reflection to compile the key words include adding num or else
     /// </summary>
     /// <param name="keyword"></param>
-    private void CompileKeyWord(string keyword, Ability ability)
+    private void CompileKeyWord(string keyword)
     {
-        object obj = ability.GetAspect<Aspect>(keyword);
+        object obj = current_ability.GetAspect<Aspect>(keyword);
         Type t = Type.GetType(keyword);//get a reflection of this type
         if(t == null)
         {
@@ -69,7 +93,10 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
             FieldInfo num_fi = t.GetField("num");//get its number parameter
             if (num_fi != null)
             {
-                num_fi.SetValue(obj, (int)num_fi.GetValue(obj) + 1); //its number ++
+               
+                int new_value = (int)num_fi.GetValue(obj) + 1;
+                num_fi.SetValue(obj, new_value); //its number ++
+                //print(keyword + ":" +new_value);
             }
             else
             {
@@ -80,14 +107,185 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
         {
             //ability did not have this execute instance
             obj = Activator.CreateInstance(t);
-            ability.AddAspect<Aspect>((Aspect)obj, key: keyword); 
+            current_ability.AddAspect<Aspect>((Aspect)obj, key: keyword); 
         }
         //test
-        Aspect a = ability.GetAspect<Aspect>(keyword);
-        FieldInfo n_fi = t.GetField("num");
-        print(keyword + "'s number" + n_fi.GetValue(a).ToString());
+        //Aspect a = current_ability.GetAspect<Aspect>(keyword);
+        //FieldInfo n_fi = t.GetField("num");
+        //print(keyword + "'s number" + n_fi.GetValue(a).ToString());
 
     }
     #endregion
+
+    /// <summary>
+    /// three words compiler will like a = b; a+=b; a-=b; a*=b;
+    /// </summary>
+    /// <param name="words"></param>
+    /// <param name="treeAttack"></param>
+    /// <param name="ability"></param>
+    private int CompileThreeWords(string[] words, TreeAttackModule treeAttack)
+    {
+        int result = 0;
+        if(words[1] == "=")
+        {
+            Assign(words[0], words[2]);//assign value to another   
+        }
+        else if(words[1] == "+=" || words[1] == "-=" || words[1] == "*=" || words[1] == "/=")
+        {
+            CalculateAssign(words[0], words[1], words[2]);
+        }
+        return result;
+    }
+
+
+    /// <summary>
+    /// for the signal "+=" "-=" "*=" "/="
+    /// </summary>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    private void CalculateAssign(string left, string middle, string right)
+    {
+        string[] left_variables = left.Split(".");
+        string left_field_value = "";
+        if (left_variables.Length != 2)
+        {
+            print("assign fail: wrong attribute: " + left);
+        }
+        else
+        {
+            left_field_value = GetValue(left_variables[0], left_variables[1]).ToString();
+        }
+        //again require the left is a variable in an existing instance
+        string[] right_variables = right.Split(".");
+        string field_value = "";
+        if (right_variables.Length == 2)
+        {
+            field_value = GetValue(right_variables[0], right_variables[1]).ToString();
+
+        }
+        else if (right_variables.Length == 1)
+        {
+            field_value = right_variables[0];
+        }
+        int left_val = 0;
+        int right_val = 0;
+        bool isInt = int.TryParse(field_value, out right_val);
+        if (!isInt)
+        {
+            print("only Support int value assign right now");
+        }
+        else
+        {
+            isInt = int.TryParse(left_field_value, out left_val);
+            if (!isInt)
+            {
+                print("only Support int value assign right now");
+            }
+            else
+            {
+                int result = 0;
+                if(middle == "+=")
+                {
+                    result = left_val + right_val;
+                }
+                else if (middle == "-=")
+                {
+                    result = left_val - right_val;
+                }
+                else if (middle == "*=")
+                {
+                    result = left_val * right_val;
+                }
+                else if (middle == "/=")
+                {
+                    result = left_val / right_val;
+                }
+
+                SetValue(left_variables[0], left_variables[1], result);
+            }
+        }
+    }
+
+
+    
+
+    /// <summary>
+    /// play with the =
+    /// </summary>
+    /// <returns></returns>
+    private void Assign(string left,string right)
+    {
+        string[] left_variables = left.Split(".");
+        string[] right_variables = right.Split(".");
+        if (left_variables.Length != 2)
+        {
+            print("assign fail: wrong attribute: " + left);
+        }
+        //get right value
+        string field_value = "";
+        if (right_variables.Length == 2)
+        {
+            field_value = GetValue(right_variables[0], right_variables[1]).ToString();
+           
+        }
+        else if(right_variables.Length == 1)
+        {
+            field_value = right_variables[0];
+        }
+
+       
+        //give that value to left
+        int right_value = 0;
+        bool isInt = int.TryParse(field_value, out right_value);
+        if (isInt)
+        {
+            SetValue(left_variables[0], left_variables[1], right_value);
+        }
+        else
+        {
+            print("only Support int value assign right now");
+        }
+      
+
+    }
+
+    /// <summary>
+    /// get a existing instance's value
+    /// </summary>
+    /// <param name="classtype"></param>
+    /// <param name="parameter"></param>
+    /// <returns></returns>
+    private object GetValue(string classtype, string parameter)
+    {
+        Aspect a = current_ability.GetAspect<Aspect>(classtype);
+        if (a == null)
+        {
+            print("dont have this class execute instance: " + classtype);
+            return 0;
+        }
+        Type t = Type.GetType(classtype);
+        FieldInfo n_fi = t.GetField(parameter);
+        return n_fi.GetValue(a);
+    }
+
+    /// <summary>
+    /// set value to int
+    /// </summary>
+    /// <param name="classtype"></param>
+    /// <param name="parameter"></param>
+    /// <param name="value"></param>
+    private void SetValue(string classtype, string parameter, int value)
+    {
+        Aspect a = current_ability.GetAspect<Aspect>(classtype);
+        if(a == null)
+        {
+            print("dont have this execute instance" + classtype);
+            return;
+        }
+        Type t = Type.GetType(classtype);
+        FieldInfo n_fi = t.GetField(parameter);
+        n_fi.SetValue(a, value);
+
+    }
 }
 

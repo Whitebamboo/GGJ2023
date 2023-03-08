@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 1002
   description: For each unit of water element, it reduces the movement speed by 15%.
   skilltype: 1
-  reqProjectileType: 0
+  reqProjectileType: 1
   triggerType: 0
   SkillCode: Decelerate; Decelerate.layer = Water.num
-  compile_Order: 0
+  compile_Order: 3

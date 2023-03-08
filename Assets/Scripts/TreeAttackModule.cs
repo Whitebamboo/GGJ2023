@@ -48,16 +48,21 @@ public class TreeAttackModule : MonoBehaviour
                 turn_skill.Add(n.skillConfig);
             }
         }
-        turn_skill.Sort(sortBySkillOrder);
+        turn_skill.Sort(sortBySkillOrder);//from small to big
+    
         //compile skill
         Ability new_ability = new Ability();
         foreach(var skill in turn_skill)
         {
-            SkillCompiler.instance.Compile(skill.SkillCode, this, new_ability);
+            SkillCompiler.instance.Compile(skill, this, new_ability);
         }
         //TODO Lauch 
-        print("bullet num" + bullet_num);
-        print("shield num" + shield_num);
+
+        print("water num : " + new_ability.GetAspect<Water>().num);
+        new_ability.GetAspect<Decelerate>().onHitExec(null);
+        //print("layer num of decelerate: " + );
+        print("bullet num: " + bullet_num);
+        print("shield num: " + shield_num);
     }
 
     private int sortBySkillOrder(SkillConfig a, SkillConfig b)

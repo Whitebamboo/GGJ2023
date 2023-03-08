@@ -8,7 +8,7 @@ public class Decelerate : DebuffExecute
     {
         num = 1;
         layer = 0;
-        base_value = 15;
-        base_time = 4;
+        value = 15;
+        time = 4;
     }
 }

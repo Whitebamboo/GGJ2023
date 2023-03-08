@@ -154,10 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ns:
   - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
-  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
-  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
   - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
   - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
+  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
+  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
+  - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
 --- !u!4 &611151621
 Transform:
   m_ObjectHideFlags: 0

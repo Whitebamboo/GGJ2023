@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: WaterDecelerateTime
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 3ed51210b569b4e48a57b33359b5b76c, type: 3}
-  Description: add  Deceleration Time 2 second this attack
+  name: Drowning
+  id: 1003
+  description: 'Decelerate: Duration increased by 2 seconds.'
   skilltype: 1
-  Node_Effect: Deceleration-Time + 2
-  First_Compile_Order: 3
+  reqProjectileType: 1
+  triggerType: 4
+  SkillCode: Decelerate.time += Water.num
+  compile_Order: 4

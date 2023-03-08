@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: StoreWater
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 3ed51210b569b4e48a57b33359b5b76c, type: 3}
-  Description: water number multiple 3
+  name: WaterStorage
+  id: 1004
+  description: Triple the amount of water elements owned
   skilltype: 1
-  Node_Effect: Water-Number * 3
-  First_Compile_Order: 1
+  reqProjectileType: 1
+  triggerType: 4
+  SkillCode: Water.num *= 3
+  compile_Order: 2

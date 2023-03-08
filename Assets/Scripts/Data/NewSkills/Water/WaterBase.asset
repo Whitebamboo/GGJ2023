@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 1001
   description: 1 water element
   skilltype: 1
-  reqProjectileType: 0
+  reqProjectileType: 1
   triggerType: 1
   SkillCode: Water
   compile_Order: 1

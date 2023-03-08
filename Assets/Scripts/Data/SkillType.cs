@@ -32,6 +32,7 @@ public enum ElementsType
 /// </summary>
 public enum ReqProjectileType
 {
+    None,
     Bullet,
     Shield,
     Both,
@@ -45,4 +46,5 @@ public enum TriggerTime
     After_onHit,
     onCreate,
     onCompile,
+    onGetHit,
 }
