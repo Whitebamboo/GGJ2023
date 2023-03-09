@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Ability : Container
 {
-
+    public int Bullet = 0;
+    public int Shield = 0;
     #region behavior
 
     public void ExecSkill(TriggerTime trigger, GameObject target)

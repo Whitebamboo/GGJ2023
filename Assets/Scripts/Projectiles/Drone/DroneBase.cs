@@ -5,94 +5,61 @@ using DG.Tweening;
 public class DroneBase : MonoBehaviour
 {
     public float health = 6;
+    public float attack = 3;
     public float attack_interval = 1f;
-    public bool startAttack = false;
-    public bool start_get_damge = false;
-    private float timer = 0;
-    public GameObject bullet;
-    public float move_distance = 7;
+    public bool canAttack = false;
+    public bool canGetDamge = false;
+    public bool canMove = false;
+    public float atktimer = 0;
+    public float speed = 10;
     public Vector3 move_direction;
-    private void Start()
+
+ 
+
+    #region Move
+
+    /// <summary>
+    /// moving behavior
+    /// </summary>
+    public virtual void Move()
     {
         
     }
 
-
-    private void Update()
+    public virtual void StartMove(Vector3 dir)
     {
-        //attack
-        Attack();
+        canMove = true;
     }
 
+    #endregion
 
-    public void StartMove(Vector3 dir)
-    {
-        //rotate
-        print("Drone start move");
-
-        dir = dir.normalized;
-        move_direction = dir;
-        //Quaternion.ve
-
-        //transform.LookAt(transform.position + dir);
-        //transform.rotation = Quaternion.FromToRotation(transform.right, dir);
-        StartCoroutine(FlyToAir(dir));
-        //prepare to destroy it self by time
-    }
-
-    IEnumerator FlyToAir(Vector3 dir)
-    {
-        Tween t = transform.DOMove(this.transform.position + dir * move_distance, 1.5f);
-        yield return t.WaitForCompletion();
-        startAttack = true;
-        start_get_damge = true;
-    }
-
+    #region behavior
     /// <summary>
     /// attack
     /// </summary>
-    private void Attack()
+    public virtual void Attack()
     {
-        if (timer <= 0)
-        {
-            timer = attack_interval;
-            CreatBullet();
-        }
-        timer -= Time.deltaTime;
-    }
-    public virtual void CreatBullet()
-    {
-        print("create bullet");
-        //find a target
-        List<Vector3> target_list =  FindObjectOfType<TreeAttackModule>().FindClosestEnemyPosition(1);
-        GameObject go = Instantiate(bullet, this.transform);
-        if((target_list != null) && (target_list.Count > 0)) 
-        {
-            go.GetComponent<DroneBullet>().StartMove(target_list[0] - transform.position);
-        }
-        
+   
     }
 
-    public void TakeDamage(float damage,DmgType dmgType)
+    /// <summary>
+    /// be hit
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="dmgType"></param>
+    public virtual void TakeDamage(float damage, DmgType dmgType)
     {
-        if (start_get_damge)
-        {
-            health -= damage;
-            CheckDead();
-        }
+      
     }
 
-    private void CheckDead()
-    {
-        if (health <= 0)
-        {
-            Dead();
-        }
-    }
 
+    /// <summary>
+    /// dead
+    /// </summary>
     public virtual void Dead()
     {
         Destroy(this.gameObject);
     }
+    #endregion
 
 }

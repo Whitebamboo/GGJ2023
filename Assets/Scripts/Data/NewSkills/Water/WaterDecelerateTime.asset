@@ -15,9 +15,11 @@ MonoBehaviour:
   skillImage: {fileID: 21300000, guid: 3ed51210b569b4e48a57b33359b5b76c, type: 3}
   name: Drowning
   id: 1003
+  PrimeId: 11
+  unlock_Req: 
   description: 'Decelerate: Duration increased by 2 seconds.'
   skilltype: 1
   reqProjectileType: 1
   triggerType: 4
-  SkillCode: Decelerate.time += Water.num
+  SkillCode: Decelerate.time += 2
   compile_Order: 4

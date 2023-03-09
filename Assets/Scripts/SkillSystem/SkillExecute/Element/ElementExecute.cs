@@ -16,6 +16,6 @@ public class ElementExecute : SkillExecute
             e.finalDamage *= Mathf.Pow(baseAttributeRestraintMultiplier, num);
 
         }
-        Debug.Log("do element execute on damage"+ num);
+        //Debug.Log("do element execute on damage"+ num);
     }
 }

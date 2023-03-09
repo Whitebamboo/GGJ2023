@@ -21,6 +21,9 @@ public interface IContainer
     /// <returns></returns>
     T GetAspect<T>(string key = null) where T : IAspect;
 
+
+    T RemoveAspect<T>(string key = null) where T : IAspect;
+    
     /// <summary>
     /// get all aspects
     /// </summary>
@@ -47,6 +50,8 @@ public class Container : IContainer
 
     }
 
+
+
     public ICollection<IAspect> Aspects()
     {
         return aspects.Values;
@@ -58,6 +63,19 @@ public class Container : IContainer
         T aspect = aspects.ContainsKey(key) ? (T)aspects[key] : default(T);
         return aspect;
     }
+
+    public T RemoveAspect<T>(string key = null) where T : IAspect
+    {
+        key = key ?? typeof(T).Name;
+        T aspect = aspects.ContainsKey(key) ? (T)aspects[key] : default(T);
+        if (aspects.ContainsKey(key))
+        {
+            aspects.Remove(key);
+        }
+        return aspect;
+    }
+
+
 }
 
 public interface IAspect

@@ -12,6 +12,7 @@ public class TreeAttackModule : MonoBehaviour
     //real variable
     public Transform spawnPoint;
     public GameObject bullet_prefab;
+    public Dictionary<long, Ability> abilityCombination = new Dictionary<long, Ability>();
     private int bullet_num = 0;
     private int shield_num = 0;
     private void Start()
@@ -52,17 +53,32 @@ public class TreeAttackModule : MonoBehaviour
                 turn_skill.Add(n.skillConfig);
             }
         }
-        turn_skill.Sort(sortBySkillOrder);//from small to big
-    
-        //compile skill
-        Ability new_ability = new Ability();
-        foreach(var skill in turn_skill)
+        long com_num = GetAbilityCombinationNumber(turn_skill);
+        Ability new_ability;
+        if (abilityCombination.ContainsKey(com_num))
         {
-            SkillCompiler.instance.Compile(skill, this, new_ability);
+            new_ability = abilityCombination[com_num];
+            //print("existing ability combination" + com_num);
         }
+        else
+        {
+            turn_skill.Sort(sortBySkillOrder);//from small to big
+
+            //compile skill
+            new_ability = new Ability();
+            foreach (var skill in turn_skill)
+            {
+                SkillCompiler.instance.Compile(skill, new_ability);
+            }
+
+            abilityCombination.Add(com_num, new_ability);
+            //print("new ability combination" + com_num);
+        }
+        bullet_num = new_ability.Bullet;
+        shield_num = new_ability.Shield;
         //TODO Lauch 
         List<Vector3> lauch_dir = FindClosestEnemyPosition(Bullet);
-        for (int i =0;i< bullet_num; i++)
+        for (int i = 0; i < bullet_num; i++)
         {
             GameObject bullet_obj = Instantiate(bullet_prefab, spawnPoint);
             Bullet b = bullet_obj.GetComponent<Bullet>();
@@ -72,13 +88,22 @@ public class TreeAttackModule : MonoBehaviour
 
 
 
-
         //Debug
         //print("water num : " + new_ability.GetAspect<Water>().num);
         //new_ability.GetAspect<Decelerate>().onHitExec(null);
         ////print("layer num of decelerate: " + );
         //print("bullet num: " + bullet_num);
         //print("shield num: " + shield_num);
+    }
+
+    private long GetAbilityCombinationNumber(List<SkillConfig> skills)
+    {
+        long result = 1;
+        foreach(var a in skills)
+        {
+            result *= a.PrimeId;
+        }
+        return result;
     }
 
     private int sortBySkillOrder(SkillConfig a, SkillConfig b)
@@ -126,7 +151,7 @@ public class TreeAttackModule : MonoBehaviour
                 }
             }
         }
-        print(enemy_position[0]);
+        
         return enemy_position;
         
 
@@ -143,6 +168,21 @@ public class TreeAttackModule : MonoBehaviour
         float b_dis = (b.transform.position - transform.position).magnitude;
         return (int)(a_dis - b_dis);
     }
+
+
+    #endregion
+
+
+    #region summon game object
+    public GameObject puppet_prefab;
+
+    public void CreatePuppet(Enemy e,int inherit_mul)
+    {
+        GameObject go =  Instantiate(puppet_prefab, e.transform.position, Quaternion.identity);
+        go.GetComponent<PuppetDrone>().InstantiateInit(e, inherit_mul);
+        e.health = 0;
+    }
+
 
 
     #endregion

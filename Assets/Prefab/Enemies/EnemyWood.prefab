@@ -122,15 +122,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
   isAttacking: 0
-  debuffs: []
   damageIncreaseRate: 0
   speedDecreaseRate: 0
+  enemyArt: {fileID: 5141586936701364689}
   attack_target: {fileID: 0}
   dropSkillChance: 0.35
   enemy_debuff_Effect_List:
   - {fileID: 3050942199546623091, guid: 27ac228eb650df44085c001a5aea7866, type: 3}
   - {fileID: 331070572485602313, guid: de0136304d240dd4ea85b38f907d6c49, type: 3}
   - {fileID: 1611423634823840, guid: 5edb65bb19672614a82a3e9e827e8512, type: 3}
+  baseDamage: 0
+  finalDamage: 0
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0

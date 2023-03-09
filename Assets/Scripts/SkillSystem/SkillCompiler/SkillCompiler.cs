@@ -13,20 +13,20 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// </summary>
     /// <param name="Skill_Code"></param>
     /// <param name="ability"></param>
-    public virtual void Compile(SkillConfig skill, TreeAttackModule tree_attack, Ability ability)
+    public virtual void Compile(SkillConfig skill, Ability ability)
     {
         string skill_code = skill.SkillCode;
         current_ability = ability;
         //pre constraint
-        if((skill.reqProjectileType == ReqProjectileType.Bullet) && (tree_attack.Bullet <= 0))
+        if((skill.reqProjectileType == ReqProjectileType.Bullet) && (ability.Bullet <= 0))
         {
             return;
         }
-        else if ((skill.reqProjectileType == ReqProjectileType.Shield) && (tree_attack.Shield <= 0))
+        else if ((skill.reqProjectileType == ReqProjectileType.Shield) && (ability.Shield <= 0))
         {
             return;
         }
-        else if ((skill.reqProjectileType == ReqProjectileType.Both) && ((tree_attack.Shield <= 0) && (tree_attack.Bullet <= 0)))
+        else if ((skill.reqProjectileType == ReqProjectileType.Both) && ((ability.Shield <= 0) && (ability.Bullet <= 0)))
         {
             return;
         }
@@ -39,10 +39,10 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
             switch (words.Length)
             {
                 case 1:
-                    CompileSingleWords(words, tree_attack);
+                    CompileSingleWords(words);
                     break;
                 case 3:
-                    CompileThreeWords(words, tree_attack);
+                    CompileThreeWords(words);
                     break;
             }
         }
@@ -57,16 +57,16 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// if this code sentence only one words
     /// </summary>
     /// <param name="words"></param>
-    private void CompileSingleWords(string[] words, TreeAttackModule tree_attack)
+    private void CompileSingleWords(string[] words)
     {
         
         if(words[0] == "Bullet")
         {
-            tree_attack.Bullet += 1;
+            current_ability.Bullet += 1;
         }
         else if(words[0] == "Shield")
         {
-            tree_attack.Shield += 1;
+            current_ability.Shield += 1;
         }
         else 
         {
@@ -123,7 +123,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// <param name="words"></param>
     /// <param name="treeAttack"></param>
     /// <param name="ability"></param>
-    private int CompileThreeWords(string[] words, TreeAttackModule treeAttack)
+    private int CompileThreeWords(string[] words)
     {
         int result = 0;
         if(words[1] == "=")

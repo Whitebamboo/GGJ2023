@@ -31,7 +31,7 @@ public class Bullet : projectile
         if(other.tag == "Enemy")
         {
             Enemy e = other.gameObject.GetComponentInParent<Enemy>();
-            print(e.name);
+           
             e.TakeBaseDamage(attack);//get a base damage
             ability.ExecSkill(TriggerTime.onHit, e.gameObject);//on hit effect to enemy
             ability.ExecSkill(TriggerTime.onDamage, e.gameObject);
