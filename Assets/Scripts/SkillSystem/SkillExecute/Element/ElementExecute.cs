@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElementExecute : SkillExecute
 {
-    public int num;
+   
     public float baseAttributeRestraintMultiplier = 1.3f;
     public List<ElementsType> RestraintElement;
     public override void onDamageExec(GameObject target)

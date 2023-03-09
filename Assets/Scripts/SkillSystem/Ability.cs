@@ -30,6 +30,12 @@ public class Ability : Container
                     s.onCreateExec(target);
                 }
                 break;
+            case TriggerTime.onCompile:
+                foreach (SkillExecute s in Aspects())
+                {
+                    s.OnCompileExec(target);
+                }
+                break;
             case TriggerTime.After_onHit:
                 foreach (SkillExecute s in Aspects())
                 {

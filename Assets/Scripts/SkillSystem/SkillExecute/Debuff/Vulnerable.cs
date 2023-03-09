@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Vulnerable : DebuffExecute
 {
+    public int growthLayer;
     public Vulnerable()
     {
         num = 1;
@@ -17,19 +18,21 @@ public class Vulnerable : DebuffExecute
         base.onHitExec(target);
         Enemy e = target.GetComponentInParent<Enemy>();
         VulnerableDebuff vulnerableDebuff = e.debuffContainer.GetAspect<VulnerableDebuff>();
+        float final_value = num * layer * value * 0.01f * growthLayer;
         if (vulnerableDebuff == null)
         {
             //create a new instance
-            vulnerableDebuff = new VulnerableDebuff(num * layer * value * 0.01f, time);
+            vulnerableDebuff = new VulnerableDebuff(final_value, time);
             e.debuffContainer.AddAspect<VulnerableDebuff>(vulnerableDebuff);
             vulnerableDebuff.OnApply(e);
         }
         else
         {
             //rewrite old instance
-            vulnerableDebuff.value = num * layer * value * 0.01f;
+            vulnerableDebuff.value = final_value;
             vulnerableDebuff.times = time;
             vulnerableDebuff.OnApply(e);
         }
+        //print("vulnerable layer num : " + final_value);
     }
 }

@@ -14,12 +14,13 @@ public class VulnerableDebuff : Debuff
     {
         base.OnApply(enemy);
         enemy.damageIncreaseRate = value;
-
+        enemy.GetComponentInChildren<DebuffEffectManager>().CreateEffect(DebuffType.Vulnerable);
     }
 
     public override void OnRemove(Enemy enemy)
     {
         base.OnRemove(enemy);
         enemy.damageIncreaseRate = 0;
+        enemy.GetComponentInChildren<DebuffEffectManager>().RemoveEffect(DebuffType.Vulnerable);
     }
 }

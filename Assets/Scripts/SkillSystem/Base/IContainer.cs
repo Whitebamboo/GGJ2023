@@ -44,7 +44,15 @@ public class Container : IContainer
     public T AddAspect<T>(T aspect, string key = null) where T : IAspect
     {
         key = key ?? typeof(T).Name;
-        aspects.Add(key, aspect);
+        if (aspects.ContainsKey(key))
+        {
+            aspects[key] = aspect;
+        }
+        else 
+        {
+            aspects.Add(key, aspect);
+        }
+        
         aspect.container = this;
         return aspect;
 

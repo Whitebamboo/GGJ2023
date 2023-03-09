@@ -8,7 +8,7 @@ public class SkillExecute : Aspect
 
 
     /// <summary>
-    /// on create trigger
+    /// on each bullet or shield create trigger
     /// </summary>
     /// <param name="target"></param>
     public virtual void onCreateExec(GameObject target)
@@ -41,6 +41,15 @@ public class SkillExecute : Aspect
     public virtual void AfterOnHitExec(GameObject target)
     {
 
+    }
+
+    /// <summary>
+    /// a function will be call after all compile finished
+    /// </summary>
+    /// <param name="target"></param>
+    public virtual void OnCompileExec(GameObject target)
+    {
+        
     }
 
 

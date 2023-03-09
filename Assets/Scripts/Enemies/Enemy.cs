@@ -40,10 +40,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float dropSkillChance = 0.3f;
 
 
-    public List<GameObject> enemy_debuff_Effect_List = new List<GameObject>();
-    public Dictionary<ElementsType, GameObject> enemy_had_effect = new Dictionary<ElementsType, GameObject>();
-
-
     public float baseDamage = 0;//each on hit has a base damage
     public float finalDamage = 0;//the final damage it take's base on a series of execute
     // Start is called before the first frame update

@@ -15,6 +15,12 @@ public class TreeAttackModule : MonoBehaviour
     public Dictionary<long, Ability> abilityCombination = new Dictionary<long, Ability>();
     private int bullet_num = 0;
     private int shield_num = 0;
+
+    //ability
+    public Ability new_ability;
+
+    //Buff value
+    public BuffContainer buffContainer = new BuffContainer();
     private void Start()
     {
         //for test
@@ -32,6 +38,7 @@ public class TreeAttackModule : MonoBehaviour
         {
             ProcessTreeNodes(ts);
         }
+        BuffCountDown();
     }
 
 
@@ -54,7 +61,7 @@ public class TreeAttackModule : MonoBehaviour
             }
         }
         long com_num = GetAbilityCombinationNumber(turn_skill);
-        Ability new_ability;
+  
         if (abilityCombination.ContainsKey(com_num))
         {
             new_ability = abilityCombination[com_num];
@@ -74,8 +81,17 @@ public class TreeAttackModule : MonoBehaviour
             abilityCombination.Add(com_num, new_ability);
             //print("new ability combination" + com_num);
         }
+
+        //all on compile event
+        new_ability.ExecSkill(TriggerTime.onCompile, this.gameObject);
+
+        //after ability compile 
+        //compile all buff
+        BuffCompileRepeat();
+        //end compile buff
         bullet_num = new_ability.Bullet;
         shield_num = new_ability.Shield;
+
         //TODO Lauch 
         List<Vector3> lauch_dir = FindClosestEnemyPosition(Bullet);
         for (int i = 0; i < bullet_num; i++)
@@ -96,6 +112,57 @@ public class TreeAttackModule : MonoBehaviour
         //print("shield num: " + shield_num);
     }
 
+    /// <summary>
+    /// when compile some buff will do something
+    /// </summary>
+    private void BuffCompileRepeat()
+    {
+        foreach(Buff b in buffContainer.Aspects())
+        {
+            if(b.times > 0)
+            {
+                b.OnCompileRepeat(this);
+                //after repeat
+                if (b.times <= 0)
+                {
+                    b.OnRemove(this);
+                }
+            }
+           
+        }
+    }
+
+    /// <summary>
+    /// work in update each time interval , minus times
+    /// </summary>
+    public void BuffCountDown()
+    {
+        foreach (Buff b in buffContainer.Aspects())
+        {
+            if(b.times > 0)
+            {
+                b.coolDown -= Time.deltaTime;
+                if (b.coolDown <= 0)
+                {
+                    b.times -= 1;
+                    if (b.times <= 0)
+                    {
+                        b.OnRemove(this);
+                    }
+                    b.coolDown += b.configInterval;
+                }
+            }
+         
+
+        }
+    }
+
+
+    /// <summary>
+    /// get a specific prime number to sign the ability
+    /// </summary>
+    /// <param name="skills"></param>
+    /// <returns></returns>
     private long GetAbilityCombinationNumber(List<SkillConfig> skills)
     {
         long result = 1;

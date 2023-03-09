@@ -62,6 +62,7 @@ public class Tree : CSingletonMono<Tree>
     /// <param name="heal"></param>
     public void GetHeal(float heal)
     {
+        heal = Mathf.Abs(heal);
         Health += heal;
         Health = Mathf.Clamp(Health, 0, initHealth);
         GetComponentInChildren<HPBar>().UpdateHP(Health);

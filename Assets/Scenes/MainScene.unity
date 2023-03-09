@@ -12088,7 +12088,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
   - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
   - {fileID: 11400000, guid: d2c9714f037aa0b4ba6d40e18b7c5131, type: 2}
-  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+  - {fileID: 11400000, guid: 65bb7b27ef2ede4438548e0a321bed63, type: 2}
+  - {fileID: 11400000, guid: 50412035a419b634789428299333e335, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
     type: 3}
