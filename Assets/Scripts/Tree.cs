@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Tree : CSingletonMono<Tree>
 {
     public float Health;
+    private float initHealth;
     public float NetworkProcessInterval;
 
     private float processTimer;
@@ -36,7 +37,7 @@ public class Tree : CSingletonMono<Tree>
     private void Init()
     {
         ProcessingStart = true;
-
+        initHealth = Health;
         NetworkModule = new TreeNetworkModule();
         TreeNode bulletNode = new TreeNode(defaultSkill);
         TreeNode sheidNode = new TreeNode(defaultSkill2);
@@ -54,6 +55,19 @@ public class Tree : CSingletonMono<Tree>
         Health -= damage;
         GetComponentInChildren<HPBar>().UpdateHP(Health);
     }
+
+    /// <summary>
+    /// vampire or other's healing
+    /// </summary>
+    /// <param name="heal"></param>
+    public void GetHeal(float heal)
+    {
+        Health += heal;
+        Health = Mathf.Clamp(Health, 0, initHealth);
+        GetComponentInChildren<HPBar>().UpdateHP(Health);
+
+    }
+
     private void Update()
     {
         if (ProcessingStart)
@@ -128,7 +142,8 @@ public class Tree : CSingletonMono<Tree>
         }
         //print(text);
 
-        AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        //TODO unlock
+        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 

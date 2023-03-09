@@ -59,8 +59,11 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     /// <param name="words"></param>
     private void CompileSingleWords(string[] words)
     {
-        
-        if(words[0] == "Bullet")
+        if(words[0] == "")
+        {
+            return;
+        }
+        else if(words[0] == "Bullet")
         {
             current_ability.Bullet += 1;
         }

@@ -6178,7 +6178,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336114400}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e412f349212461e48ad1ae00179de507, type: 3}
   m_Name: 
@@ -12085,11 +12085,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ns:
   - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
-  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
-  - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
-  - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
-  - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
-  - {fileID: 11400000, guid: 54aea2797c307594c8d97fa021c357f8, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+  - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
+  - {fileID: 11400000, guid: d2c9714f037aa0b4ba6d40e18b7c5131, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
     type: 3}

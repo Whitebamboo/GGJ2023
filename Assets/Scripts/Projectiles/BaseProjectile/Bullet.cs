@@ -34,9 +34,10 @@ public class Bullet : projectile
            
             e.TakeBaseDamage(attack);//get a base damage
             ability.ExecSkill(TriggerTime.onHit, e.gameObject);//on hit effect to enemy
-            ability.ExecSkill(TriggerTime.onDamage, e.gameObject);
+            ability.ExecSkill(TriggerTime.onDamage, e.gameObject);//calculate final damage
+            e.EnemyAfterOndamageCalCulate();
+            ability.ExecSkill(TriggerTime.After_onHit, e.gameObject);//do after on hit effect
             e.TakeFinalDamage();
-            ability.ExecSkill(TriggerTime.After_onHit, e.gameObject);
             Dead();
         }
     }

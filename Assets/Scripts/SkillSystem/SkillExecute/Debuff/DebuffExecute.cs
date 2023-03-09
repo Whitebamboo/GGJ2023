@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebuffExecute : SkillExecute
 {
-    public int num;//how many this node
+    
     public int layer;//a multiple layer
     public float value = 15;//15%
     public int time = 4;

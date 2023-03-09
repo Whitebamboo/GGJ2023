@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d3a165f31ba7cf418a0d46a35d8ff32, type: 3}
-  m_Name: WoodBase
+  m_Name: WoodVulnerable
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: d196fe63ac9d7894690f91ec4fd0269f, type: 3}
-  name: Wood
-  id: 1011
-  PrimeId: 37
+  name: Wilt
+  id: 1012
+  PrimeId: 41
   unlock_Req: 
-  description: 1 Wood
+  description: Causes 10% increased damage taken per 1 unit of Wood element.
   skilltype: 1
   reqProjectileType: 1
-  triggerType: 1
-  SkillCode: Wood;
-  compile_Order: 1
+  triggerType: 0
+  SkillCode: Vulnerable;Vulnerable.layer = Wood.num
+  compile_Order: 3

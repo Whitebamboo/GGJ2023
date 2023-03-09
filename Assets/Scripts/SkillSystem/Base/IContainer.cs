@@ -86,5 +86,10 @@ public interface IAspect
 public class Aspect : IAspect
 {
     public IContainer container { get ; set ; }
+
+    public void print(string s)
+    {
+        Debug.Log(s);
+    }
 }
 

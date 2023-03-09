@@ -30,8 +30,8 @@ public class Enemy : MonoBehaviour
 
     //debuff
     public DebuffContainer debuffContainer = new DebuffContainer();
-    public float damageIncreaseRate = 0;
-    public float speedDecreaseRate = 0;
+    public float damageIncreaseRate = 0;//(0,1)
+    public float speedDecreaseRate = 0;//(0,1)
 
 
 
@@ -79,12 +79,20 @@ public class Enemy : MonoBehaviour
         finalDamage = damage;
     }
 
+    /// <summary>
+    /// a calulation made after bullet ondamage finished,include vulnerable or other
+    /// </summary>
+    public void EnemyAfterOndamageCalCulate()
+    {
+        finalDamage *= (1 + damageIncreaseRate);//vulnerable 
+    }
 
     /// <summary>
     /// after all calculation do this damage
     /// </summary>
     public void TakeFinalDamage()
     {
+       
         if(finalDamage < baseDamage)
         {
             TakeDamage(finalDamage, DmgType.EnemyWeak);
