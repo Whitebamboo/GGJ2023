@@ -42,7 +42,13 @@ public class Ability : Container
                     s.AfterOnHitExec(target);
                 }
                 break;
-            //TODO
+            case TriggerTime.onDead:
+                foreach (SkillExecute s in Aspects())
+                {
+                    s.OnDeadExec(target);
+                }
+                break;
+                //TODO
 
 
 

@@ -63,6 +63,7 @@ public class Tree : CSingletonMono<Tree>
     public void GetHeal(float heal)
     {
         heal = Mathf.Abs(heal);
+        GameManager.instance.dmgTextManager.AddHealText(heal, DmgType.EnemyNormal, transform.position + new Vector3(4,6,0));
         Health += heal;
         Health = Mathf.Clamp(Health, 0, initHealth);
         GetComponentInChildren<HPBar>().UpdateHP(Health);

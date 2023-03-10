@@ -34,6 +34,13 @@ public class DmgTextManager : CSingletonMono<DmgTextManager>
         
     }
 
+
+    /// <summary>
+    /// when get damage
+    /// </summary>
+    /// <param name="dmg"></param>
+    /// <param name="type"></param>
+    /// <param name="pos"></param>
     public void AddDmgText(float dmg, DmgType type, Vector3 pos)
     {
         var dmgInt = (int) dmg;
@@ -60,6 +67,41 @@ public class DmgTextManager : CSingletonMono<DmgTextManager>
         dmgText.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), textLifeTime * 0.8f);
         dmgText.textComponent.DOFade(0, textLifeTime).SetEase(Ease.InCirc).OnComplete(() => OnTextFaded(dmgText));
     }
+
+    /// <summary>
+    /// add healing
+    /// </summary>
+    /// <param name="dmg"></param>
+    /// <param name="type"></param>
+    /// <param name="pos"></param>
+    public void AddHealText(float dmg, DmgType type, Vector3 pos)
+    {
+        var dmgInt = (int)dmg;
+        var dmgString = dmgInt.ToString();
+        DmgText dmgText;
+        int i = texts.FindIndex(text => !text.gameObject.activeSelf && text.dmgType == type);
+        if (i != -1)
+        {
+            dmgText = texts[i];
+            dmgText.gameObject.SetActive(true);
+        }
+        else
+        {
+            var go = CreateTextPrefab(type);
+            go.transform.position = pos;
+            dmgText = go.GetComponent<DmgText>();
+            dmgText.dmgType = type;
+            texts.Add(dmgText);
+        }
+        dmgText.gameObject.transform.position = pos;
+        dmgText.textComponent.text = "+" + dmgString;
+        //dmgText.transform.DOLocalJump(new Vector3(0, 0.2f, 0), 0.1f, 1, textLifeTime);
+        //dmgText.transform.DOLocalMoveY()
+        dmgText.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), textLifeTime * 0.8f);
+        dmgText.textComponent.DOFade(0, textLifeTime).SetEase(Ease.InCirc).OnComplete(() => OnTextFaded(dmgText));
+    }
+
+
 
     private void OnTextFaded(DmgText dmgText)
     {

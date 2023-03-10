@@ -107,7 +107,8 @@ public class Shield : projectile
         if(health <= 0)
         {
             //ondead effect TODO
-            ability.ExecSkill(TriggerTime.onDead, enemy.gameObject);
+            ability.ExecSkill(TriggerTime.onDead, enemy.gameObject);//some ondead effect focus on enemy
+           
             Dead();
             
         }
@@ -119,8 +120,8 @@ public class Shield : projectile
     /// </summary>
     private void Dead()
     {
+        ability.ExecSkill(TriggerTime.onDead, this.gameObject);//some ondead effect focus on it self
         Destroy(this.gameObject);
-        
     }
     #endregion
 }
