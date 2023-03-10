@@ -143,7 +143,7 @@ public class EnemyManager : MonoBehaviour
                     }
                     else if (enemy.attack_target.tag == "Shield")
                     {
-                        enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy);
+                        enemy.attack_target.GetComponent<Shield>().TakeDamage(enemy.attack, enemy);
                     }
                     else if (enemy.attack_target.tag == "Drone")
                     {

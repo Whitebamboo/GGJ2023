@@ -15,14 +15,14 @@ public class Fireball : Bullet
     /// multi methods
     /// </summary>
     /// <param name="b"></param>
-    public void InstantiateInit(Bullet b)
+    public void InstantiateInit(projectile p)
     {
         print("create fire ball");
-        FireballCreator fbc = b.ability.GetAspect<FireballCreator>();
+        FireballCreator fbc = p.ability.GetAspect<FireballCreator>();
         if(fbc != null)
         {
             int count = fbc.num * fbc.layer;
-            attack = b.attack * count * 0.1f;
+            attack = p.attack * count * 0.1f;
             size = size * fbc.sizeMul / 100;
             transform.localScale = transform.localScale * size;
             attack_range = attack_range * fbc.sizeMul / 100;

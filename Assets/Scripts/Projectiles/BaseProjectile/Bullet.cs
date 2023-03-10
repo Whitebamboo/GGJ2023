@@ -5,7 +5,10 @@ using UnityEngine;
 public class Bullet : projectile
 {
 
-
+    private void Update()
+    {
+        Move();
+    }
     #region behavior
 
     public override void InstantiateInit(Ability _ability)

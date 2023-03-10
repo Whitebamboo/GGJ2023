@@ -47,4 +47,5 @@ public enum TriggerTime
     onCreate,
     onCompile,
     onGetHit,
+    onDead,
 }

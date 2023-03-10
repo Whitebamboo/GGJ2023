@@ -12084,16 +12084,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ns:
-  - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
-  - {fileID: 11400000, guid: 6da087eff386e2948939a0ffb9831e56, type: 2}
+  - {fileID: 11400000, guid: 89568eb7e73ddea4c9342ec19a43ce9d, type: 2}
+  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
   - {fileID: 11400000, guid: 220f900cd062e994f80c919b40210a24, type: 2}
-  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
-  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
-  - {fileID: 11400000, guid: 0e213d07406c33741bb7b0702a482d7c, type: 2}
-  - {fileID: 11400000, guid: 5614d708df5c21d41a9fbc3188c3287c, type: 2}
-  - {fileID: 11400000, guid: 5614d708df5c21d41a9fbc3188c3287c, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
+    type: 3}
+  shield_prefab: {fileID: 5312936944774059596, guid: fc48cad2dd5439d4b8290ca7c1913836,
     type: 3}
   puppet_prefab: {fileID: 5360953320062156503, guid: 3efab36207d894c40b7bb4763daea4d7,
     type: 3}

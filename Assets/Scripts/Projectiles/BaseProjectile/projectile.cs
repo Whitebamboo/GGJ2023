@@ -16,11 +16,7 @@ public class projectile : MonoBehaviour
     public TreeAttackModule treeAttackModule;
 
   
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-    }
+  
 
     #region behavior
     public virtual void InstantiateInit(Ability _ability)

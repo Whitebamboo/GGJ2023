@@ -22,11 +22,11 @@ public class FireballCreator : SkillExecute
         base.onCreateExec(target);
         print("speed "+speedMul);
         print("size " + sizeMul);
-        Bullet b = target.GetComponent<Bullet>();
+        projectile p = target.GetComponent<projectile>();
         TreeAttackModule tam = GameObject.FindObjectOfType<TreeAttackModule>();
-        if(b && b.ability.GetAspect<Fire>() != null)
+        if(p && p.ability.GetAspect<Fire>() != null)
         {
-            tam.CreateFireball(b);
+            tam.CreateFireball(p);
         }
         
     }

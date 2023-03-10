@@ -12,6 +12,7 @@ public class TreeAttackModule : MonoBehaviour
     //real variable
     public Transform spawnPoint;
     public GameObject bullet_prefab;
+    public GameObject shield_prefab;
     public Dictionary<long, Ability> abilityCombination = new Dictionary<long, Ability>();
     private List<Vector3> lauch_dir;
     private int bullet_num = 0;
@@ -102,8 +103,17 @@ public class TreeAttackModule : MonoBehaviour
             b.InstantiateInit(new_ability);
             b.StartMove(lauch_dir[i] - spawnPoint.position);
 
-            print(b.gameObject);
+            //print(b.gameObject);
             new_ability.ExecSkill(TriggerTime.onCreate, b.gameObject);
+        }
+        lauch_dir = FindClosestEnemyPosition(Shield);
+        for(int i= 0; i < shield_num; i++)
+        {
+            GameObject shield_obj = Instantiate(shield_prefab, spawnPoint);
+            Shield s = shield_obj.GetComponent<Shield>();
+            s.InstantiateInit(new_ability);
+            s.StartMove(lauch_dir[i] - spawnPoint.position);
+            new_ability.ExecSkill(TriggerTime.onCreate, s.gameObject);
         }
 
 
@@ -255,11 +265,11 @@ public class TreeAttackModule : MonoBehaviour
     }
 
     public GameObject fireball_prefab;
-    public void CreateFireball(Bullet b)
+    public void CreateFireball(projectile p)
     {
         GameObject go = Instantiate(fireball_prefab, spawnPoint.position, Quaternion.identity);
-        go.GetComponent<Fireball>().InstantiateInit(b);
-        go.GetComponent<Fireball>().StartMove(b.move_direction);
+        go.GetComponent<Fireball>().InstantiateInit(p);
+        go.GetComponent<Fireball>().StartMove(p.move_direction);
     }
 
     #endregion

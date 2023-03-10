@@ -19,7 +19,7 @@ MonoBehaviour:
   unlock_Req: 
   description: 1 Fire element
   skilltype: 1
-  reqProjectileType: 1
+  reqProjectileType: 3
   triggerType: 1
   SkillCode: Fire
   compile_Order: 1
