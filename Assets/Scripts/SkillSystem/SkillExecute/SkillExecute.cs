@@ -52,5 +52,22 @@ public class SkillExecute : Aspect
         
     }
 
+    /// <summary>
+    /// when enemies hit u 
+    /// </summary>
+    /// <param name="target"></param>
+    public virtual void OnGetHitExec(GameObject target)
+    {
+
+    }
+
+    /// <summary>
+    /// when this object dead
+    /// </summary>
+    /// <param name="target"></param>
+    public virtual void OnDeadExec(GameObject target)
+    {
+
+    }
 
 }

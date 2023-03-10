@@ -82,10 +82,11 @@ public class Shield : projectile
     /// <param name="damage"></param>
     public void TakeDamage(float damage,Enemy enemy)
     {
+        //print("exit health :" + health);
         ElementsType enemy_type = enemy.element;
         if (start_get_damge)
         {
-            ability.ExecSkill(TriggerTime.onHit, enemy.gameObject);
+            ability.ExecSkill(TriggerTime.onGetHit, enemy.gameObject);
             health -= Mathf.Floor(damage);
             CheckDead(enemy);//self dead
         }

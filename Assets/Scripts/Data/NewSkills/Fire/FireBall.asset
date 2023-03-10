@@ -19,7 +19,7 @@ MonoBehaviour:
   unlock_Req: 
   description: create a fireball
   skilltype: 1
-  reqProjectileType: 3
+  reqProjectileType: 1
   triggerType: 3
   SkillCode: FireballCreator;FireballCreator.layer = Fire.num
-  compile_Order: 2
+  compile_Order: 3

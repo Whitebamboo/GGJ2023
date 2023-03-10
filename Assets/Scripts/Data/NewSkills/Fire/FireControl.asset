@@ -19,7 +19,7 @@ MonoBehaviour:
   unlock_Req: 
   description: Fireball's speed lower 20%
   skilltype: 1
-  reqProjectileType: 3
+  reqProjectileType: 1
   triggerType: 3
   SkillCode: FireballCreator.speedMul -= 40; FireballCreator.sizeMul += 40;
-  compile_Order: 3
+  compile_Order: 4
