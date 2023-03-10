@@ -56,7 +56,7 @@ public class SkillExecute : Aspect
     /// when enemies hit u 
     /// </summary>
     /// <param name="target"></param>
-    public virtual void OnGetHitExec(GameObject target)
+    public virtual void OnGetHitExec(GameObject target,float damage)
     {
 
     }

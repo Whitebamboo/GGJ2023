@@ -12087,6 +12087,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89568eb7e73ddea4c9342ec19a43ce9d, type: 2}
   - {fileID: 11400000, guid: 0d69680937cf2464186e921accbf3ef2, type: 2}
   - {fileID: 11400000, guid: 24c5056df58b1c14789a53ec549e8b14, type: 2}
+  - {fileID: 11400000, guid: 1107ef6410068ec48b0f614e513fb28c, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
     type: 3}

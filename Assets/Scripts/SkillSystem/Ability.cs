@@ -48,5 +48,18 @@ public class Ability : Container
 
         }
     }
+
+    public void ExecSkill(TriggerTime trigger, GameObject target, float damage)
+    {
+        switch (trigger)
+        {
+            case TriggerTime.onGetHit:
+                foreach (SkillExecute s in Aspects())
+                {
+                    s.OnGetHitExec(target,damage);
+                }
+                break;
+        }
+    }
     #endregion
 }

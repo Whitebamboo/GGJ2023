@@ -81,7 +81,7 @@ public class TreeAttackModule : MonoBehaviour
             }
 
             abilityCombination.Add(com_num, new_ability);
-            //print("new ability combination" + com_num);
+            print("new ability combination" + com_num);
         }
 
         //all on compile event

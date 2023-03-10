@@ -86,7 +86,7 @@ public class Shield : projectile
         ElementsType enemy_type = enemy.element;
         if (start_get_damge)
         {
-            ability.ExecSkill(TriggerTime.onGetHit, enemy.gameObject);
+            ability.ExecSkill(TriggerTime.onGetHit, enemy.gameObject, damage);
             health -= Mathf.Floor(damage);
             CheckDead(enemy);//self dead
         }

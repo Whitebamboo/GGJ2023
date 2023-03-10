@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CounterBlow
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 93b698610632d2347a41d964aa168284, type: 3}
-  name: Heavy
-  id: 1026
-  PrimeId: 107
+  name: Thorn
+  id: 1028
+  PrimeId: 113
   unlock_Req: 
-  description: shield hp +4
+  description: counterblow +30%
   skilltype: 1
   reqProjectileType: 2
-  triggerType: 3
-  SkillCode: ShieldValue.health += 4
+  triggerType: 5
+  SkillCode: Thorn
   compile_Order: 1
