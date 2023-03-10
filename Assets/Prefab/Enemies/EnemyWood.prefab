@@ -114,14 +114,19 @@ MonoBehaviour:
   text: {fileID: 3988426076766956893}
   model: {fileID: 7299239665937465516}
   droppedSkills:
-  - {fileID: 11400000, guid: 301eaf2e47464634f85c30cc3e4e747e, type: 2}
-  - {fileID: 11400000, guid: 832a3fd7add3e9d429eea7be97ecaa2e, type: 2}
-  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: 12e0fc6f8f863a343825b8bd77b13cf2, type: 2}
-  - {fileID: 11400000, guid: 6ea0666232d89094f91e7e31e45b74bf, type: 2}
-  - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
-  - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
+  - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
+  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
+  - {fileID: 11400000, guid: 6da087eff386e2948939a0ffb9831e56, type: 2}
+  - {fileID: 11400000, guid: 54aea2797c307594c8d97fa021c357f8, type: 2}
+  - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
+  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
+  - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
+  - {fileID: 11400000, guid: 596790e8501c60e44887d971becbf4da, type: 2}
+  - {fileID: 11400000, guid: 65bb7b27ef2ede4438548e0a321bed63, type: 2}
+  - {fileID: 11400000, guid: 50412035a419b634789428299333e335, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+  - {fileID: 11400000, guid: d2c9714f037aa0b4ba6d40e18b7c5131, type: 2}
+  - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
   isAttacking: 0
   damageIncreaseRate: 0
   speedDecreaseRate: 0

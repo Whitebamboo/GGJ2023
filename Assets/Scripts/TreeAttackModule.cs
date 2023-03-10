@@ -13,6 +13,7 @@ public class TreeAttackModule : MonoBehaviour
     public Transform spawnPoint;
     public GameObject bullet_prefab;
     public Dictionary<long, Ability> abilityCombination = new Dictionary<long, Ability>();
+    private List<Vector3> lauch_dir;
     private int bullet_num = 0;
     private int shield_num = 0;
 
@@ -93,13 +94,16 @@ public class TreeAttackModule : MonoBehaviour
         shield_num = new_ability.Shield;
 
         //TODO Lauch 
-        List<Vector3> lauch_dir = FindClosestEnemyPosition(Bullet);
+        lauch_dir = FindClosestEnemyPosition(Bullet);
         for (int i = 0; i < bullet_num; i++)
         {
             GameObject bullet_obj = Instantiate(bullet_prefab, spawnPoint);
             Bullet b = bullet_obj.GetComponent<Bullet>();
             b.InstantiateInit(new_ability);
             b.StartMove(lauch_dir[i] - spawnPoint.position);
+
+            print(b.gameObject);
+            new_ability.ExecSkill(TriggerTime.onCreate, b.gameObject);
         }
 
 
@@ -250,7 +254,13 @@ public class TreeAttackModule : MonoBehaviour
         e.health = 0;
     }
 
-
+    public GameObject fireball_prefab;
+    public void CreateFireball(Bullet b)
+    {
+        GameObject go = Instantiate(fireball_prefab, spawnPoint.position, Quaternion.identity);
+        go.GetComponent<Fireball>().InstantiateInit(b);
+        go.GetComponent<Fireball>().StartMove(b.move_direction);
+    }
 
     #endregion
 

@@ -14,7 +14,11 @@ public class VulnerableDebuff : Debuff
     {
         base.OnApply(enemy);
         enemy.damageIncreaseRate = value;
-        enemy.GetComponentInChildren<DebuffEffectManager>().CreateEffect(DebuffType.Vulnerable);
+        if(value > 0)
+        {
+            enemy.GetComponentInChildren<DebuffEffectManager>().CreateEffect(DebuffType.Vulnerable);
+        }
+        
     }
 
     public override void OnRemove(Enemy enemy)

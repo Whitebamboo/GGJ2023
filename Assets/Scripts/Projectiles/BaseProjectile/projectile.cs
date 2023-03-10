@@ -31,7 +31,7 @@ public class projectile : MonoBehaviour
 
     }
 
-    private void Move()
+    public virtual void Move()
     {
         if (canMove)
         {

@@ -51,3 +51,6 @@ MonoBehaviour:
   - debuffType: 2
     effects_prefab: {fileID: 1611423634823840, guid: 5edb65bb19672614a82a3e9e827e8512,
       type: 3}
+  - debuffType: 1
+    effects_prefab: {fileID: 3050942199546623091, guid: 27ac228eb650df44085c001a5aea7866,
+      type: 3}

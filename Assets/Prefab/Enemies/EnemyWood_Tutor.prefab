@@ -114,7 +114,7 @@ MonoBehaviour:
   text: {fileID: 3988426076766956893}
   model: {fileID: 7299239665937465516}
   droppedSkills:
-  - {fileID: 11400000, guid: 301eaf2e47464634f85c30cc3e4e747e, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
   isAttacking: 0
   damageIncreaseRate: 0
   speedDecreaseRate: 0

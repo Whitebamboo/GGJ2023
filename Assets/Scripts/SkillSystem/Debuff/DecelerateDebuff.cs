@@ -14,7 +14,11 @@ public class DecelerateDebuff : Debuff
     {
         base.OnApply(enemy);
         enemy.speedDecreaseRate = value;
-        enemy.GetComponentInChildren<DebuffEffectManager>().CreateEffect(DebuffType.Decelerate);
+        if(value > 0)
+        {
+            enemy.GetComponentInChildren<DebuffEffectManager>().CreateEffect(DebuffType.Decelerate);
+        }
+       
     }
 
     public override void OnRemove(Enemy enemy)

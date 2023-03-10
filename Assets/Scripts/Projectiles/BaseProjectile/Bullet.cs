@@ -19,7 +19,7 @@ public class Bullet : projectile
         transform.rotation = Quaternion.FromToRotation(transform.right, move_direction);
   
         //trigger onCreate 
-        ability.ExecSkill(TriggerTime.onCreate, treeAttackModule.gameObject);
+        //ability.ExecSkill(TriggerTime.onCreate, treeAttackModule.gameObject);//dont put it here maybe ,hard to manage
     }
 
     /// <summary>
