@@ -107,7 +107,7 @@ public class WeightedRandomGenerator<T>
             weightsum += softmax_weight;
             if(e.Weight > r)
             {
-                Debug.Log("edge weight" + e.Weight + "random num" + r);
+                //Debug.Log("edge weight" + e.Weight + "random num" + r);
                 return e.Item;
             }
             

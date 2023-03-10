@@ -39,7 +39,7 @@ public class GameManager : CSingletonMono<GameManager>
 
     public void ProcessDropItemList(List<SkillConfig> skills, float dropChance)
     {
-        Debug.Log("Add Items!!!!");
+        //Debug.Log("Add Items!!!!");
 
         if(skills == null || skills.Count == 0)
         {

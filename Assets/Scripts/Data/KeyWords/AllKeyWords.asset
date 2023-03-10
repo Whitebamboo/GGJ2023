@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c48e9b28c778b4fb05e2519f9e5e99, type: 3}
+  m_Name: AllKeyWords
+  m_EditorClassIdentifier: 
+  keyWords:
+  - keyWord: Water
+    keyWordValue:
+    - 0
+  - keyWord: Fire
+    keyWordValue:
+    - 0
+  - keyWord: Wood
+    keyWordValue:
+    - 0
+  - keyWord: Thunder
+    keyWordValue:
+    - 0
+  - keyWord: Ice
+    keyWordValue:
+    - 0
+  - keyWord: Deceleration
+    keyWordValue:
+    - 4
+    - 15
+  - keyWord: Puppet
+    keyWordValue:
+    - 1
+  - keyWord: Vulnerable
+    keyWordValue:
+    - 4
+    - 10
+  - keyWord: Vulnerable
+    keyWordValue:
+    - 4
+    - 10
+  - keyWord: Vampire
+    keyWordValue:
+    - 5
+  - keyWord: Growth
+    keyWordValue:
+    - 0
+  - keyWord: Shield
+    keyWordValue:
+    - 4
+    - 15
+  - keyWord: Bullet
+    keyWordValue:
+    - 10
+  - keyWord: CounterAttack
+    keyWordValue:
+    - 5
+  - keyWord: Laser
+    keyWordValue:
+    - 4
+    - 1
+    - 1
+  - keyWord: Cracking
+    keyWordValue:
+    - 2
+  - keyWord: Aggregation
+    keyWordValue:
+    - 1
+  - keyWord: Paralysis
+    keyWordValue:
+    - 4
+    - 30
+  reservedWord:
+  - On
+  - If
+  - Add
+  - +
+  - '-'
+  - '*'
+  - /
+  - ==
+  - '>'
+  - <
+  ValueWord:
+  - Number
+  - Time
+  - Value
+  - Attack
+  - Health

@@ -28,7 +28,7 @@ public class TreeNetworkModule
         foreach(TreeNodeChain chain in chainList)
         {
             generator.AddEntry(chain, chain.GetWeight());
-            Debug.Log("Weight: " + chain.GetWeight());
+            //Debug.Log("Weight: " + chain.GetWeight());
         }
         return generator.GetRandomEntry();
     }
@@ -106,10 +106,10 @@ public class TreeNetworkModule
                     continue;
                 }
 
-                text += node.skillConfig.skilltype + " | ";
+                //text += node.skillConfig.skilltype + " | ";
             }
 
-            Debug.Log(text);
+            //Debug.Log(text);
         }
     }
 

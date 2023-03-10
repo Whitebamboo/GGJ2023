@@ -2,34 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class shield : MonoBehaviour
+public class Shield : projectile
 {
     //Base_attribute
-    public float health_base = 6;
-    private float health = 6;//real health
-    public float health_add = 0;
-    public float health_multiply = 1;
-    public Vector3 move_direction;
-    public float exist_time = 5f;//only exist 5 seconds
-    private float disappear_timer = 0f;
-    public float move_distance = 10f;//only leave 10 m and stop there to be attack by enemy
-    public List<ElementsType> elements_list = new List<ElementsType>();//a list that do not get damage
-    public float size = 1f;
-    public bool isPenetrate = false;
-    public int penetrate_times = 0;//will respawn from dead for each time
-    public bool start_get_damge = false;
-    public GameObject explode_Object;//need attach
-    //a dictionary to restore elements restraint relationship, first item is the element, second will be the elemnts make 1/2 damage
-    private static Dictionary<ElementsType, ElementsType> element_restraint_reverse = new Dictionary<ElementsType, ElementsType>() {
-        {ElementsType.Fire,  ElementsType.Water },
-        {ElementsType.Water, ElementsType.Wood},
-        {ElementsType.Wood, ElementsType.Fire }
-    };
+    public float health = 15;//real health
 
-    ShiledPool shiledPool;
+
+    public float exist_time = 5f;//only exist 5 seconds
+    private float disappear_timer = 0f;//timer count its disappear
+    public float push_distance = 10f;//only leave 10 m and stop there to be attack by enemy
+    public bool start_get_damge = false;//the shield start to get damage and make onhit
+   
+
+
     private void Start()
     {
-        shiledPool = FindObjectOfType<ShiledPool>();
+        
     }
 
     public void Update()
@@ -49,52 +37,28 @@ public class shield : MonoBehaviour
         
     }
 
-
-    /// <summary>
-    /// init
-    /// </summary>
-    public void Init()
+    public override void InstantiateInit(Ability _ability)
     {
+        base.InstantiateInit(_ability);
         start_get_damge = false;
-        disappear_timer = 3f;
-        health = health_base;
-        health_add = 0;
-        health_multiply = 1;
-        
+        disappear_timer = 3;//not start to do the real count down
+        attack = health;
     }
 
-    public void StartMove(Vector3 dir)
+    
+
+    public override void StartMove(Vector3 dir)
     {
+        base.StartMove(dir);
         //rotate
         print("shield start move");
-        
-        dir = dir.normalized;
-        move_direction = dir;
-        //Quaternion.ve
-
-        transform.LookAt(transform.position + dir);
+        transform.LookAt(transform.position + move_direction);
         //transform.rotation = Quaternion.FromToRotation(transform.right, dir);
-        StartCoroutine(PushEnemyMove(dir));
+        StartCoroutine(PushEnemyMove(move_direction));
         //prepare to destroy it self by time
     }
 
 
-    /// <summary>
-    /// initial behavor
-    /// </summary>
-    /// <param name="info"></param>
-    public void SetShieldParameters(ProjectileCreateInfo info)
-    {
-        health_add = info.attack_add;
-        health_multiply = info.attack_multiply;
-        isPenetrate = info.isPenetrate;
-        penetrate_times = info.penetrate;
-        elements_list = info.elements_list;
-        size = info.size;
-
-        //calculate real health
-        health = (health_base + health_add) * health_multiply;
-    }
 
 
     /// <summary>
@@ -104,7 +68,9 @@ public class shield : MonoBehaviour
     /// <returns></returns>
     IEnumerator PushEnemyMove(Vector3 dir)
     {
-        Tween t = transform.DOMove(this.transform.position + dir * move_distance, 1.5f);
+        float push_time = push_distance / speed;
+    
+        Tween t = transform.DOMove(this.transform.position + dir * push_distance, push_time);
         yield return t.WaitForCompletion();
         disappear_timer = exist_time;
         start_get_damge = true;
@@ -116,15 +82,13 @@ public class shield : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage,Enemy enemy)
     {
+        //print("exit health :" + health);
         ElementsType enemy_type = enemy.element;
         if (start_get_damge)
         {
-            if (elements_list.Contains(element_restraint_reverse[enemy_type]))
-            {
-                damage *= 1 / 2;//damage lower
-            }
+            ability.ExecSkill(TriggerTime.onGetHit, enemy.gameObject);
             health -= Mathf.Floor(damage);
-            CheckDead(enemy);
+            CheckDead(enemy);//self dead
         }
        
     }
@@ -133,19 +97,6 @@ public class shield : MonoBehaviour
 
 
     #region dead behavior
-    /// <summary>
-    /// only used in explode
-    /// </summary>
-    /// <param name="target"></param>
-    public void MakeExplodeDamage(GameObject target)
-    {
-        Enemy e = target.GetComponent<Enemy>();
-        //make damage
-        float damage = ((health_base + health_add) * health_multiply);
-        
-        e.TakeDamage(damage / 2, DmgType.EnemyNormal);//make an damge of 1/2 health TODO
-    }
-
 
 
     /// <summary>
@@ -155,20 +106,10 @@ public class shield : MonoBehaviour
     {
         if(health <= 0)
         {
-
-            //ondead effect
-            CallOnDeadEffect(enemy);
-            if (isPenetrate && (penetrate_times > 0))
-            {
-                health = (health_base + health_add) * health_multiply;
-                penetrate_times -= 1;
-                disappear_timer = exist_time;
-                //print("shield respawn");
-            }
-            else
-            {
-                Dead();
-            }
+            //ondead effect TODO
+            ability.ExecSkill(TriggerTime.onDead, enemy.gameObject);
+            Dead();
+            
         }
     }
 
@@ -178,24 +119,8 @@ public class shield : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        //Destroy(this.gameObject);
-        shiledPool.PoolDead(this.gameObject);
-    }
-
-    /// <summary>
-    /// shield effect happen on dead
-    /// </summary>
-    private void CallOnDeadEffect(Enemy enemy)
-    {
-        List<OnDeadEffect> ondead_list = new List<OnDeadEffect>(GetComponents<OnDeadEffect>());
-        if (ondead_list.Count == 0)
-        {
-            return;
-        }
-        foreach (OnDeadEffect ondeadComponent in ondead_list)
-        {
-            ondeadComponent.OnDeadBehavior(enemy);//an onhit behavior will be override later
-        }
+        Destroy(this.gameObject);
+        
     }
     #endregion
 }

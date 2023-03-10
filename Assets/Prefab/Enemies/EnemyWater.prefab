@@ -38,6 +38,7 @@ Transform:
   - {fileID: 41074463153290647}
   - {fileID: 4473553499710618804}
   - {fileID: 4031071327145115589}
+  - {fileID: 4394753150289073925}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,24 +114,26 @@ MonoBehaviour:
   text: {fileID: 6338116893421868402}
   model: {fileID: 2342839290254779261}
   droppedSkills:
-  - {fileID: 11400000, guid: 1f9d69577253f0a44bca7cd9ff4d94fd, type: 2}
-  - {fileID: 11400000, guid: 6fb4afd897bae4f46a58de8698b7a583, type: 2}
-  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: f4db4a1897cc214438619136aad33c56, type: 2}
-  - {fileID: 11400000, guid: 19db409b0f6a46d479a143d085ae0c4f, type: 2}
-  - {fileID: 11400000, guid: 19db409b0f6a46d479a143d085ae0c4f, type: 2}
-  - {fileID: 11400000, guid: cf57735b34839e348929625657a8f551, type: 2}
-  - {fileID: 11400000, guid: 832a3fd7add3e9d429eea7be97ecaa2e, type: 2}
+  - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
+  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
+  - {fileID: 11400000, guid: 6da087eff386e2948939a0ffb9831e56, type: 2}
+  - {fileID: 11400000, guid: 54aea2797c307594c8d97fa021c357f8, type: 2}
+  - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
+  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
+  - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
+  - {fileID: 11400000, guid: 596790e8501c60e44887d971becbf4da, type: 2}
+  - {fileID: 11400000, guid: 65bb7b27ef2ede4438548e0a321bed63, type: 2}
+  - {fileID: 11400000, guid: 50412035a419b634789428299333e335, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+  - {fileID: 11400000, guid: d2c9714f037aa0b4ba6d40e18b7c5131, type: 2}
+  - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
   isAttacking: 0
-  debuffs: []
   damageIncreaseRate: 0
   speedDecreaseRate: 0
   attack_target: {fileID: 0}
   dropSkillChance: 0.35
-  enemy_debuff_Effect_List:
-  - {fileID: 3050942199546623091, guid: 27ac228eb650df44085c001a5aea7866, type: 3}
-  - {fileID: 331070572485602313, guid: de0136304d240dd4ea85b38f907d6c49, type: 3}
-  - {fileID: 1611423634823840, guid: 5edb65bb19672614a82a3e9e827e8512, type: 3}
+  baseDamage: 0
+  finalDamage: 0
 --- !u!54 &7379852767426001542
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -566,6 +569,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &2296724846907081437
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1248348678500178740}
+    m_Modifications:
+    - target: {fileID: 2354561411099474767, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_Name
+      value: DebuffManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1101c57a8cb99144ba27950bd78c43e0, type: 3}
+--- !u!4 &4394753150289073925 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2531823026089465304, guid: 1101c57a8cb99144ba27950bd78c43e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2296724846907081437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2964561179165844620
 PrefabInstance:
   m_ObjectHideFlags: 0

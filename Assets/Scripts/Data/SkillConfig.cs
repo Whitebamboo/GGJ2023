@@ -6,22 +6,16 @@ using UnityEngine;
 public class SkillConfig : ScriptableObject
 {
     public Sprite skillImage;
-    public string Description;
+    public string name;
+    public int id;
+    public int PrimeId;//use to create an un repeat combination, if each skill is a prime we can use their multiple value to find a unique combination
+    public string unlock_Req;//a descirption to define when this node unlock
+    public string description;
     public SkillType skilltype = SkillType.Base;
-    //the infomation that we can input
-    public BaseType baseType = BaseType.Attack;
-    //elements_parameters
-    public ElementsType elementType = ElementsType.Fire; 
-    public List<FloatParameters> elements_parameters = new List<FloatParameters>();
-    //BattleCry_parameters
-    public BattleCryBehaviorType battleCryBehaviorType = BattleCryBehaviorType.Buff;
-    public List<StringParameters> battleCryBehavior_parameters = new List<StringParameters>();
-    //onhit behavior
-    public OnHitBehaviorType onHitBehaviorType = OnHitBehaviorType.Explode;
-    public List<FloatParameters> onhit_parameters = new List<FloatParameters>();
-    //Attribute behavior
-    public Attributetype attributetype = Attributetype.AttackOrDefend;
-    public List<FloatParameters> attribute_information = new List<FloatParameters>();
+    public ReqProjectileType reqProjectileType = ReqProjectileType.Bullet;
+    public TriggerTime triggerType = TriggerTime.onHit;
+    public string SkillCode;
+    public int compile_Order;//0,1,2,3,4
    
 
 

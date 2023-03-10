@@ -67,25 +67,32 @@ public class EnemyManager : MonoBehaviour
             }
 
             // handle debuffs
-            enemies.ForEach(enemy =>
-            {
-                enemy.debuffs.ForEach(debuff =>
-                {
-                    debuff.coolDown -= Time.deltaTime;
-                    if (debuff.coolDown <= 0)
-                    {
-                        debuff.OnRepeat(enemy);
-                        debuff.times -= 1;
-                        if (debuff.times == 0)
-                        {
-                            debuff.OnRemove(enemy);
-                        }
 
-                        debuff.coolDown += debuff.configInterval;
+            foreach(Enemy e in enemies)
+            {
+                foreach(Debuff d in e.debuffContainer.Aspects())
+                {
+                    if(d.times > 0)
+                    {
+                        d.coolDown -= Time.deltaTime;
+                        if (d.coolDown <= 0)
+                        {
+                            d.OnRepeat(e);//repeat behavior
+                            d.times -= 1;//exist times
+                            if (d.times == 0)
+                            {
+                                d.OnRemove(e);//remove behavior
+                            }
+
+                            d.coolDown += d.configInterval;
+                        }
                     }
-                });
-                enemy.debuffs.RemoveAll(debuff => debuff.times == 0);
-            });
+           
+                }
+            }
+
+
+          
 
             enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy =>
             {
@@ -105,7 +112,7 @@ public class EnemyManager : MonoBehaviour
                 enemy.model.transform.localScale = new Vector3(localScale.x, localScale.y,
                     Mathf.Abs(localScale.z) * (dir.x < 0 ? -1 : 1));
                 enemy.gameObject.GetComponent<Rigidbody>().velocity =
-                    dir * enemy.speed * Mathf.Clamp01(1 - enemy.speedDecreaseRate / 100);
+                    dir * enemy.speed * Mathf.Clamp01(1 - enemy.speedDecreaseRate);
             });
 
             // update cool down
@@ -136,7 +143,11 @@ public class EnemyManager : MonoBehaviour
                     }
                     else if (enemy.attack_target.tag == "Shield")
                     {
-                        enemy.attack_target.GetComponent<shield>().TakeDamage(enemy.attack, enemy);
+                        enemy.attack_target.GetComponent<Shield>().TakeDamage(enemy.attack, enemy);
+                    }
+                    else if (enemy.attack_target.tag == "Drone")
+                    {
+                        enemy.attack_target.GetComponent<DroneBase>().TakeDamage(enemy.attack, DmgType.EnemyNormal);
                     }
 
                     GameManager.instance.dmgTextManager.AddDmgText(enemy.attack, DmgType.PlayerNormal,
