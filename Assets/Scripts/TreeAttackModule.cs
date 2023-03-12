@@ -96,25 +96,33 @@ public class TreeAttackModule : MonoBehaviour
 
         //TODO Lauch 
         lauch_dir = FindClosestEnemyPosition(Bullet);
-        for (int i = 0; i < bullet_num; i++)
+        if(lauch_dir != null && lauch_dir.Count > 0)
         {
-            GameObject bullet_obj = Instantiate(bullet_prefab, spawnPoint);
-            Bullet b = bullet_obj.GetComponent<Bullet>();
-            b.InstantiateInit(new_ability);
-            b.StartMove(lauch_dir[i] - spawnPoint.position);
+            for (int i = 0; i < bullet_num; i++)
+            {
+                GameObject bullet_obj = Instantiate(bullet_prefab, spawnPoint);
+                Bullet b = bullet_obj.GetComponent<Bullet>();
+                b.InstantiateInit(new_ability);
+                b.StartMove(lauch_dir[i] - spawnPoint.position);
 
-            //print(b.gameObject);
-            new_ability.ExecSkill(TriggerTime.onCreate, b.gameObject);
+                //print(b.gameObject);
+                new_ability.ExecSkill(TriggerTime.onCreate, b.gameObject);
+            }
         }
         lauch_dir = FindClosestEnemyPosition(Shield);
-        for(int i= 0; i < shield_num; i++)
+        if (lauch_dir != null && lauch_dir.Count > 0)
         {
-            GameObject shield_obj = Instantiate(shield_prefab, spawnPoint);
-            Shield s = shield_obj.GetComponent<Shield>();
-            s.InstantiateInit(new_ability);
-            s.StartMove(lauch_dir[i] - spawnPoint.position);
-            new_ability.ExecSkill(TriggerTime.onCreate, s.gameObject);
+            for (int i = 0; i < shield_num; i++)
+            {
+                GameObject shield_obj = Instantiate(shield_prefab, spawnPoint);
+                Shield s = shield_obj.GetComponent<Shield>();
+                s.InstantiateInit(new_ability);
+                s.StartMove(lauch_dir[i] - spawnPoint.position);
+                new_ability.ExecSkill(TriggerTime.onCreate, s.gameObject);
+            }
         }
+        
+     
 
 
 

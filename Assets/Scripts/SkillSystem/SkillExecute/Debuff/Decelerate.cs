@@ -31,5 +31,6 @@ public class Decelerate : DebuffExecute
             decelerateDebuff.times = time;
             decelerateDebuff.OnApply(e);
         }
+        print("decelerate num * layer :" + num * layer);
     }
 }
