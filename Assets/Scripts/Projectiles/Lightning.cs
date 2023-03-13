@@ -5,17 +5,20 @@ using UnityEngine;
 public class Lightning : projectile
 {
     public Vector3 startPoint;
-
+    private Vector3 sectionStartPoint;
+    private List<Vector3> newDir;
+    private Vector3 newTargetPos;
+    private int offset_ind = 0;
     /// <summary>
     /// TODO
     /// </summary>
     /// <param name="e"></param>
     public void InstantiateInit(LightningCreator lt, Enemy e)
     {
-        startPoint = new Vector3(e.transform.position.x, 20, e.transform.position.z);
+        startPoint = new Vector3(e.transform.position.x, 16, e.transform.position.z);
         attack = lt.num * lt.layer * lt.value;//damage;
         move_direction = (e.transform.position - startPoint).normalized;//set moce direction here, dont need to set on other place
-        //move_direction = new Vector3(0, -1, 0);
+       
         speed = 100;
     }
 
@@ -26,23 +29,50 @@ public class Lightning : projectile
 
     public override void Move()
     {
-        float dis = (this.transform.position - startPoint).magnitude;
-        if(dis > 4)
-        {
-            float x = Random.Range(0f, 1f);
-            float change = Random.Range(-0.1f, 0.1f);
-            if (x > 0.8f)
-            {
-                move_direction += new Vector3(change, 0, 0);
-                print("change dir");
-            }
-            startPoint = this.transform.position;
-        }
 
-        
+
         if (canMove)
         {
-            this.transform.position += move_direction.normalized * speed * Time.deltaTime;
+
+
+            if (offset_ind == 0)
+            {
+                this.transform.position += newDir[offset_ind].normalized * speed * Time.deltaTime;
+                if ((this.transform.position - sectionStartPoint).magnitude > 3)
+                {
+                    offset_ind++;
+                    sectionStartPoint = this.transform.position;
+                }
+            }
+            else if (offset_ind == 1)
+            {
+                this.transform.position += newDir[offset_ind].normalized * speed * Time.deltaTime;
+                if ((this.transform.position - sectionStartPoint).magnitude > 4)
+                {
+                    offset_ind++;
+                    //calculate a target point,which is the intersection of two line: a 
+                    newTargetPos = VectorMathUtils.GetIntersection(startPoint, move_direction, transform.position, newDir[offset_ind]);
+                }
+            }
+            else if (offset_ind == 2)
+            {
+                if((transform.position - newTargetPos).magnitude < .5f)
+                {
+                    offset_ind++;
+                }
+                else
+                {
+                    this.transform.position += newDir[offset_ind].normalized * speed * Time.deltaTime;
+                }
+
+            }
+            else
+            {
+                this.transform.position += move_direction.normalized * speed * Time.deltaTime;
+            }
+
+
+
         }
         if (transform.localPosition.magnitude > 1000)//outside screen make it dead
         {
@@ -57,7 +87,13 @@ public class Lightning : projectile
         canMove = true;//start the animation showing a lightning dash down and calculate the damage
         this.transform.position = startPoint;
         transform.rotation = Quaternion.FromToRotation(transform.right, move_direction);
-        //LightningDamage();//start make damage;
+        newDir = new List<Vector3>();
+        float offset = Random.Range(-0.3f, 0.3f);
+        newDir.Add(move_direction + new Vector3(offset, 0, 0));
+        newDir.Add(move_direction + new Vector3(-offset, 0, 0));
+        newDir.Add(move_direction + new Vector3(offset, 0, 0));
+        offset_ind = 0;
+        sectionStartPoint = startPoint;
     }
 
 
