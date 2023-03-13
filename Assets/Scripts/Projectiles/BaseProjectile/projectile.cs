@@ -68,7 +68,7 @@ public class projectile : MonoBehaviour
     /// <summary>
     /// the bullet destroy it self in all situations
     /// </summary>
-    private void Dead()
+    public void Dead()
     {
         Destroy(this.gameObject);
     }

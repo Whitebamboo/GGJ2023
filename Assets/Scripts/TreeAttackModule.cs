@@ -280,6 +280,14 @@ public class TreeAttackModule : MonoBehaviour
         go.GetComponent<Fireball>().StartMove(p.move_direction);
     }
 
+
+    public GameObject lightning_prefab;
+    public void CreateLightning(LightningCreator lt, Enemy e)
+    {
+        GameObject go = Instantiate(lightning_prefab, e.transform.position, Quaternion.identity);
+        go.GetComponent<Lightning>().InstantiateInit(lt, e);
+        go.GetComponent<Lightning>().StartMove(Vector3.zero);//todo maybe change this later;
+    }
     #endregion
 
 

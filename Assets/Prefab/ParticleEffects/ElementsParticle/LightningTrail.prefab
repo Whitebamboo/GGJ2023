@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073809397045529140}
   m_LocalRotation: {x: -1.4210855e-14, y: 0.707107, z: -0.000000029802319, w: 0.70710665}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.013, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1351,7 +1351,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 0.5058824, b: 0.97279084, a: 1}
+        key1: {r: 1, g: 0.9699112, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4060,7 +4060,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 0.4852941, b: 1, a: 1}
+        key1: {r: 1, g: 0.9945871, b: 0.48627448, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4185,7 +4185,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 0.4852941, b: 1, a: 1}
+        key1: {r: 1, g: 0.9857805, b: 0.48627448, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4891,7 +4891,7 @@ GameObject:
   - component: {fileID: 3511508362087596279}
   - component: {fileID: 3511508362087596278}
   m_Layer: 0
-  m_Name: SwordTrailLightningPurple
+  m_Name: LightningTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4905,7 +4905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3511508362087596280}
   m_LocalRotation: {x: 0.000000012344518, y: -0.707107, z: -0.00000004214687, w: 0.70710665}
-  m_LocalPosition: {x: -0, y: -0, z: 0.008}
+  m_LocalPosition: {x: 0, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11208,7 +11208,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 0.15566039, b: 1, a: 1}
+        key1: {r: 1, g: 0.96153504, b: 0.5251572, a: 1}
         key2: {r: 1, g: 0.459, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

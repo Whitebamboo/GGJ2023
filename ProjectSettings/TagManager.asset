@@ -8,6 +8,7 @@ TagManager:
   - Tree
   - Shield
   - Drone
+  - Ground
   layers:
   - Default
   - TransparentFX
