@@ -22,4 +22,4 @@ MonoBehaviour:
   reqProjectileType: 1
   triggerType: 3
   SkillCode: FireballCreator.speedMul -= 40; FireballCreator.sizeMul += 40;
-  compile_Order: 4
+  compile_Order: 5

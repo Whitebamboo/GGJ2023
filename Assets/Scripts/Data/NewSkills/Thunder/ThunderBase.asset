@@ -23,4 +23,4 @@ MonoBehaviour:
   triggerType: 0
   SkillCode: 'Fire.num >= 1 : Water.num >= 1 : Thunder; Fire.num -= 1; Water.num
     -= 1 '
-  compile_Order: 2
+  compile_Order: 3

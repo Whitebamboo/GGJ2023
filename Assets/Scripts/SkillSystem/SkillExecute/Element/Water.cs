@@ -13,4 +13,11 @@ public class Water : ElementExecute
         RestraintElement = new List<ElementsType>();
         RestraintElement.Add(ElementsType.Fire);
     }
+
+    public override void onDamageExec(GameObject target)
+    {
+        base.onDamageExec(target);
+       
+        Debug.Log("do water : "+ num);
+    }
 }

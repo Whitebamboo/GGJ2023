@@ -22,4 +22,4 @@ MonoBehaviour:
   reqProjectileType: 1
   triggerType: 0
   SkillCode: Decelerate; Decelerate.layer = Water.num
-  compile_Order: 3
+  compile_Order: 4

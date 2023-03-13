@@ -22,4 +22,4 @@ MonoBehaviour:
   reqProjectileType: 3
   triggerType: 4
   SkillCode: Growth
-  compile_Order: 2
+  compile_Order: 3

@@ -7,5 +7,5 @@ public enum DebuffType
     Decelerate,
     Burn,
     Vulnerable,
-    
+    Paralysis,
 }

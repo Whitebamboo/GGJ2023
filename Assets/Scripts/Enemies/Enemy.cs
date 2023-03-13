@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour
     public DebuffContainer debuffContainer = new DebuffContainer();
     public float damageIncreaseRate = 0;//(0,1)
     public float speedDecreaseRate = 0;//(0,1)
+    public float paralysisRate = 0;//(0,1) probablity that enemy may do nothing(no moving or atk, each second) TODO
 
-
+    //debuff end
 
     public GameObject attack_target = null;
 
