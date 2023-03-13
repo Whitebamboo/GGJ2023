@@ -30,9 +30,53 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
         {
             return;
         }
+
+
+
         //start parsing string
+
+        //first check if there are : if branches
+        if (skill_code.Contains(":"))
+        {
+            string[] branches = skill_code.Split(":"); //may be a == b : c == d : a += b; a += c;
+            string ExecuteLinearCode = branches[branches.Length - 1];//a += b; a += c;
+            int j = 0;//branch index need all to be true 
+            while (j != branches.Length - 1)
+            {
+                if (CompileBranch(branches[j]))
+                {
+                    j++;
+                    if (j == branches.Length - 1)
+                    {
+                        print("satisfice compile : " + ExecuteLinearCode);
+                        CompileExecuteCode(ExecuteLinearCode);
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            CompileExecuteCode(skill_code);
+        }
+
+
+       
+        //test 
+
+    }
+
+    /// <summary>
+    /// compile the code that execute
+    /// </summary>
+    /// <param name="skill_code"></param>
+    public void CompileExecuteCode(string skill_code)
+    {
         string[] skill_sentences = skill_code.Split(";");
-        for(int i = 0; i < skill_sentences.Length; i++)
+        for (int i = 0; i < skill_sentences.Length; i++)
         {
             string code_sentence = skill_sentences[i].Trim();
             string[] words = code_sentence.Split(" ");
@@ -45,11 +89,113 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
                     CompileThreeWords(words);
                     break;
             }
+
+
         }
-        //test
-      
+    }
+
+    #region branches if else if
+
+
+    /// <summary>
+    /// if branches compile
+    /// </summary>
+    /// <param name="branchString"></param>
+    /// <returns></returns>
+    private bool CompileBranch(string branchString)
+    {
+
+        branchString = branchString.Trim();
+        string[] words = branchString.Split(" ");
+        switch (words.Length)
+        {
+            case 1:
+                break;
+            case 3:
+                return CompileBranchesWithThreeWords(words);
+               
+        }
+        return false;
+    }
+
+
+    /// <summary>
+    /// branch support == >= <= > < 
+    /// </summary>
+    /// <param name="words"></param>
+    /// <returns></returns>
+    private bool CompileBranchesWithThreeWords(string[] words)
+    {
+        string[] left_variables = words[0].Split(".");
+        string[] right_variables = words[2].Split(".");
+        string left_field_value = "";
+        if(left_variables.Length == 2)
+        {
+            left_field_value = GetValue(left_variables[0], left_variables[1]).ToString();
+            if (left_field_value == "0")
+            {
+                //dont have this skill in ability
+                return false;
+            }
+        }
+        else if(left_variables.Length == 1)
+        {
+            left_field_value = words[0];
+        }
+        else
+        {
+            print("wrong variable format in Branches" + words[0]);
+        }
+        string right_field_value = "";
+        if (right_variables.Length == 2)
+        {
+            right_field_value = GetValue(right_variables[0], right_variables[1]).ToString();
+            if (right_field_value == "0")
+            {
+                //dont have this skill in ability
+                return false;
+            }
+        }
+        else if (right_variables.Length == 1)
+        {
+            right_field_value = words[2];
+        }
+        else
+        {
+            print("wrong variable format in Branches" + words[2]);
+        }
+        //compare
+        int left_val = 0;
+        int right_val = 0;
+        bool isLeftInt = int.TryParse(left_field_value, out left_val);
+        bool isRightInt = int.TryParse(right_field_value, out right_val);
+        if (isLeftInt && isRightInt)
+        {
+            switch (words[1])
+            {
+                case "==":
+                    return left_val == right_val;
+                case ">=":
+                    return left_val >= right_val;
+                case "<=":
+                    return left_val <= right_val;
+                case "<":
+                    return left_val < right_val;
+                case ">":
+                    return left_val > right_val;
+            }
+        }
+        else
+        {
+            print("only Support int value compare now");
+        }
+
+        return false;
 
     }
+
+
+    #endregion
 
     #region when the code sentences only a words
 
@@ -120,6 +266,8 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
     }
     #endregion
 
+
+    #region compile three words
     /// <summary>
     /// three words compiler will like a = b; a+=b; a-=b; a*=b;
     /// </summary>
@@ -164,7 +312,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
         if (right_variables.Length == 2)
         {
             field_value = GetValue(right_variables[0], right_variables[1]).ToString();
-
+           
         }
         else if (right_variables.Length == 1)
         {
@@ -251,6 +399,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
       
 
     }
+    #endregion
 
     /// <summary>
     /// get a existing instance's value
