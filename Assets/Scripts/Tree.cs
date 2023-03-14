@@ -86,12 +86,12 @@ public class Tree : CSingletonMono<Tree>
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnYesClicked();
-            ExperienceSystems.instance.AddExp(1);
+            
         }
         else if(Input.GetKeyDown(KeyCode.E))
         {
             OnNoClicked();
-            ExperienceSystems.instance.AddExp(1);
+            
         }
 
         CheckDead();
@@ -124,6 +124,7 @@ public class Tree : CSingletonMono<Tree>
         if(yesOrNoClicked && currentChain != null)
         {
             currentChain.UpdateWeight(yesOrNo);
+            ExperienceSystems.instance.AddExp(1);
         }
         yesOrNoClicked = false;
         GameManager.instance.ResetYesNo();
