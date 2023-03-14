@@ -17,6 +17,6 @@ public class SkillConfig : ScriptableObject
     public string SkillCode;
     public int compile_Order;//0,1,2,3,4
    
-
+    
 
 }

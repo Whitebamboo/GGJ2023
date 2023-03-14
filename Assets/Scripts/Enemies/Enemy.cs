@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody rigidbody;
     private Coroutine attackCoroutine;
     public bool isAttacking = false;
-
+    public int exp = 5;//experience
     //debuff
     public DebuffContainer debuffContainer = new DebuffContainer();
     public float damageIncreaseRate = 0;//(0,1)
@@ -155,6 +155,12 @@ public class Enemy : MonoBehaviour
     public void DropSkills()
     {
         GameManager.instance.ProcessDropItemList(droppedSkills, dropSkillChance);
+    }
+
+
+    public void AddExperience()
+    {
+        ExperienceSystems.instance.AddExp(exp);
     }
 
     public void AddRank(int rank)

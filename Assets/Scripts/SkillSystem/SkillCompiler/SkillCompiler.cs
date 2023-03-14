@@ -279,6 +279,7 @@ public class SkillCompiler : CSingletonMono<SkillCompiler>
         int result = 0;
         if(words[1] == "=")
         {
+            
             Assign(words[0], words[2]);//assign value to another   
         }
         else if(words[1] == "+=" || words[1] == "-=" || words[1] == "*=" || words[1] == "/=")

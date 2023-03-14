@@ -13,6 +13,7 @@ public class Vampire : SkillExecute
         num = 1;
         layer = 0;
         value = 5;
+        growthLayer = 1;
     }
 
     public override void AfterOnHitExec(GameObject target)

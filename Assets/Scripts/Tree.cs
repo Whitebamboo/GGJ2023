@@ -86,10 +86,12 @@ public class Tree : CSingletonMono<Tree>
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnYesClicked();
+            ExperienceSystems.instance.AddExp(1);
         }
         else if(Input.GetKeyDown(KeyCode.E))
         {
             OnNoClicked();
+            ExperienceSystems.instance.AddExp(1);
         }
 
         CheckDead();
@@ -145,7 +147,7 @@ public class Tree : CSingletonMono<Tree>
         //print(text);
 
         //TODO unlock
-        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 

@@ -5941,6 +5941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 332911707}
   - component: {fileID: 332911706}
+  - component: {fileID: 332911708}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5990,6 +5991,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &332911708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332911705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8c84cf571d1b44cada2ef86bab95fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanBeReset: 1
+  experienceData: {fileID: 11400000, guid: 4746288347ce40c4cb44fddd0f914096, type: 2}
+  currentLevelSkills: []
 --- !u!1001 &336114396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12085,11 +12101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ns:
   - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
-  - {fileID: 11400000, guid: 53cd7ee6595c1de41aad826d5a7e2f12, type: 2}
-  - {fileID: 11400000, guid: 673071b7ac08c514586111afa6998fa9, type: 2}
-  - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
-  - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
-  - {fileID: 11400000, guid: 783b22a46490da44ba6a8da6b84ad275, type: 2}
+  - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+  - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
     type: 3}

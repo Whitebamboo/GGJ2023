@@ -96,7 +96,9 @@ public class EnemyManager : MonoBehaviour
 
             enemies.Where(enemy => enemy.health <= 0).ToList().ForEach(enemy =>
             {
-                enemy.DropSkills();
+                //enemy.DropSkills();
+                //ToDO add experience
+                enemy.AddExperience();
                 Destroy(enemy.gameObject);
             });
             enemies.RemoveAll(enemy => enemy.health <= 0);

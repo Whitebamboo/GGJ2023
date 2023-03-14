@@ -11,6 +11,7 @@ public class Vulnerable : DebuffExecute
         layer = 0;
         value = 10;
         time = 4;
+        growthLayer = 1;
     }
 
     public override void onHitExec(GameObject target)
@@ -33,6 +34,6 @@ public class Vulnerable : DebuffExecute
             vulnerableDebuff.times = time;
             vulnerableDebuff.OnApply(e);
         }
-        //print("vulnerable layer num : " + final_value);
+        print("vulnerable layer num : " + final_value);
     }
 }

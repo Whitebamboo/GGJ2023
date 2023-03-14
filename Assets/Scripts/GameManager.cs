@@ -37,6 +37,11 @@ public class GameManager : CSingletonMono<GameManager>
                 
     }
 
+    /// <summary>
+    /// drop skill random base on enemy kill
+    /// </summary>
+    /// <param name="skills"></param>
+    /// <param name="dropChance"></param>
     public void ProcessDropItemList(List<SkillConfig> skills, float dropChance)
     {
         //Debug.Log("Add Items!!!!");
@@ -53,6 +58,27 @@ public class GameManager : CSingletonMono<GameManager>
             SkillConfig skillConfig = skills[Random.Range(0, skills.Count)];
             networkUI.AddNewItem(skillConfig);
         }
+    }
+
+    /// <summary>
+    /// drop skill base on experience system
+    /// </summary>
+    /// <param name="skills"></param>
+    public void ProcessDropItemList(List<SkillConfig> skills)
+    {
+        //Debug.Log("Add Items!!!!");
+
+        if (skills == null || skills.Count == 0)
+        {
+            Debug.LogError("No skill drops in enemey");
+        }
+        else
+        {
+            SkillConfig skillConfig = skills[Random.Range(0, skills.Count)];
+            networkUI.AddNewItem(skillConfig);
+        }
+      
+        
     }
 
     public void ShowDescription(string des)
