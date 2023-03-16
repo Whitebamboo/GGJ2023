@@ -148,7 +148,7 @@ public class Tree : CSingletonMono<Tree>
         //print(text);
 
         //TODO unlock
-        //AttackModule.ProcessTreeNodes(chain.treeNodeList);
+        AttackModule.ProcessTreeNodes(chain.treeNodeList);
     }
 
 

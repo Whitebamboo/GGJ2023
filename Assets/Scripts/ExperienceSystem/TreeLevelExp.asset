@@ -51,12 +51,28 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
   - level: 3
     toNextLevelExp: 20
-    dropSkills: []
+    dropSkills:
+    - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
   - level: 4
-    toNextLevelExp: 25
-    dropSkills: []
+    toNextLevelExp: 20
+    dropSkills:
+    - {fileID: 11400000, guid: 220f900cd062e994f80c919b40210a24, type: 2}
+    - {fileID: 11400000, guid: 5614d708df5c21d41a9fbc3188c3287c, type: 2}
+    - {fileID: 11400000, guid: f6dbc5eb47fba19429038bd24f71ef30, type: 2}
+    - {fileID: 11400000, guid: 6da087eff386e2948939a0ffb9831e56, type: 2}
+    - {fileID: 11400000, guid: 0e213d07406c33741bb7b0702a482d7c, type: 2}
+    - {fileID: 11400000, guid: 65bb7b27ef2ede4438548e0a321bed63, type: 2}
+    - {fileID: 11400000, guid: 50412035a419b634789428299333e335, type: 2}
+    - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
+    - {fileID: 11400000, guid: d2c9714f037aa0b4ba6d40e18b7c5131, type: 2}
+    - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
+    - {fileID: 11400000, guid: 54aea2797c307594c8d97fa021c357f8, type: 2}
+    - {fileID: 11400000, guid: 8de616724fd019c4e9dd26d6ec845f79, type: 2}
+    - {fileID: 11400000, guid: 725f2507a318a3344a986ca2314fc344, type: 2}
+    - {fileID: 11400000, guid: 52b3499e6d332304f8a40a640bb2ed51, type: 2}
+    - {fileID: 11400000, guid: 596790e8501c60e44887d971becbf4da, type: 2}
   - level: 5
-    toNextLevelExp: 30
+    toNextLevelExp: 20
     dropSkills: []
   generalDropSkills:
   - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
