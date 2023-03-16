@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5312936944774059585}
   - component: {fileID: 5312936944774059586}
   - component: {fileID: 5312936944774059587}
-  - component: {fileID: 7081475644433275638}
+  - component: {fileID: 2951660902659758314}
   m_Layer: 7
   m_Name: Shield
   m_TagString: Shield
@@ -131,7 +131,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7081475644433275638
+--- !u!114 &2951660902659758314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,7 @@ MonoBehaviour:
   move_direction: {x: 0, y: 0, z: 0}
   canMove: 0
   treeAttackModule: {fileID: 0}
+  health: 15
   exist_time: 5
   push_distance: 5
   start_get_damge: 0

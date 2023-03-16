@@ -19,21 +19,31 @@ public class GrowthBuff : Buff
     {
         base.OnCompileRepeat(tree);
         //hard code later porbably can use pointer to do this
-        Wood w = tree.new_ability.GetAspect<Wood>();
-        Vulnerable v = tree.new_ability.GetAspect<Vulnerable>();
-        Vampire vam = tree.new_ability.GetAspect<Vampire>();
-        //this buff happens after compile, so its will affect all var connect to wood
-        int growth_mul = (int)Mathf.Max(1, value);
-        if (w != null)
+       
+        //this buff happens before compile, add wood node to tree skill config
+        if(value > 10)
         {
-            w.growthLayer = (int)growth_mul;
-            if(v != null)
+            value = 10;
+        }
+        int growth_mul = (int)Mathf.Max(1, value);
+        int count = 0;
+        SkillConfig wood = null;
+        foreach(SkillConfig s in tree.turn_skill)
+        {
+            if(s.id == 1011)
             {
-                v.growthLayer = (int)growth_mul;
+                if (wood == null)
+                {
+                    wood = s;
+                }
+                count++;
             }
-            if(vam != null)
+        }
+        if (count > 0)
+        {
+            for(int i = 0; i < count * growth_mul; i++)
             {
-                vam.growthLayer = (int)growth_mul;
+                tree.turn_skill.Add(wood);
             }
         }
         print("current growth layer : " + growth_mul);

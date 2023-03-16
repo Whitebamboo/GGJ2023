@@ -13,7 +13,8 @@ public class TreeAttackModule : MonoBehaviour
     public Transform spawnPoint;
     public GameObject bullet_prefab;
     public GameObject shield_prefab;
-    public Dictionary<long, Ability> abilityCombination = new Dictionary<long, Ability>();
+    public Dictionary<ulong, Ability> abilityCombination = new Dictionary<ulong, Ability>();
+    public List<SkillConfig> turn_skill;//this turn's skills
     private List<Vector3> lauch_dir;
     private int bullet_num = 0;
     private int shield_num = 0;
@@ -54,7 +55,7 @@ public class TreeAttackModule : MonoBehaviour
         bullet_num = 0;
         shield_num = 0;
         // order the skill base on its compile order
-        List<SkillConfig> turn_skill = new List<SkillConfig>();
+        turn_skill = new List<SkillConfig>();
         foreach(var n in nodes)
         {
             if (n.skillConfig)
@@ -62,7 +63,8 @@ public class TreeAttackModule : MonoBehaviour
                 turn_skill.Add(n.skillConfig);
             }
         }
-        long com_num = GetAbilityCombinationNumber(turn_skill);
+        BuffCompileRepeat();
+        ulong com_num = GetAbilityCombinationNumber(turn_skill);
   
         if (abilityCombination.ContainsKey(com_num))
         {
@@ -89,7 +91,7 @@ public class TreeAttackModule : MonoBehaviour
 
         //after ability compile 
         //compile all buff
-        BuffCompileRepeat();
+        
         //end compile buff
         bullet_num = new_ability.Bullet;
         shield_num = new_ability.Shield;
@@ -116,6 +118,7 @@ public class TreeAttackModule : MonoBehaviour
             {
                 GameObject shield_obj = Instantiate(shield_prefab, spawnPoint);
                 Shield s = shield_obj.GetComponent<Shield>();
+                
                 s.InstantiateInit(new_ability);
                 s.StartMove(lauch_dir[i] - spawnPoint.position);
                 new_ability.ExecSkill(TriggerTime.onCreate, s.gameObject);
@@ -185,12 +188,12 @@ public class TreeAttackModule : MonoBehaviour
     /// </summary>
     /// <param name="skills"></param>
     /// <returns></returns>
-    private long GetAbilityCombinationNumber(List<SkillConfig> skills)
+    private ulong GetAbilityCombinationNumber(List<SkillConfig> skills)
     {
-        long result = 1;
+        ulong result = 1;
         foreach(var a in skills)
         {
-            result *= a.PrimeId;
+            result *= (ulong)a.PrimeId;
         }
         return result;
     }

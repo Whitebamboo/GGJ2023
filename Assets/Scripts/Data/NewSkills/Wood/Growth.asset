@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 1014
   PrimeId: 47
   unlock_Req: 
-  description: 1 growth
+  description: 1 growth; 10 layer max
   skilltype: 1
   reqProjectileType: 3
   triggerType: 4

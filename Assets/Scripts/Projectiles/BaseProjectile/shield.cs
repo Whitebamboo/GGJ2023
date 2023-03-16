@@ -12,12 +12,12 @@ public class Shield : projectile
     private float disappear_timer = 0f;//timer count its disappear
     public float push_distance = 10f;//only leave 10 m and stop there to be attack by enemy
     public bool start_get_damge = false;//the shield start to get damage and make onhit
-   
+
 
 
     private void Start()
     {
-        
+
     }
 
     public void Update()
@@ -33,8 +33,8 @@ public class Shield : projectile
                 Dead();
             }
         }
-  
-        
+
+
     }
 
     public override void InstantiateInit(Ability _ability)
@@ -45,7 +45,7 @@ public class Shield : projectile
         attack = health;
     }
 
-    
+
 
     public override void StartMove(Vector3 dir)
     {
@@ -69,7 +69,7 @@ public class Shield : projectile
     IEnumerator PushEnemyMove(Vector3 dir)
     {
         float push_time = push_distance / speed;
-    
+
         Tween t = transform.DOMove(this.transform.position + dir * push_distance, push_time);
         yield return t.WaitForCompletion();
         disappear_timer = exist_time;
@@ -80,7 +80,7 @@ public class Shield : projectile
     /// shield get damage
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage,Enemy enemy)
+    public void TakeDamage(float damage, Enemy enemy)
     {
         //print("exit health :" + health);
         ElementsType enemy_type = enemy.element;
@@ -90,7 +90,7 @@ public class Shield : projectile
             health -= Mathf.Floor(damage);
             CheckDead(enemy);//self dead
         }
-       
+
     }
 
 
@@ -104,13 +104,13 @@ public class Shield : projectile
     /// </summary>
     private void CheckDead(Enemy enemy)
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             //ondead effect TODO
             ability.ExecSkill(TriggerTime.onDead, enemy.gameObject);//some ondead effect focus on enemy
-           
+
             Dead();
-            
+
         }
     }
 

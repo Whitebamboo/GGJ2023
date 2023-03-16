@@ -12102,12 +12102,13 @@ MonoBehaviour:
   ns:
   - {fileID: 11400000, guid: 95e6f13319d92cd40a6fcd5278951b7c, type: 2}
   - {fileID: 11400000, guid: 637a5087954bb28469bc4a55683075a1, type: 2}
-  - {fileID: 11400000, guid: 49482d8a0b3b14e4c8a1bd1bdfca44c5, type: 2}
+  - {fileID: 11400000, guid: 65bb7b27ef2ede4438548e0a321bed63, type: 2}
   spawnPoint: {fileID: 146157020}
   bullet_prefab: {fileID: 5312936944774059596, guid: 365fc4487dfbb2d4e8fba245faea1a08,
     type: 3}
   shield_prefab: {fileID: 5312936944774059596, guid: fc48cad2dd5439d4b8290ca7c1913836,
     type: 3}
+  turn_skill: []
   puppet_prefab: {fileID: 5360953320062156503, guid: 3efab36207d894c40b7bb4763daea4d7,
     type: 3}
   fireball_prefab: {fileID: 7237246657120354228, guid: b32d728ebf3f0f14bb32441aa2f1ce7e,

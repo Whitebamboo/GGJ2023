@@ -9,7 +9,7 @@ public class Growth : SkillExecute
     public Growth()
     {
         num = 1;
-        times = 4;
+        times = 2;
     }
     public override void OnCompileExec(GameObject target)
     {
