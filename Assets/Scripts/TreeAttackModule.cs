@@ -291,6 +291,21 @@ public class TreeAttackModule : MonoBehaviour
         go.GetComponent<Lightning>().InstantiateInit(lt, e);
         go.GetComponent<Lightning>().StartMove(Vector3.zero);//todo maybe change this later;
     }
+
+    
+    public GameObject eletricChain_prefab;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ec"></param>
+    /// <param name="e">the target enemy</param>
+    public void CreateEletricChain(EletricChain ec,Vector3 createPoint, Enemy e)
+    {
+        
+        GameObject go = Instantiate(eletricChain_prefab, createPoint, Quaternion.identity);
+        go.GetComponent<EletricBall>().InstantiateInit(ec, e);
+        go.GetComponent<EletricBall>().StartMove(Vector3.zero);//todo maybe change this later;
+    }
     #endregion
 
 
