@@ -22,7 +22,7 @@ public class Fireball : Bullet
         if(fbc != null)
         {
             int count = fbc.num * fbc.layer;
-            attack = p.attack * count * 0.1f;
+            attack = p.attack * count * 0.3f;//30% * X * base_atk
             size = size * fbc.sizeMul / 100;
             transform.localScale = transform.localScale * size;
             attack_range = attack_range * fbc.sizeMul / 100;
