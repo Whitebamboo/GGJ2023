@@ -12351,6 +12351,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b07f2b794a5fbe4cb3cf9fa918df1fd, type: 2}
   - {fileID: 11400000, guid: f30e0062d5a2e0746b321858301065ca, type: 2}
   - {fileID: 11400000, guid: a005b135d1460ed429fa2a47b7f17574, type: 2}
+  waveDuration: 60
+  spawnInterval: 5
   enemies: []
 --- !u!4 &762198146
 Transform:

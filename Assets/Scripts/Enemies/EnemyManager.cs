@@ -10,11 +10,18 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<Transform> spawnPositions;
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<WaveInfo> waveInfos;
+
+    // How many seconds per wave;
+    [SerializeField] private float waveDuration;
+    [SerializeField] private float spawnInterval;
     public List<Enemy> enemies;
     private float timer;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
+        waveInfos = GenerateWaveInfos(10);
     }
 
     // Update is called once per frame
@@ -29,6 +36,48 @@ public class EnemyManager : MonoBehaviour
         enemies.ForEach(enemy => Destroy(enemy.gameObject));
         enemies = new List<Enemy>();
         StartCoroutine(WaveCoroutine());
+    }
+
+    private List<WaveInfo> GenerateWaveInfos(int nWaves)
+    {
+        var ret = new List<WaveInfo>();
+        for (var i = 0; i < nWaves; i++)
+        {
+            var waveInfo = new WaveInfo
+            {
+                time = waveDuration,
+                spawnInfos = new List<SpawnInfo>()
+            };
+            var totalMonstersSpawn = 0;
+            for (var t = spawnInterval; t < waveDuration; t += spawnInterval)
+            {
+                var newTotal =(int) MonstersSpawnedToTime(t);
+                if (newTotal < totalMonstersSpawn) continue;
+                var amountToAdd = newTotal - totalMonstersSpawn;
+                
+                for (var k = 0; k < amountToAdd; k++)
+                {
+                    var spawnInfo = new SpawnInfo
+                    {
+                        time = Random.Range(t, t - spawnInterval),
+                        enemyIndex = Random.Range(0, 3),
+                        spawnPositionIndex = Random.Range(0, 12),
+                        rank = i
+                    };
+                    waveInfo.spawnInfos.Add(spawnInfo);
+                }
+                totalMonstersSpawn = newTotal;
+            }
+            waveInfo.spawnInfos.Sort(SortByTime);
+            ret.Add(waveInfo);
+        }
+        return ret;
+    }
+
+    private float MonstersSpawnedToTime(float time)
+    {
+        // y = -0.00x4 + 0.00x3 - 0.01x2 + 0.30x - 0.15
+        return (float) (-0.01 * Mathf.Pow(time, 2) + 0.3 * time - 0.15);
     }
 
     public IEnumerator WaveCoroutine()
@@ -49,7 +98,7 @@ public class EnemyManager : MonoBehaviour
                     timer = 0;
                     waveInfo = waveInfos[waveIndex];
                     spawnInfos = waveInfo.spawnInfos;
-                    spawnInfos.Sort(SortByTime);
+                    // spawnInfos.Sort(SortByTime);
                     i = 0;
                 }
             }
